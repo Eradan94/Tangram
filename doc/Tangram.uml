@@ -1,0 +1,51 @@
+@startuml
+Class Game {
+
+}
+Class Main {
+}
+
+Interface Shape {
+}
+
+Class Piece {
+}
+
+Class Triangle {
+}
+
+Class Action {
+}
+
+Class FileUtils {
+}
+
+Interface Drawable {
+}
+
+Interface Clickable {
+}
+
+Class Button {
+}
+
+Class Point<T>{
+}
+
+Main --> Game
+Game *-- "0..n" Shape
+Game --> Action
+Action --> FileUtils
+Action <-- Shape
+Action <-- Button
+Shape <|.. Piece
+Shape <|.. Triangle
+Piece o-- "0..n" Triangle
+Drawable <|.. Shape
+Drawable <|.. Button 
+Drawable <|.. Game
+Clickable <|.. Shape
+Clickable <|.. Button 
+Triangle o-- "3" Point
+Button o-- "2" Point
+@enduml
