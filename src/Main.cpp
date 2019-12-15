@@ -2,9 +2,6 @@
  * Project Tangram
  */
 
-
-#include "Main.h"
-
-/**
- * Main implementation
- */
+int main(int argc, char const *argv[]) {
+	return 0;
+}

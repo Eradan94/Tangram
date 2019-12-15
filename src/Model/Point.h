@@ -6,7 +6,7 @@
 #ifndef _POINT_H
 #define _POINT_H
 
-template< CoordinateType >
+template<class CoordinateType>
 class Point {
 };
 
