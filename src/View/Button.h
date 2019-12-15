@@ -7,7 +7,7 @@
 #define _BUTTON_H
 
 #include "Drawable.h"
-#include "Clickable.h"
+#include "../Controller/Clickable.h"
 
 
 class Button: public Drawable, public Clickable {

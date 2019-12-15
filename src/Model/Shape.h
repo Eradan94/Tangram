@@ -6,10 +6,11 @@
 #ifndef _SHAPE_H
 #define _SHAPE_H
 
-#include "../View/Clickable.h"
+#include "../Controller/Clickable.h"
+#include "../View/Drawable.h"
 
 
-class Shape: public Clickable {
+class Shape: public Clickable, public Drawable {
 };
 
 #endif //_SHAPE_H
