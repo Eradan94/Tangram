@@ -1,0 +1,43 @@
+@startuml
+Class Main
+
+Package Controller {
+	Class Game	
+	Class Action
+	Class FileUtils
+	Interface Clickable
+}
+
+Package Model {
+	Class Point<CoordinateType>
+	Class Triangle
+	Class Piece
+	Interface Shape
+}
+
+Package View {
+	Interface Drawable
+	Class Menu
+	Class Button
+}
+
+FileUtils <-- Action
+Action <-- Game
+Action <- Shape
+Action <- Button
+Game <-- Main
+Game -> Menu
+Game -* "0..*" Shape
+Game .|> Drawable
+Shape <|. Piece
+Shape <|.. Triangle
+Shape ..|> Drawable
+Shape ..|> Clickable
+Triangle o- "3" Point
+Piece o-- "0..*" Triangle
+Menu o-- "0..*" Button
+Menu .|> Drawable
+Button .|> Drawable
+Point --> Menu
+Clickable <|. Button
+@enduml
