@@ -24,7 +24,7 @@ public :
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
-        os << "(" << point.x << ", " << point.y << ")" << std::endl;
+        os << "(" << point.x << ", " << point.y << ")";
         return os;
     }
 };
@@ -46,6 +46,8 @@ bool Point<CoordinateType>::operator!=(const Point& other) const {
     return !(*this == other);
 }
 
+/* Create a vector from two points
+*/
 template<class CoordinateType>
 vector<CoordinateType> Point<CoordinateType>::createVector(const Point& other) {
 	vector<CoordinateType> v;

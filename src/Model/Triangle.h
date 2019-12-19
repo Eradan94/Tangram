@@ -14,46 +14,50 @@
 template<class CoordinateType>
 class Triangle: public Shape {
 private :
-    Point<CoordinateType> a;
-    Point<CoordinateType> b;
-    Point<CoordinateType> c;
+    Point<CoordinateType>& a;
+    Point<CoordinateType>& b;
+    Point<CoordinateType>& c;
 
 public :
-    Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c);
+    Triangle(Point<CoordinateType>& _a, Point<CoordinateType>& _b, Point<CoordinateType>& _c);
 
-    vector<CoordinateType> centroid(Point<CoordinateType> p);
-    bool isInTriangle(Point<CoordinateType> p);
+    vector<CoordinateType> calculateBarycentricCoordinates(Point<CoordinateType>& p) const;
+    bool isInTriangle(Point<CoordinateType>& p) const;
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
-        os << "Triangle : " << std::endl << "Point A : " << triangle.a << "Point B : " << triangle.b << "Point C : " << triangle.c << std::endl;
+        os << "Triangle : " << std::endl << "   Point A : " << triangle.a << std::endl << "   Point B : " << triangle.b << std::endl << "   Point C : " << triangle.c;
         return os;
     }
 };
 
 template<class CoordinateType>
-Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c)
+Triangle<CoordinateType>::Triangle(Point<CoordinateType>& _a, Point<CoordinateType>& _b, Point<CoordinateType>& _c)
 : a(_a), b(_b), c(_c){
 }
 
+/* Calculate the barycentric coordinates of the point
+*/
 template<class CoordinateType>
-vector<CoordinateType> Triangle<CoordinateType>::centroid(Point<CoordinateType> p) {
-	vector<CoordinateType> centroid;
+vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates(Point<CoordinateType>& p) const{
+	vector<CoordinateType> barCoordinates;
 	vector<CoordinateType> pa = p.createVector(a);
 	vector<CoordinateType> pb = p.createVector(b);
 	vector<CoordinateType> pc = p.createVector(c);
-	centroid.push_back((pb[0] * pc[1]) - (pb[1] * pc[0]));
-	centroid.push_back((pc[0] * pa[1]) - (pc[1] * pa[0]));
-	centroid.push_back((pa[0] * pb[1]) - (pa[1] * pb[0]));
-	return centroid;
+	barCoordinates.push_back((pb[0] * pc[1]) - (pb[1] * pc[0]));
+	barCoordinates.push_back((pc[0] * pa[1]) - (pc[1] * pa[0]));
+	barCoordinates.push_back((pa[0] * pb[1]) - (pa[1] * pb[0]));
+	return barCoordinates;
 }
 
+/* A point is inside a triangle if all his coordinates are positive or negative
+*/
 template<class CoordinateType>
-bool Triangle<CoordinateType>::isInTriangle(Point<CoordinateType> p) {
-	std::vector<CoordinateType> centroid = this->centroid(p);
-	if(centroid[0] <= 0 && centroid[1] <= 0 && centroid[2] <= 0)
+bool Triangle<CoordinateType>::isInTriangle(Point<CoordinateType>& p) const{
+	std::vector<CoordinateType> barCoordinates = this->calculateBarycentricCoordinates(p);
+	if(barCoordinates[0] <= 0 && barCoordinates[1] <= 0 && barCoordinates[2] <= 0)
 		return true;
-	else if(centroid[0] >= 0 && centroid[1] >= 0 && centroid[2] >= 0)
+	else if(barCoordinates[0] >= 0 && barCoordinates[1] >= 0 && barCoordinates[2] >= 0)
 		return true;
 	return false;
 }
