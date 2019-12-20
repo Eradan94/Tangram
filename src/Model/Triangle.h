@@ -23,6 +23,7 @@ public :
 
     vector<CoordinateType> calculateBarycentricCoordinates(Point<CoordinateType>& p) const;
     bool isInTriangle(Point<CoordinateType>& p) const;
+    Point<CoordinateType> center();
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
@@ -60,6 +61,13 @@ bool Triangle<CoordinateType>::isInTriangle(Point<CoordinateType>& p) const{
 	else if(barCoordinates[0] >= 0 && barCoordinates[1] >= 0 && barCoordinates[2] >= 0)
 		return true;
 	return false;
+}
+
+/* Calculate the triangle's center
+*/
+template<class CoordinateType>
+Point<CoordinateType> Triangle<CoordinateType>::center() {
+    return Point<CoordinateType>((a.getX() + b.getX()+ c.getX()) / 3, (a.getY() + b.getY() + c.getY()) / 3);
 }
 
 #endif //_TRIANGLE_H

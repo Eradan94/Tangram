@@ -19,6 +19,12 @@ public :
     Point(CoordinateType _x = 0, CoordinateType _y = 0);
     bool operator== (const Point& other) const;
     bool operator!= (const Point& other) const;
+    Point<CoordinateType> operator+ (const Point& other) const;
+    Point<CoordinateType> operator/ (const CoordinateType& val) const;
+    Point<CoordinateType>& operator+= (const Point& other);
+
+    CoordinateType getX();
+    CoordinateType getY();
 
     std::vector<CoordinateType> createVector(const Point& other);
 
@@ -36,14 +42,45 @@ Point<CoordinateType>::Point(CoordinateType _x, CoordinateType _y)
 : x(_x), y(_y){
 }
 
+/* Operators
+*/
 template<class CoordinateType>
-bool Point<CoordinateType>::operator==(const Point& other) const {
+bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const {
     return (x == other.x && y == other.y);
 }
 
 template<class CoordinateType>
-bool Point<CoordinateType>::operator!=(const Point& other) const {
+bool Point<CoordinateType>::operator!=(const Point<CoordinateType>& other) const {
     return !(*this == other);
+}
+
+template<class CoordinateType>
+Point<CoordinateType> Point<CoordinateType>::operator/ (const CoordinateType& val) const {
+    return Point<CoordinateType>(x / val, y / val);
+}
+
+template<class CoordinateType>
+Point<CoordinateType> Point<CoordinateType>::operator+ (const Point<CoordinateType>& other) const {
+    return Point<CoordinateType>(x + other.x, y + other.y);
+}
+
+template<class CoordinateType>
+Point<CoordinateType>& Point<CoordinateType>::operator+= (const Point<CoordinateType>& other) {
+    x += other.x;
+    y += other.y;
+    return *this;
+}
+
+/* Getters
+*/
+template<class CoordinateType>
+CoordinateType Point<CoordinateType>::getX() {
+    return x;
+}
+
+template<class CoordinateType>
+CoordinateType Point<CoordinateType>::getY() {
+    return y;
 }
 
 /* Create a vector from two points
