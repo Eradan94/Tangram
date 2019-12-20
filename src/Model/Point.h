@@ -7,7 +7,7 @@
 #define _POINT_H
 
 #include <iostream>
-#include <vector>
+#include <math.h>
 
 template<class CoordinateType>
 class Point {
@@ -20,13 +20,16 @@ public :
     bool operator== (const Point& other) const;
     bool operator!= (const Point& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
+    Point<CoordinateType> operator- (const Point& other) const;
+    //Point<CoordinateType> operator- () const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point& other);
+    //Point<CoordinateType>& operator-= (const Point& other);
 
     CoordinateType getX();
     CoordinateType getY();
 
-    std::vector<CoordinateType> createVector(const Point& other);
+    void rotate(const Point<CoordinateType>& c, double theta);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
@@ -65,11 +68,28 @@ Point<CoordinateType> Point<CoordinateType>::operator+ (const Point<CoordinateTy
 }
 
 template<class CoordinateType>
+Point<CoordinateType> Point<CoordinateType>::operator- (const Point<CoordinateType>& other) const {
+    return Point<CoordinateType>(x - other.x, y - other.y);
+}
+
+template<class CoordinateType>
 Point<CoordinateType>& Point<CoordinateType>::operator+= (const Point<CoordinateType>& other) {
     x += other.x;
     y += other.y;
     return *this;
 }
+
+/*template<class CoordinateType>
+Point<CoordinateType> Point<CoordinateType>::operator- () const {
+    return Point<CoordinateType>(-x, -y);
+}*/
+
+/*template<class CoordinateType>
+Point<CoordinateType>& Point<CoordinateType>::operator-= (const Point<CoordinateType>& other) {
+    x -= other.x;
+    y -= other.y;
+    return *this;
+}*/
 
 /* Getters
 */
@@ -83,14 +103,14 @@ CoordinateType Point<CoordinateType>::getY() {
     return y;
 }
 
-/* Create a vector from two points
+/* Performs a rotation around another point with an angle theta
 */
 template<class CoordinateType>
-vector<CoordinateType> Point<CoordinateType>::createVector(const Point& other) {
-	vector<CoordinateType> v;
-	v.push_back(other.x - x);
-	v.push_back(other.y - y);
-	return v;
+void Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
+    CoordinateType newx = (cos(theta) * (x - center.x)) - (sin(theta) * (y - center.y)) + center.x;
+    CoordinateType newy = (sin(theta) * (x - center.x)) + (cos(theta) * (y - center.y)) + center.y;
+    x = newx;
+    y = newy;
 }
 
 #endif //_POINT_H

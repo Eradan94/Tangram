@@ -3,7 +3,6 @@
  */
 
 #include "Model/Point.h"
-//#include "Model/Triangle.h"
 #include "Model/Piece.h"
 
 #include <iostream>
@@ -20,7 +19,10 @@ void testPoint() {
     cout << p1 << endl; // (0, 0)
     cout << p2 << endl; // (3, 3)
     cout << p3 << endl; // (8.6, 3.4)
-
+    Point<int>  p4(2, 0);
+    Point<int>  p5(1, 0);
+    p4.rotate(p5, 1.57); // 90 degrees
+    cout << p4 << endl;
 }
 
 void testTriangle() {
@@ -36,6 +38,12 @@ void testTriangle() {
     cout << p4 << " is in triangle ? " << t.isInTriangle(p4) << endl; // 1
     cout << p5 << " is in triangle ? " << t.isInTriangle(p5) << endl; // 0
     cout << "Center of t : " << t.center() << endl; //Center : (10, 10)
+    Point<int> p6(10, 0);
+    t.rotate(p6, 1.57); // 90 degrees
+    cout << "rotated triangle : " << t << endl;
+    Point<int> translation(3, 3);
+    t.translate(translation);
+    cout << "translation (3, 3) triangle" << t << endl;
 }
 
 void testPiece() {
@@ -57,7 +65,12 @@ void testPiece() {
     cout << p << endl;
     cout << "Center of p : " << p.center() << endl; //Center : (10, 10)
 
-    //Piece<int> p;
+    double theta = 6.283; // 360 degrees
+    p.rotate(theta);
+    cout << "Rotated piece : " << p << endl;
+    Point<int> clickPos(0, 0);
+    p.centralize(clickPos);
+    cout << "Centralized piece : " << p << endl;
 }
 
 int main(int argc, char const *argv[]) {

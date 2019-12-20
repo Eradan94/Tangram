@@ -19,6 +19,8 @@ public :
     void addTriangle(const Triangle<CoordinateType> t);
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
     Point<CoordinateType> center();
+    void rotate(double theta);
+    void centralize(Point<CoordinateType> clickPos);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
@@ -56,11 +58,31 @@ void Piece<CoordinateType>::addTriangles(std::initializer_list<Triangle<Coordina
 template<class CoordinateType>
 Point<CoordinateType> Piece<CoordinateType>::center() {
     Point<CoordinateType> center;
-    std::cout << "size : " << triangles.size() << std::endl;
     for(auto& t : triangles) {
         center += t.center();
     }
     return center / triangles.size();
+}
+
+/* Performs a rotation with an angle theta
+*/
+template<class CoordinateType>
+void Piece<CoordinateType>::rotate(double theta) {
+    Point<CoordinateType> c = center();
+    for(auto& t : triangles) {
+        t.rotate(c, theta);
+    }
+}
+
+/* Centralize the piece on the mouse cursor
+*/
+template<class CoordinateType>
+void Piece<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
+    Point<CoordinateType> c = center();
+    Point<CoordinateType> translation = clickPos - c;
+    for(auto& t : triangles) {
+        t.translate(translation);
+    }
 }
 
 #endif //_PIECE_H
