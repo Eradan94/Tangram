@@ -12,7 +12,7 @@
 #include "Shape.h"
 
 template<class CoordinateType>
-class Triangle: public Shape {
+class Triangle: public Shape<CoordinateType> {
 private :
     Point<CoordinateType> a;
     Point<CoordinateType> b;
@@ -24,8 +24,9 @@ public :
     vector<CoordinateType> calculateBarycentricCoordinates(Point<CoordinateType>& p) const;
     bool isInTriangle(Point<CoordinateType>& p) const;
     Point<CoordinateType> center();
-    void rotate(const Point<CoordinateType>& center, double theta);
-    void translate(Point<CoordinateType> translation);
+    virtual void rotate(const Point<CoordinateType> center, double theta);
+    virtual void centralize(Point<CoordinateType> clickPos);
+    virtual void translate(Point<CoordinateType> translation);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
@@ -75,10 +76,17 @@ Point<CoordinateType> Triangle<CoordinateType>::center() {
 /* Performs a rotation around another point with an angle theta
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
+void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double theta) {
     a.rotate(center, theta);
     b.rotate(center, theta);
     c.rotate(center, theta);
+}
+
+template<class CoordinateType>
+void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
+    Point<CoordinateType> c = center();
+    Point<CoordinateType> translation = clickPos - c;
+    translate(translation);
 }
 
 /* Translate a triangle

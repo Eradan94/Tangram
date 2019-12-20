@@ -66,11 +66,19 @@ void testPiece() {
     cout << "Center of p : " << p.center() << endl; //Center : (10, 10)
 
     double theta = 6.283; // 360 degrees
-    p.rotate(theta);
+    Point<int> c = p.center();
+    p.rotate(c, theta);
     cout << "Rotated piece : " << p << endl;
     Point<int> clickPos(0, 0);
     p.centralize(clickPos);
     cout << "Centralized piece : " << p << endl;
+}
+
+void testShape() {
+    Point<int> p1;
+    Point<int>  p2(30, 0);
+    Point<int> p3(0, 30);
+
 }
 
 int main(int argc, char const *argv[]) {

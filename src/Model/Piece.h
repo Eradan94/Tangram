@@ -12,15 +12,15 @@
 #include "Triangle.h"
 
 template<class CoordinateType>
-class Piece: public Shape {
+class Piece: public Shape<CoordinateType> {
 public :
     Piece();
 
     void addTriangle(const Triangle<CoordinateType> t);
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
-    Point<CoordinateType> center();
-    void rotate(double theta);
-    void centralize(Point<CoordinateType> clickPos);
+    virtual void rotate(Point<CoordinateType> center, double theta);
+    virtual Point<CoordinateType> center();
+    virtual void centralize(Point<CoordinateType> clickPos);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
@@ -67,10 +67,10 @@ Point<CoordinateType> Piece<CoordinateType>::center() {
 /* Performs a rotation with an angle theta
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::rotate(double theta) {
-    Point<CoordinateType> c = center();
+void Piece<CoordinateType>::rotate(Point<CoordinateType> center, double theta) {
+    //Point<CoordinateType> c = center();
     for(auto& t : triangles) {
-        t.rotate(c, theta);
+        t.rotate(center, theta);
     }
 }
 
