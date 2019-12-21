@@ -6,7 +6,6 @@
 #ifndef _PIECE_H
 
 #include <list>
-#include<stdarg.h>
 
 #include "Shape.h"
 #include "Triangle.h"
@@ -21,6 +20,8 @@ public :
     virtual void rotate(Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center();
     virtual void centralize(Point<CoordinateType> clickPos);
+
+    void draw(sf::RenderWindow& window);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
@@ -82,6 +83,15 @@ void Piece<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
     Point<CoordinateType> translation = clickPos - c;
     for(auto& t : triangles) {
         t.translate(translation);
+    }
+}
+
+/* draw a piece
+*/
+template<class CoordinateType>
+void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
+    for(auto& t : triangles) {
+        t.draw(window);
     }
 }
 

@@ -2,6 +2,8 @@
  * Project Tangram
  */
 
+#include <SFML/Graphics.hpp>
+
 #include "Model/Point.h"
 #include "Model/Piece.h"
 
@@ -30,7 +32,7 @@ void testTriangle() {
     Point<int> p1;
     Point<int>  p2(30, 0);
     Point<int> p3(0, 30);
-    Triangle<int> t(p1, p2, p3);
+    Triangle<int> t(p1, p2, p3, sf::Color(255, 0, 0));
     cout << t << endl;
     /* Point A : (0, 0) Point B : (30, 0) Point C : (0, 30)*/
     Point<int> p4(1, 1);
@@ -51,11 +53,11 @@ void testPiece() {
     Point<int> p1;
     Point<int>  p2(30, 0);
     Point<int> p3(0, 30);
-    Triangle<int> t(p1, p2, p3);
+    Triangle<int> t(p1, p2, p3, sf::Color(255, 0, 0));
     cout << t << endl;
 
     Point<int> p4(0, -30);
-    Triangle<int> t2(p1, p2, p4);
+    Triangle<int> t2(p1, p2, p4, sf::Color(255, 0, 0));
     cout << t2 << endl;
     /* Point A : (0, 0) Point B : (30, 0) Point C : (0, -30)*/
 
@@ -76,15 +78,49 @@ void testPiece() {
 
 void testShape() {
     Point<int> p1;
-    Point<int>  p2(30, 0);
+    Point<int> p2(30, 0);
     Point<int> p3(0, 30);
+    Triangle<int> t(p1, p2, p3, sf::Color(255, 0, 0));
+    Piece<int> p;
+    p.addTriangle(t);
+    vector<Shape<int>*> shapes;
+    shapes.push_back(&t);
+    shapes.push_back(&p);
+}
 
+void testSFML() {
+    sf::RenderWindow window(sf::VideoMode(1600, 1000), "SFML works!");
+
+    Point<int> p1(30, 30);
+    Point<int> p2(30, 60);
+    Point<int> p3(60, 30);
+    Triangle<int> t(p1, p2, p3, sf::Color(255, 0, 0));
+    Point<int> p4(30, 0);
+    Triangle<int> t2(p4, p1, p3, sf::Color(255, 0, 0));
+    Piece<int> p;
+    p.addTriangle(t);
+    p.addTriangle(t2);
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        window.clear();
+        p.draw(window);
+        window.display();
+    }
 }
 
 int main(int argc, char const *argv[]) {
     //testPoint();
     //testTriangle();
-    testPiece();
+    //testPiece();
+    //testShape();
+    testSFML();
 
 	return 0;
 }

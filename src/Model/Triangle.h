@@ -5,6 +5,8 @@
 
 #ifndef _TRIANGLE_H
 
+#include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include <vector>
 
@@ -17,16 +19,20 @@ private :
     Point<CoordinateType> a;
     Point<CoordinateType> b;
     Point<CoordinateType> c;
+    sf::Color color;
 
 public :
-    Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c);
+    Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color);
 
     vector<CoordinateType> calculateBarycentricCoordinates(Point<CoordinateType>& p) const;
     bool isInTriangle(Point<CoordinateType>& p) const;
     Point<CoordinateType> center();
+
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual void centralize(Point<CoordinateType> clickPos);
     virtual void translate(Point<CoordinateType> translation);
+
+    void draw(sf::RenderWindow& window);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
@@ -36,8 +42,8 @@ public :
 };
 
 template<class CoordinateType>
-Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c)
-: a(_a), b(_b), c(_c){
+Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color)
+: a(_a), b(_b), c(_c), color(color){
 }
 
 /* Calculate the barycentric coordinates of the point
@@ -82,6 +88,8 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
     c.rotate(center, theta);
 }
 
+/* Centralize the triangle around the click position
+*/
 template<class CoordinateType>
 void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
     Point<CoordinateType> c = center();
@@ -96,6 +104,22 @@ void Triangle<CoordinateType>::translate(Point<CoordinateType> translation) {
     a += translation;
     b += translation;
     c += translation;
+}
+
+/* draw the triangle
+*/
+template<class CoordinateType>
+void Triangle<CoordinateType>::draw(sf::RenderWindow& window) {
+    sf::ConvexShape triangle;
+    triangle.setPointCount(3);
+
+    // define points
+    triangle.setPoint(0, sf::Vector2f(a.getX(), a.getY()));
+    triangle.setPoint(1, sf::Vector2f(b.getX(), b.getY()));
+    triangle.setPoint(2, sf::Vector2f(c.getX(), c.getY()));
+
+    triangle.setFillColor(color);
+    window.draw(triangle);
 }
 
 #endif //_TRIANGLE_H
