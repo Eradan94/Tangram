@@ -7,6 +7,8 @@ include_directories(src/Controller)
 include_directories(src/Model)
 include_directories(src/View)
 
+find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
+
 add_executable(Tangram
         src/Controller/Action.cpp
         src/Controller/Action.h
@@ -28,3 +30,5 @@ add_executable(Tangram
         src/View/Menu.cpp
         src/View/Menu.h
         src/Main.cpp)
+
+target_link_libraries(Tangram sfml-graphics)
