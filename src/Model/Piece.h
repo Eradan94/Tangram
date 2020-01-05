@@ -65,6 +65,8 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, ...) {
 		Triangle<CoordinateType> t(p1, p2, p3, color);
 		triangles.push_back(t);
 	}
+
+	va_end(args);
 }
 
 /* Add a single triangle in the list

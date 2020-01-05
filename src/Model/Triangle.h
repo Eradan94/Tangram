@@ -92,8 +92,8 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
 */
 template<class CoordinateType>
 void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
-    Point<CoordinateType> center = center();
-    Point<CoordinateType> translation = clickPos - center;
+    Point<CoordinateType> point = center();
+    Point<CoordinateType> translation = clickPos - point;
     translate(translation);
 }
 
