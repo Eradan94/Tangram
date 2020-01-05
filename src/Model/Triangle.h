@@ -3,7 +3,7 @@
  */
 
 
-#ifndef _TRIANGLE_H
+#pragma once
 
 #include <SFML/Graphics.hpp>
 
@@ -122,4 +122,3 @@ void Triangle<CoordinateType>::draw(sf::RenderWindow& window) {
     window.draw(triangle);
 }
 
-#endif //_TRIANGLE_H

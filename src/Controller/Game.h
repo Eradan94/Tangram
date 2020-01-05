@@ -3,9 +3,7 @@
  */
 
 
-#ifndef _GAME_H
-#define _GAME_H
-
+#pragma once
 #include "../View/Drawable.h"
 #include "../View/Button.h"
 #include "../Model/Shape.h"
@@ -20,10 +18,3 @@ private :
     std::vector<Shape<double>> pieces;
     std::list<Button> buttons;
 };
-
-Game::Game() {
-
-
-}
-
-#endif //_GAME_H

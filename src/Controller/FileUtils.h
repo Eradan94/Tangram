@@ -3,10 +3,7 @@
  */
 
 
-#ifndef _FILEUTILS_H
-#define _FILEUTILS_H
-
+#pragma once
 class FileUtils {
 };
 
-#endif //_FILEUTILS_H

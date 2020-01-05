@@ -3,9 +3,7 @@
  */
 
 
-#ifndef _MENU_H
-#define _MENU_H
-
+#pragma once
 #include "Drawable.h"
 #include "Button.h"
 
@@ -18,4 +16,3 @@ private :
     std::list<Button> buttons;
 };
 
-#endif //_MENU_H

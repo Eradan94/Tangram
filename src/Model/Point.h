@@ -3,9 +3,7 @@
  */
 
 
-#ifndef _POINT_H
-#define _POINT_H
-
+#pragma once
 #include <iostream>
 #include <math.h>
 
@@ -113,4 +111,3 @@ void Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double t
     y = newy;
 }
 
-#endif //_POINT_H

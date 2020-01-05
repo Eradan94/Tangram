@@ -3,10 +3,7 @@
  */
 
 
-#ifndef _CLICKABLE_H
-#define _CLICKABLE_H
-
+#pragma once
 class Clickable {
 };
 
-#endif //_CLICKABLE_H

@@ -3,9 +3,7 @@
  */
 
 
-#ifndef _SHAPE_H
-#define _SHAPE_H
-
+#pragma once
 #include "../Controller/Clickable.h"
 #include "../View/Drawable.h"
 #include "Point.h"
@@ -17,4 +15,3 @@ class Shape: public Clickable, public Drawable {
     virtual void rotate(Point<CoordinateType> center, double theta) = 0;
 };
 
-#endif //_SHAPE_H

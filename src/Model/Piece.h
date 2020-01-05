@@ -3,7 +3,7 @@
  */
 
 
-#ifndef _PIECE_H
+#pragma once
 
 #include <list>
 
@@ -94,5 +94,3 @@ void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
         t.draw(window);
     }
 }
-
-#endif //_PIECE_H

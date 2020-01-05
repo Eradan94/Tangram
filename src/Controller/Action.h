@@ -3,10 +3,7 @@
  */
 
 
-#ifndef _ACTION_H
-#define _ACTION_H
-
+#pragma once
 class Action {
 };
 
-#endif //_ACTION_H

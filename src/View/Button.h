@@ -3,9 +3,7 @@
  */
 
 
-#ifndef _BUTTON_H
-#define _BUTTON_H
-
+#pragma once
 #include <SFML/Graphics.hpp>
 
 #include "Drawable.h"
@@ -27,4 +25,3 @@ private :
     string text;
 };
 
-#endif //_BUTTON_H
