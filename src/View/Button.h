@@ -23,5 +23,6 @@ private :
     Point<int> topLeft;
     Point<int> bottomRight;
     string text;
+    bool display;
 };
 

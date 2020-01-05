@@ -5,17 +5,19 @@
 
 #include "Button.h"
 
+#include <utility>
+
 /**
  * Button implementation
  */
 
-Button::Button(Point<int> topLeft, Point<int> bottomRight, string text)  : topLeft(topLeft), bottomRight(bottomRight), text(text) {
+Button::Button(Point<int> topLeft, Point<int> bottomRight, string text) :
+	topLeft(topLeft), bottomRight(bottomRight), text(std::move(text)), display(true) {
 }
 
-Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text) {
-    topLeft = Point<int>(topLeftX, topLeftY);
-    bottomRight = Point<int>(bottomRightX, bottomRightY);
-    this->text = text;
+Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text) :
+	topLeft(Point<int>(topLeftX, topLeftY)), bottomRight(Point<int>(bottomRightX, bottomRightY)),
+	text(std::move(text)), display(true) {
 }
 
 void Button::draw(sf::RenderWindow& window) {
@@ -26,4 +28,8 @@ void Button::draw(sf::RenderWindow& window) {
     rectangle.setPosition(bottomRight.getX(), bottomRight.getY());
 
     window.draw(rectangle);
+}
+
+void Button::setDisplay(bool mode) {
+	display = mode;
 }
