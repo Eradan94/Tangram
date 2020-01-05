@@ -6,6 +6,7 @@
 #pragma once
 
 #include <list>
+#include <cstdarg>
 
 #include "Shape.h"
 #include "Triangle.h"
@@ -14,7 +15,7 @@ template<class CoordinateType>
 class Piece: public Shape<CoordinateType> {
 public :
     Piece();
-
+	Piece(int size, sf::Color color, ...);
     void addTriangle(const Triangle<CoordinateType> t);
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
     virtual void rotate(Point<CoordinateType> center, double theta);
@@ -38,6 +39,32 @@ private :
 
 template<class CoordinateType>
 Piece<CoordinateType>::Piece(){
+}
+
+// Creates a Piece using a color and a list of coordinates.
+// Coordinates are grouped by 3, each group is a triangle.
+// Piece(3, color,
+// 		x11, y11, x12, y12, x13, y13,
+// 		x21, y21, x22, y22, x23, y23,
+//		x31, y31, x32, y32, x33, y33);
+template<class CoordinateType>
+Piece<CoordinateType>::Piece(int size, sf::Color color, ...) {
+	va_list args;
+	va_start(args, color);
+
+	for(int i = 0; i < size; i++) {
+		CoordinateType x = va_arg(args, CoordinateType);
+		CoordinateType y = va_arg(args, CoordinateType);
+		Point<CoordinateType> p1 = Point<CoordinateType>(x, y);
+		x = va_arg(args, CoordinateType);
+		y = va_arg(args, CoordinateType);
+		Point<CoordinateType> p2 = Point<CoordinateType>(x, y);
+		x = va_arg(args, CoordinateType);
+		y = va_arg(args, CoordinateType);
+		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
+		Triangle<CoordinateType> t(p1, p2, p3, color);
+		triangles.push_back(t);
+	}
 }
 
 /* Add a single triangle in the list
