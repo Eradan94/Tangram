@@ -28,7 +28,7 @@ public :
     bool isInTriangle(Point<CoordinateType>& p) const;
     Point<CoordinateType> center();
 
-    virtual void rotate(const Point<CoordinateType> center, double theta);
+    virtual void rotate(Point<CoordinateType> center, double theta);
     virtual void centralize(Point<CoordinateType> clickPos);
     virtual void translate(Point<CoordinateType> translation);
 
@@ -92,8 +92,8 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
 */
 template<class CoordinateType>
 void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
-    Point<CoordinateType> c = center();
-    Point<CoordinateType> translation = clickPos - c;
+    Point<CoordinateType> center = center();
+    Point<CoordinateType> translation = clickPos - center;
     translate(translation);
 }
 

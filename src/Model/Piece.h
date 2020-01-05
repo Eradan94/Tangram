@@ -16,7 +16,8 @@ class Piece: public Shape<CoordinateType> {
 public :
     Piece();
 	Piece(int size, sf::Color color, ...);
-    void addTriangle(const Triangle<CoordinateType> t);
+    void addTriangle(Triangle<CoordinateType> t);
+	~Piece();
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
     virtual void rotate(Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center();
@@ -38,8 +39,7 @@ private :
 };
 
 template<class CoordinateType>
-Piece<CoordinateType>::Piece(){
-}
+Piece<CoordinateType>::Piece()= default;
 
 // Creates a Piece using a color and a list of coordinates.
 // Coordinates are grouped by 3, each group is a triangle.
@@ -112,6 +112,9 @@ void Piece<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
         t.translate(translation);
     }
 }
+
+template<class CoordinateType>
+Piece<CoordinateType>::~Piece() = default;
 
 /* draw a piece
 */

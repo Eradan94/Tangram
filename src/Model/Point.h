@@ -14,7 +14,7 @@ private :
     CoordinateType y;
 
 public :
-    Point(CoordinateType _x = 0, CoordinateType _y = 0);
+    explicit Point(CoordinateType _x = 0, CoordinateType _y = 0);
     bool operator== (const Point& other) const;
     bool operator!= (const Point& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;

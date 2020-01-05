@@ -17,7 +17,7 @@ public :
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text);
 
     void setDisplay(bool mode);
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window) override;
 
 private :
     Point<int> topLeft;
