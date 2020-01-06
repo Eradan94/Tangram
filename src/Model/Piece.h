@@ -22,7 +22,7 @@ public :
     virtual void rotate(Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center();
     virtual void centralize(Point<CoordinateType> clickPos);
-
+	virtual bool isInShape(Point<CoordinateType> & p) const;
     void draw(sf::RenderWindow& window);
 
     // friends functions
@@ -125,4 +125,14 @@ void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
     for(auto& t : triangles) {
         t.draw(window);
     }
+}
+
+template<class CoordinateType>
+bool Piece<CoordinateType>::isInShape(Point<CoordinateType> &p) const{
+	for(auto& t : triangles) {
+		if(t.isInShape(p)) {
+			return true;
+		}
+	}
+	return false;
 }
