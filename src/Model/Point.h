@@ -5,7 +5,7 @@
 
 #pragma once
 #include <iostream>
-#include <math.h>
+#include <cmath>
 
 template<class CoordinateType>
 class Point {
