@@ -6,15 +6,18 @@
 #pragma once
 #include <iostream>
 #include <cmath>
+#include <SFML/Window/Event.hpp>
 
 template<class CoordinateType>
 class Point {
 private :
-    CoordinateType x;
+	CoordinateType x;
     CoordinateType y;
 
 public :
     explicit Point(CoordinateType _x = 0, CoordinateType _y = 0);
+    Point(sf::Event::MouseButtonEvent event);
+    Point(sf::Event::MouseMoveEvent event);
     bool operator== (const Point& other) const;
     bool operator!= (const Point& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
@@ -41,6 +44,14 @@ using namespace std;
 template<class CoordinateType>
 Point<CoordinateType>::Point(CoordinateType _x, CoordinateType _y)
 : x(_x), y(_y){
+}
+
+template<class CoordinateType>
+Point<CoordinateType>::Point(sf::Event::MouseButtonEvent event) : x(event.x), y(event.y) {
+}
+
+template<class CoordinateType>
+Point<CoordinateType>::Point(sf::Event::MouseMoveEvent event) : x(event.x), y(event.y) {
 }
 
 /* Operators
