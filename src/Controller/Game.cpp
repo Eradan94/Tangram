@@ -45,3 +45,13 @@ void Game::draw(sf::RenderWindow &window) {
 		s -> draw(window);
 	}
 }
+
+Shape<double> * Game::getSelected(Point<double> event) {
+	Shape<double> * res = nullptr;
+	for (auto s : pieces) {
+		if (s->isInShape(event)){
+			res = s;
+		}
+	}
+	return res;
+}

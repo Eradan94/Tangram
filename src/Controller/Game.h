@@ -15,7 +15,11 @@
 class Game: public Drawable {
 public :
 	static Game * init();
+
 	void draw(sf::RenderWindow& window) override;
+
+	Shape<double> * getSelected(Point<double> event);
+
 private :
 	Game();
     std::vector<Shape<double>*> pieces;
