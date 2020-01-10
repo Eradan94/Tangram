@@ -40,7 +40,7 @@ int main(int argc, char const *argv[]) {
 			}
 			if(isPressed && event.type == sf::Event::MouseWheelScrolled) {
 				if (selected != nullptr){
-					selected -> rotate(event.mouseWheelScroll.delta / 18);
+					selected -> rotate(event.mouseWheelScroll.delta * M_PI / 16);
 					cout << "Scrolled " << event.mouseWheelScroll.delta << endl;
 				}
 			}
