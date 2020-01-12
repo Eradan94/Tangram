@@ -23,22 +23,18 @@ void Action::initActions(Game & game) {
 	registerEvent(sf::Event::MouseButtonPressed, [&game](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			game.select(event.mouseButton);
-			cout << "Pressed " << event.mouseButton.button << endl;
 		}
 	});
 	registerEvent(sf::Event::MouseButtonReleased, [&game](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			game.deselect(event.mouseButton);
-			cout << "Released " << event.mouseButton.x << " " << event.mouseButton.y << endl;
 		}
 	});
 	registerEvent(sf::Event::MouseMoved, [&game](sf::Event event) {
 		game.centralizeSelected(event.mouseMove);
-		cout << "Moved " << event.mouseMove.x << " " << event.mouseMove.y << endl;
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [&game](sf::Event event) {
 		game.rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
-		cout << "Scrolled " << event.mouseWheelScroll.delta << endl;
 	});
 }
 
