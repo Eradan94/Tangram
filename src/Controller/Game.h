@@ -12,16 +12,26 @@
 #include <list>
 #include <vector>
 
-class Game: public Drawable {
+class Game {
 public :
 	static Game * init();
 
-	void draw(sf::RenderWindow& window) override;
+	Game();
 
-	Shape<double> * getSelected(Point<double> event);
+	~Game();
+
+	void draw(sf::RenderWindow& window);
+
+	void select(const Point<double> & event);
+
+	void deselect(const Point<double> & event);
+
+	void centralizeSelected(const sf::Event::MouseMoveEvent event);
+
+	void rotateSelected(const double d);
 
 private :
-	Game();
     std::vector<Shape<double>*> pieces;
     std::list<Button> buttons;
+	Shape<double> * selected;
 };
