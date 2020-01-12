@@ -19,10 +19,10 @@ public :
     void addTriangle(Triangle<CoordinateType> t);
 	~Piece();
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
-    virtual void rotate(Point<CoordinateType> center, double theta);
-    virtual Point<CoordinateType> center();
-    virtual void centralize(Point<CoordinateType> clickPos);
-	virtual bool isInShape(Point<CoordinateType> & p) const;
+    virtual void rotate(const Point<CoordinateType> center, double theta);
+    virtual Point<CoordinateType> center() const;
+    virtual void centralize(const Point<CoordinateType> clickPos);
+	virtual bool isInShape(const Point<CoordinateType> & p) const;
     void draw(sf::RenderWindow& window);
 
     // friends functions
@@ -86,7 +86,7 @@ void Piece<CoordinateType>::addTriangles(std::initializer_list<Triangle<Coordina
 /* calculate the piece's center
 */
 template<class CoordinateType>
-Point<CoordinateType> Piece<CoordinateType>::center() {
+Point<CoordinateType> Piece<CoordinateType>::center() const {
     Point<CoordinateType> center;
     for(auto& t : triangles) {
         center += t.center();
@@ -97,7 +97,7 @@ Point<CoordinateType> Piece<CoordinateType>::center() {
 /* Performs a rotation with an angle theta
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::rotate(Point<CoordinateType> center, double theta) {
+void Piece<CoordinateType>::rotate(const Point<CoordinateType> center, double theta) {
     //Point<CoordinateType> c = center();
     for(auto& t : triangles) {
         t.rotate(center, theta);
@@ -107,7 +107,7 @@ void Piece<CoordinateType>::rotate(Point<CoordinateType> center, double theta) {
 /* Centralize the piece on the mouse cursor
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
+void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos) {
     Point<CoordinateType> c = center();
     Point<CoordinateType> translation = clickPos - c;
     for(auto& t : triangles) {
@@ -128,7 +128,7 @@ void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
 }
 
 template<class CoordinateType>
-bool Piece<CoordinateType>::isInShape(Point<CoordinateType> &p) const{
+bool Piece<CoordinateType>::isInShape(const Point<CoordinateType> &p) const{
 	for(auto& t : triangles) {
 		if(t.isInShape(p)) {
 			return true;

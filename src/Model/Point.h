@@ -27,8 +27,8 @@ public :
     Point<CoordinateType>& operator+= (const Point& other);
     //Point<CoordinateType>& operator-= (const Point& other);
 
-    CoordinateType getX();
-    CoordinateType getY();
+    CoordinateType getX() const;
+    CoordinateType getY() const;
 
     void rotate(const Point<CoordinateType>& c, double theta);
 
@@ -103,12 +103,12 @@ Point<CoordinateType>& Point<CoordinateType>::operator-= (const Point<Coordinate
 /* Getters
 */
 template<class CoordinateType>
-CoordinateType Point<CoordinateType>::getX() {
+CoordinateType Point<CoordinateType>::getX() const{
     return x;
 }
 
 template<class CoordinateType>
-CoordinateType Point<CoordinateType>::getY() {
+CoordinateType Point<CoordinateType>::getY() const{
     return y;
 }
 

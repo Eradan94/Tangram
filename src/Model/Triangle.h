@@ -24,13 +24,13 @@ private :
 public :
     Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color);
 
-    vector<CoordinateType> calculateBarycentricCoordinates(Point<CoordinateType>& p) const;
-    bool isInShape(Point<CoordinateType>& p) const;
-    Point<CoordinateType> center();
+    vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType>& p) const;
+    bool isInShape(const Point<CoordinateType>& p) const;
+    Point<CoordinateType> center() const;
 
-    virtual void rotate(Point<CoordinateType> center, double theta);
-    virtual void centralize(Point<CoordinateType> clickPos);
-    virtual void translate(Point<CoordinateType> translation);
+    virtual void rotate(const Point<CoordinateType> center, double theta);
+    virtual void centralize(const Point<CoordinateType> clickPos);
+    virtual void translate(const Point<CoordinateType> translation);
 
     void draw(sf::RenderWindow& window);
 
@@ -49,7 +49,7 @@ Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateTyp
 /* Calculate the barycentric coordinates of the point
 */
 template<class CoordinateType>
-vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates(Point<CoordinateType>& p) const{
+vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates(const Point<CoordinateType>& p) const{
 	vector<CoordinateType> barCoordinates;
 	Point<CoordinateType> pa = p - a;
     Point<CoordinateType> pb = p - b;
@@ -63,7 +63,7 @@ vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates
 /* A point is inside a triangle if all his coordinates are positive or negative
 */
 template<class CoordinateType>
-bool Triangle<CoordinateType>::isInShape(Point<CoordinateType>& p) const{
+bool Triangle<CoordinateType>::isInShape(const Point<CoordinateType>& p) const{
 	std::vector<CoordinateType> barCoordinates = this->calculateBarycentricCoordinates(p);
 	if(barCoordinates[0] <= 0 && barCoordinates[1] <= 0 && barCoordinates[2] <= 0)
 		return true;
@@ -75,7 +75,7 @@ bool Triangle<CoordinateType>::isInShape(Point<CoordinateType>& p) const{
 /* Calculate the triangle's center
 */
 template<class CoordinateType>
-Point<CoordinateType> Triangle<CoordinateType>::center() {
+Point<CoordinateType> Triangle<CoordinateType>::center() const{
     return Point<CoordinateType>((a.getX() + b.getX()+ c.getX()) / 3, (a.getY() + b.getY() + c.getY()) / 3);
 }
 
@@ -91,7 +91,7 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
 /* Centralize the triangle around the click position
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
+void Triangle<CoordinateType>::centralize(const Point<CoordinateType> clickPos) {
     Point<CoordinateType> point = center();
     Point<CoordinateType> translation = clickPos - point;
     translate(translation);
@@ -100,7 +100,7 @@ void Triangle<CoordinateType>::centralize(Point<CoordinateType> clickPos) {
 /* Translate a triangle
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::translate(Point<CoordinateType> translation) {
+void Triangle<CoordinateType>::translate(const Point<CoordinateType> translation) {
     a += translation;
     b += translation;
     c += translation;
