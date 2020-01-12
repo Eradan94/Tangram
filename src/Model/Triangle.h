@@ -29,7 +29,7 @@ public :
     Point<CoordinateType> center() const;
 
     virtual void rotate(const Point<CoordinateType> center, double theta);
-    virtual void centralize(const Point<CoordinateType> clickPos);
+    virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
     virtual void translate(const Point<CoordinateType> translation);
 
     void draw(sf::RenderWindow& window);
@@ -91,9 +91,9 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
 /* Centralize the triangle around the click position
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::centralize(const Point<CoordinateType> clickPos) {
-    Point<CoordinateType> point = center();
-    Point<CoordinateType> translation = clickPos - point;
+void Triangle<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
+	Point<CoordinateType> point = center() - relativePos;
+	Point<CoordinateType> translation = clickPos - point;
     translate(translation);
 }
 

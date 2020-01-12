@@ -34,4 +34,5 @@ private :
     std::vector<Shape<double>*> pieces;
     std::list<Button> buttons;
 	Shape<double> * selected;
+	Point<double> relativePos;
 };

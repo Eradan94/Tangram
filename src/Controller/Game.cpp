@@ -55,6 +55,7 @@ void Game::select(const Point<double> & event) {
 	for (auto s : pieces) {
 		if (s->isInShape(event)){
 			selected = s;
+			relativePos = selected->center() - event;
 		}
 	}
 }

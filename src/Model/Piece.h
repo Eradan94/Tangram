@@ -21,7 +21,7 @@ public :
     //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center() const;
-    virtual void centralize(const Point<CoordinateType> clickPos);
+    virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
 	virtual bool isInShape(const Point<CoordinateType> & p) const;
     void draw(sf::RenderWindow& window);
 
@@ -107,9 +107,9 @@ void Piece<CoordinateType>::rotate(const Point<CoordinateType> center, double th
 /* Centralize the piece on the mouse cursor
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos) {
-    Point<CoordinateType> c = center();
-    Point<CoordinateType> translation = clickPos - c;
+void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
+    Point<CoordinateType> point = center() - relativePos;
+    Point<CoordinateType> translation = clickPos - point;
     for(auto& t : triangles) {
         t.translate(translation);
     }
