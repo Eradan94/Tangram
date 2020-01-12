@@ -3,7 +3,7 @@
  */
 
 
-#include "Triangle.h"
+#include "../Model/Triangle.h"
 #include "Game.h"
 #include "../Model/Piece.h"
 
