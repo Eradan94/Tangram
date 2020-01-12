@@ -32,6 +32,6 @@ int main(int argc, char const *argv[]) {
 		}
 		game->draw(window);
 	}
-
+	delete game;
 	return 0;
 }
