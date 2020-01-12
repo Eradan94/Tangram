@@ -9,7 +9,6 @@
 #include "Action.h"
 
 Game * Game::init() {
-//	auto * window = new sf::RenderWindow(sf::VideoMode(1600, 1000), "Tangram");
 	auto * smallTriangle1 = new Piece<double>(1, sf::Color(255, 100, 0),
 											  0.0, 400.0, 100.0, 300.0, 200.0, 400.0);
 	auto * smallTriangle2 = new Piece<double>(1, sf::Color(255, 255, 0),
@@ -40,8 +39,7 @@ Game * Game::init() {
 	return game;
 }
 
-Game::Game() : selected(nullptr) {
-	cout << "Game constructor : " << this << endl;
+Game::Game() : selected(nullptr), relativePos(Point(0., 0.)) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
@@ -53,6 +51,7 @@ void Game::draw(sf::RenderWindow& window) {
 }
 
 void Game::select(const Point<double> & event) {
+	selected = nullptr;
 	for (auto s : pieces) {
 		if (s->isInShape(event)){
 			selected = s;
@@ -61,13 +60,15 @@ void Game::select(const Point<double> & event) {
 }
 
 void Game::deselect(const Point<double> & event) {
-	selected -> centralize(event);
-	selected = nullptr;
+	if (selected != nullptr) {
+		selected->centralize(event, relativePos);
+		selected = nullptr;
+	}
 }
 
 void Game::centralizeSelected(sf::Event::MouseMoveEvent event) {
 	if (selected != nullptr) {
-		selected -> centralize(event);
+		selected -> centralize(event, relativePos);
 	}
 }
 
@@ -76,5 +77,4 @@ void Game::rotateSelected(const double d) {
 }
 
 Game::~Game() {
-	cout << "Game destructor : " << (void *) this << endl;
 }
