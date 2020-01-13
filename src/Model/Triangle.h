@@ -25,7 +25,7 @@ public :
     Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color);
 
     vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType>& p) const;
-    bool isInShape(const Point<CoordinateType>& p) const;
+    bool isClicked(const Point<CoordinateType>& p) const;
     Point<CoordinateType> center() const;
 
     virtual void rotate(const Point<CoordinateType> center, double theta);
@@ -63,7 +63,7 @@ vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates
 /* A point is inside a triangle if all his coordinates are positive or negative
 */
 template<class CoordinateType>
-bool Triangle<CoordinateType>::isInShape(const Point<CoordinateType>& p) const{
+bool Triangle<CoordinateType>::isClicked(const Point<CoordinateType>& p) const{
 	std::vector<CoordinateType> barCoordinates = this->calculateBarycentricCoordinates(p);
 	if(barCoordinates[0] <= 0 && barCoordinates[1] <= 0 && barCoordinates[2] <= 0)
 		return true;

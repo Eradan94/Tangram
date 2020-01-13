@@ -33,3 +33,7 @@ void Button::draw(sf::RenderWindow& window) {
 void Button::setDisplay(bool mode) {
 	display = mode;
 }
+
+bool Button::isClicked(const Point<int> &p) const {
+	return false;
+}

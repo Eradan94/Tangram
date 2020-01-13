@@ -53,7 +53,7 @@ void Game::draw(sf::RenderWindow& window) {
 void Game::select(const Point<double> & event) {
 	selected = nullptr;
 	for (auto s : pieces) {
-		if (s->isInShape(event)){
+		if (s->isClicked(event)){
 			selected = s;
 			relativePos = selected->center() - event;
 		}
