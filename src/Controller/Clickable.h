@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "Point.h"
+#include "../Model/Point.h"
 
 template<class CoordinateType>
 class Clickable {

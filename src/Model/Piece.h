@@ -16,9 +16,8 @@ class Piece: public Shape<CoordinateType> {
 public :
     Piece();
 	Piece(int size, sf::Color color, ...);
-    void addTriangle(Triangle<CoordinateType> t);
 	~Piece();
-    //void addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles);
+    void addTriangle(Triangle<CoordinateType> t);
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center() const;
     virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
@@ -76,13 +75,6 @@ void Piece<CoordinateType>::addTriangle(const Triangle<CoordinateType> t) {
     triangles.push_back(t);
 }
 
-/* add several triangles in the list
-*/
-/*template<class CoordinateType>
-void Piece<CoordinateType>::addTriangles(std::initializer_list<Triangle<CoordinateType>> triangles) {
-    this->triangles.insert(this->triangles.end(), triangles.begin(), triangles.end());
-}*/
-
 /* calculate the piece's center
 */
 template<class CoordinateType>
@@ -127,8 +119,11 @@ void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
     }
 }
 
+/* return true if the point p is inside the piece
+*/
 template<class CoordinateType>
 bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
+    // Verify for each triangle if the point is inside it
 	for(auto& t : triangles) {
 		if(t.isClicked(p)) {
 			return true;

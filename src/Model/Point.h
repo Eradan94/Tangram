@@ -22,10 +22,8 @@ public :
     bool operator!= (const Point& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
     Point<CoordinateType> operator- (const Point& other) const;
-    //Point<CoordinateType> operator- () const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point& other);
-    //Point<CoordinateType>& operator-= (const Point& other);
 
     CoordinateType getX() const;
     CoordinateType getY() const;
@@ -87,18 +85,6 @@ Point<CoordinateType>& Point<CoordinateType>::operator+= (const Point<Coordinate
     y += other.y;
     return *this;
 }
-
-/*template<class CoordinateType>
-Point<CoordinateType> Point<CoordinateType>::operator- () const {
-    return Point<CoordinateType>(-x, -y);
-}*/
-
-/*template<class CoordinateType>
-Point<CoordinateType>& Point<CoordinateType>::operator-= (const Point<CoordinateType>& other) {
-    x -= other.x;
-    y -= other.y;
-    return *this;
-}*/
 
 /* Getters
 */

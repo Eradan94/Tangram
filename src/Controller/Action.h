@@ -7,8 +7,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <math.h>
 #include <functional>
 #include "Game.h"
+#include <string>
 
 class Action {
 public:

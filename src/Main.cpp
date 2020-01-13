@@ -9,15 +9,15 @@
 
 #include <iostream>
 #include <vector>
-#include <Action.h>
+#include "Controller/Action.h"
 #include "Controller/Game.h"
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-	Game * game = Game::init();
+	Game * game = Game::init("../Tangram/levels/1.txt");
 
-	sf::RenderWindow window(sf::VideoMode(600, 800), "Tangram");
+	sf::RenderWindow window(sf::VideoMode(900, 800), "Tangram");
 	Action::initActions(*game);
 
 	while (window.isOpen())

@@ -14,7 +14,7 @@
 
 class Game {
 public :
-	static Game * init();
+	static Game * init(char* fileName);
 
 	Game();
 
@@ -32,6 +32,8 @@ public :
 
 private :
     std::vector<Shape<double>*> pieces;
+    std::vector<Point<double>> goal;
+    sf::ConvexShape convex;
     std::list<Button> buttons;
 	Shape<double> * selected;
 	Point<double> relativePos;

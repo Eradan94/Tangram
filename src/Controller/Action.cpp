@@ -34,7 +34,7 @@ void Action::initActions(Game & game) {
 		game.centralizeSelected(event.mouseMove);
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [&game](sf::Event event) {
-		game.rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
+		game.rotateSelected(event.mouseWheelScroll.delta * 3.14 / 16);
 	});
 }
 
