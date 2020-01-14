@@ -22,6 +22,7 @@ public :
     virtual Point<CoordinateType> center() const;
     virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
 	virtual bool isClicked(const Point<CoordinateType> & p) const;
+	virtual std::vector<Point<CoordinateType>> getPoints() const;
     void draw(sf::RenderWindow& window);
 
     // friends functions
@@ -130,4 +131,15 @@ bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
 		}
 	}
 	return false;
+}
+
+template<class CoordinateType>
+vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
+	vector<Point<CoordinateType>> points;
+	for_each(triangles.cbegin(), triangles.cend(), [&points](Triangle<CoordinateType> t){
+		vector<Point<CoordinateType>> trianglePoints = t.getPoints();
+		points.insert(points.cend(), trianglePoints.cbegin(), trianglePoints.cend());
+	});
+
+	return points;
 }

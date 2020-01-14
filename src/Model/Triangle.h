@@ -31,6 +31,7 @@ public :
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
     virtual void translate(const Point<CoordinateType> translation);
+	virtual std::vector<Point<CoordinateType>> getPoints() const;
 
     void draw(sf::RenderWindow& window);
 
@@ -121,4 +122,16 @@ void Triangle<CoordinateType>::draw(sf::RenderWindow& window) {
     triangle.setFillColor(color);
     window.draw(triangle);
 }
+
+template<class CoordinateType>
+vector<Point<CoordinateType>> Triangle<CoordinateType>::getPoints() const {
+	vector<Point<CoordinateType>> points;
+	points.push_back(a);
+	points.push_back(b);
+	points.push_back(c);
+
+	return points;
+}
+
+
 
