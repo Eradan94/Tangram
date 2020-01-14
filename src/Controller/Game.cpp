@@ -86,3 +86,13 @@ void Game::rotateSelected(const double d) {
 
 Game::~Game() {
 }
+
+void Game::save() {
+	std::vector<Point<double>> points;
+	for_each(pieces.cbegin(), pieces.cend(), [&points](Shape<double> * s) {
+		vector<Point<double>> shapePoints = s -> getPoints();
+		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
+	});
+
+	FileUtils::writeFile(points, "levels/save.txt");
+}

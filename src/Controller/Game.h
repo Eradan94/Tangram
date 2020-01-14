@@ -31,6 +31,8 @@ public :
 
 	void rotateSelected(const double d);
 
+	void save();
+
 private :
     std::vector<Shape<double>*> pieces;
     std::list<Button> buttons;

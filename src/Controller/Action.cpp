@@ -20,6 +20,9 @@ void Action::operator()(sf::Event event) {
 }
 
 void Action::initActions(Game & game) {
+	registerEvent(sf::Event::Closed, [&game](sf::Event event) {
+		game.save();
+	});
 	registerEvent(sf::Event::MouseButtonPressed, [&game](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			game.select(event.mouseButton);
