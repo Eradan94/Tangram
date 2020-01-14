@@ -11,10 +11,11 @@
 
 #include <list>
 #include <vector>
+#include "../Model/Figure.h"
 
 class Game {
 public :
-	static Game * init(char* fileName);
+	static Game * init(const char * filename);
 
 	Game();
 
@@ -32,9 +33,8 @@ public :
 
 private :
     std::vector<Shape<double>*> pieces;
-    std::vector<Point<double>> goal;
-    sf::ConvexShape convex;
     std::list<Button> buttons;
 	Shape<double> * selected;
 	Point<double> relativePos;
+	Figure * figure;
 };

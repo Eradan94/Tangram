@@ -9,7 +9,7 @@
 #include "../Controller/FileUtils.h"
 #include "Action.h"
 
-Game * Game::init(char* fileName) {
+Game * Game::init(const char * filename) {
 	auto * smallTriangle1 = new Piece<double>(1, sf::Color(255, 100, 0),
 											  0.0, 400.0, 100.0, 300.0, 200.0, 400.0);
 	auto * smallTriangle2 = new Piece<double>(1, sf::Color(255, 255, 0),
@@ -36,19 +36,7 @@ Game * Game::init(char* fileName) {
 	game->pieces.push_back(square);
 	game->pieces.push_back(parallelogram);
 
-	//Goal Test
-	game->goal = FileUtils::readFile(fileName);
-	/*game->goal.push_back(Point<double>(400., 400.));
-	game->goal.push_back(Point<double>(550., 400.));
-	game->goal.push_back(Point<double>(400., 550.));*/
-	// crée une forme vide
-    // définit le nombre de points (3)
-    game->convex.setPointCount(3);
-    // définit les points
-    game->convex.setFillColor(sf::Color(255, 255, 255));
-    game->convex.setPoint(0, sf::Vector2f(game->goal[0].getX(), game->goal[0].getY()));
-    game->convex.setPoint(1, sf::Vector2f(game->goal[1].getX(), game->goal[1].getY()));
-    game->convex.setPoint(2, sf::Vector2f(game->goal[2].getX(), game->goal[2].getY()));
+	game->figure = Figure::createFigure(filename);
 
 	// boutons :
 	// ???
@@ -60,11 +48,10 @@ Game::Game() : selected(nullptr), relativePos(Point(0., 0.)) {
 
 void Game::draw(sf::RenderWindow& window) {
 	window.clear();
-	window.draw(convex);
+	figure -> draw(window);
 	for (auto s : pieces) {
 		s -> draw(window);
 	}
-
 	window.display();
 }
 

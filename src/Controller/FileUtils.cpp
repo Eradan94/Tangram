@@ -9,7 +9,7 @@
  * FileUtils implementation
  */
 
-std::vector<Point<double>> FileUtils::readFile(char* fileName) {
+std::vector<Point<double>> FileUtils::readFile(const char* fileName) {
     std::vector<Point<double>> points;
     std::string line;
     std::ifstream level(fileName);
@@ -17,7 +17,6 @@ std::vector<Point<double>> FileUtils::readFile(char* fileName) {
     double x, y;
     int sep;
     if(level) {
-        std::cout << "open" << std::endl;
         while(getline(level, line)) {
             sep = line.find(' ');
             xStr = line.substr(0, sep);

@@ -15,7 +15,7 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-	Game * game = Game::init("../Tangram/levels/1.txt");
+	Game * game = Game::init(argv[1]);
 
 	sf::RenderWindow window(sf::VideoMode(900, 800), "Tangram");
 	Action::initActions(*game);

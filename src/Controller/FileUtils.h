@@ -12,7 +12,7 @@
 #pragma once
 class FileUtils {
     public :
-        static std::vector<Point<double>> readFile(char* fileName);
+        static std::vector<Point<double>> readFile(const char* fileName);
     private :
 
 };
