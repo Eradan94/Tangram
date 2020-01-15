@@ -81,7 +81,9 @@ void Game::centralizeSelected(sf::Event::MouseMoveEvent event) {
 }
 
 void Game::rotateSelected(const double d) {
-	selected -> rotate(d);
+	if (selected != nullptr) {
+		selected->rotate(d);
+	}
 }
 
 Game::~Game() {
