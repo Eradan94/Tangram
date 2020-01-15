@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <vector>
+#include <cfloat>
 
 #include "Point.h"
 #include "Shape.h"
@@ -30,8 +31,9 @@ public :
 
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
-    virtual void translate(const Point<CoordinateType> translation);
+    virtual void translate(const Point<CoordinateType>& translation);
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
+	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
 
     void draw(sf::RenderWindow& window);
 
@@ -101,7 +103,7 @@ void Triangle<CoordinateType>::centralize(const Point<CoordinateType> clickPos, 
 /* Translate a triangle
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::translate(const Point<CoordinateType> translation) {
+void Triangle<CoordinateType>::translate(const Point<CoordinateType>& translation) {
     a += translation;
     b += translation;
     c += translation;
@@ -133,5 +135,29 @@ vector<Point<CoordinateType>> Triangle<CoordinateType>::getPoints() const {
 	return points;
 }
 
+/* Calculate the distance between a triangle and another shape.
+* The distance between two triangles is the shortest distance between two points from each shape
+* points represents the couple of points, to get the translation to perform
+*/
+template<class CoordinateType>
+double Triangle<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const {
+    // First, get the points from each triangle
+    vector<Point<CoordinateType>> selectedPiecePoints = this->getPoints();
+    vector<Point<CoordinateType>> otherPoints = shape->getPoints();
+    double minDist = DBL_MAX;
+    double dist;
+    // Calculate the distance between each possible couple of points (p1, p2), where p1 is a point of shape and p2 is a point of the current instance
+    for(auto& point : selectedPiecePoints) {
+        for(auto& otherPoint : otherPoints) {
+            dist = point.distance(otherPoint);
+            if(dist < minDist) {
+                points[0] = point;
+                points[1] = otherPoint;
+                minDist = dist;
+            }
+        }
+    }
+    return minDist;
+}
 
 

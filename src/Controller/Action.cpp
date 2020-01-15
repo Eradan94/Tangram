@@ -30,6 +30,7 @@ void Action::initActions(Game & game) {
 	});
 	registerEvent(sf::Event::MouseButtonReleased, [&game](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
+            //game.magnetize(); fait dans deselect
 			game.deselect(event.mouseButton);
 		}
 	});

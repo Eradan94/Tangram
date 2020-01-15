@@ -8,7 +8,7 @@ Polygon::Polygon() {
 	update();
 }
 
-unsigned long Polygon::getPointCount() const {
+size_t Polygon::getPointCount() const {
 	return points.size();
 }
 

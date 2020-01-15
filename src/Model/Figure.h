@@ -3,7 +3,7 @@
 #include <vector>
 #include "../View/Drawable.h"
 #include "Point.h"
-#include "Polygon.h"
+#include "../View/Polygon.h"
 
 class Figure : public Drawable {
 public:

@@ -24,6 +24,7 @@ public :
     Point<CoordinateType> operator- (const Point& other) const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point& other);
+    double distance(const Point& otherPoint);
 
     CoordinateType getX() const;
     CoordinateType getY() const;
@@ -106,5 +107,12 @@ void Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double t
     CoordinateType newy = (sin(theta) * (x - center.x)) + (cos(theta) * (y - center.y)) + center.y;
     x = newx;
     y = newy;
+}
+
+/* Return the distance between two points
+*/
+template<class CoordinateType>
+double Point<CoordinateType>::distance(const Point& otherPoint) {
+    return sqrt((otherPoint.x - x) * (otherPoint.x - x) + (otherPoint.y - y) * (otherPoint.y - y));
 }
 
