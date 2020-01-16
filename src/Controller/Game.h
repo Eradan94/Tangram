@@ -11,6 +11,7 @@
 
 #include <list>
 #include <vector>
+ #include <cfloat>
 #include "../Model/Figure.h"
 
 class Game {
@@ -32,6 +33,8 @@ public :
 	void rotateSelected(const double d);
 
 	void save();
+
+	void magnetize();
 
 private :
     std::vector<Shape<double>*> pieces;

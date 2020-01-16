@@ -18,11 +18,15 @@ public :
 	Piece(int size, sf::Color color, ...);
 	~Piece();
     void addTriangle(Triangle<CoordinateType> t);
+
+    virtual void translate(const Point<CoordinateType>& translation);
     virtual void rotate(const Point<CoordinateType> center, double theta);
     virtual Point<CoordinateType> center() const;
     virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
 	virtual bool isClicked(const Point<CoordinateType> & p) const;
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
+	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
+
     void draw(sf::RenderWindow& window);
 
     // friends functions
@@ -103,6 +107,13 @@ template<class CoordinateType>
 void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
     Point<CoordinateType> point = center() - relativePos;
     Point<CoordinateType> translation = clickPos - point;
+    translate(translation);
+}
+
+/* Translate a piece
+*/
+template<class CoordinateType>
+void Piece<CoordinateType>::translate(const Point<CoordinateType>& translation) {
     for(auto& t : triangles) {
         t.translate(translation);
     }
@@ -142,4 +153,24 @@ vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
 	});
 
 	return points;
+}
+
+/* Calculate the distance between a piece and another shape.
+* The distance between two triangles is the shortest distance between two points from each shape
+* points represents the couple of points, to get the translation to perform
+*/
+template<class CoordinateType>
+double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const {
+    std::vector<Point<CoordinateType>> minPoints;
+    double minDist = DBL_MAX;
+    double dist;
+    for(auto& triangle : this->triangles) {
+        dist = triangle.distance(shape, points);
+        if(dist < minDist) {
+            minDist = dist;
+            minPoints = points;
+        }
+    }
+    points = minPoints;
+    return minDist;
 }

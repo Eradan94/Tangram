@@ -2,7 +2,7 @@
 // Created by odomar on 14/01/2020.
 //
 
-#include <FileUtils.h>
+#include "../Controller/FileUtils.h"
 #include "Figure.h"
 
 Figure * Figure::createFigure(const char *filename) {
