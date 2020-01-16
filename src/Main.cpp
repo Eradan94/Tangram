@@ -17,7 +17,7 @@ using namespace std;
 int main(int argc, char const *argv[]) {
 	Game * game = Game::init(argv[1]);
 
-	sf::RenderWindow window(sf::VideoMode(900, 800), "Tangram");
+	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "Tangram");
 	Action::initActions(*game);
 
 	while (window.isOpen())
