@@ -1,3 +1,4 @@
 # CLion files
 .idea/
 cmake-build-debug/
+/levels/save.txt
