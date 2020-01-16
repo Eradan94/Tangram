@@ -36,7 +36,7 @@ Game * Game::init(const char * filename) {
 	game->pieces.push_back(smallTriangle1);
 	game->pieces.push_back(smallTriangle2);
 
-	game->figure = Figure::createFigure(filename);
+	game -> goal = Piece<double>::createPiece(filename);
 
 	// boutons :
 	// ???
@@ -48,7 +48,7 @@ Game::Game() : selected(nullptr), relativePos(Point(0., 0.)) {
 
 void Game::draw(sf::RenderWindow& window) {
 	window.clear();
-	figure -> draw(window);
+	goal -> draw(window);
 	for (auto s : pieces) {
 		s -> draw(window);
 	}
@@ -97,6 +97,7 @@ void Game::save() {
 		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
 	});
 
+	Point<double>::normalize(points);
 	FileUtils::writeFile(points, "levels/save.txt");
 }
 

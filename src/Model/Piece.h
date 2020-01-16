@@ -7,6 +7,7 @@
 
 #include <list>
 #include <cstdarg>
+#include <FileUtils.h>
 
 #include "Shape.h"
 #include "Triangle.h"
@@ -16,7 +17,10 @@ class Piece: public Shape<CoordinateType> {
 public :
     Piece();
 	Piece(int size, sf::Color color, ...);
+	Piece(sf::Color color, std::vector<Point<CoordinateType>> points);
 	~Piece();
+
+	static Piece<CoordinateType> * createPiece(const char * filename);
     void addTriangle(Triangle<CoordinateType> t);
 
     virtual void translate(const Point<CoordinateType>& translation);
@@ -173,4 +177,23 @@ double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector
     }
     points = minPoints;
     return minDist;
+}
+
+template<class CoordinateType>
+Piece<CoordinateType>::Piece(sf::Color color, vector<Point<CoordinateType>> points) {
+	Point<double> offsetPoint(600, 50);
+	for(int i = 0; i < points.size() / 3; i++) {
+		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
+		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;
+		Point<CoordinateType> p3 = points[i * 3 + 2] + offsetPoint;
+		Triangle<CoordinateType> t(p1, p2, p3, color);
+		triangles.push_back(t);
+	}
+}
+
+template<class CoordinateType>
+Piece<CoordinateType> * Piece<CoordinateType>::createPiece(const char *filename) {
+
+	std::vector<Point<CoordinateType>> points = FileUtils::readFile(filename);
+	return new Piece(sf::Color(255, 255, 255), points);
 }

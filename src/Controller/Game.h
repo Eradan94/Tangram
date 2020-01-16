@@ -41,5 +41,5 @@ private :
     std::list<Button> buttons;
 	Shape<double> * selected;
 	Point<double> relativePos;
-	Figure * figure;
+	Piece<double> * goal;
 };
