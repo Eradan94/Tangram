@@ -29,6 +29,6 @@ add_executable(Tangram
         src/View/Drawable.h
         src/View/Menu.cpp
         src/View/Menu.h
-        src/Main.cpp src/Model/Figure.cpp src/Model/Figure.h src/View/Polygon.cpp src/View/Polygon.h)
+        src/Main.cpp)
 
 target_link_libraries(Tangram sfml-graphics)

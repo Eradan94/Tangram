@@ -12,7 +12,6 @@
 #include <list>
 #include <vector>
  #include <cfloat>
-#include "../Model/Figure.h"
 
 class Game {
 public :
