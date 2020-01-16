@@ -7,6 +7,8 @@
 #include <iostream>
 #include <cmath>
 #include <SFML/Window/Event.hpp>
+#include <vector>
+#include <cfloat>
 
 template<class CoordinateType>
 class Point {
@@ -25,6 +27,8 @@ public :
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point& other);
     double distance(const Point& otherPoint);
+
+    static void normalize(std::vector<Point<CoordinateType>> & points);
 
     CoordinateType getX() const;
     CoordinateType getY() const;
@@ -107,6 +111,25 @@ void Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double t
     CoordinateType newy = (sin(theta) * (x - center.x)) + (cos(theta) * (y - center.y)) + center.y;
     x = newx;
     y = newy;
+}
+
+template<class CoordinateType>
+void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
+	double minX = DBL_MAX;
+	double minY = DBL_MAX;
+
+	for_each(points.cbegin(), points.cend(), [&minX, &minY](auto & p){
+		if (p.x < minX)
+			minX = p.x;
+
+		if (p.y < minY)
+			minY = p.y;
+	});
+
+	for_each(points.begin(), points.end(), [&minX, &minY](auto & p){
+		p.x -= minX;
+		p.y -= minY;
+	});
 }
 
 /* Return the distance between two points
