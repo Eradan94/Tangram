@@ -33,7 +33,7 @@ public :
     CoordinateType getX() const;
     CoordinateType getY() const;
 
-    void rotate(const Point<CoordinateType>& c, double theta);
+    Point<CoordinateType> rotate(const Point<CoordinateType>& c, double theta);
 
     // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
@@ -106,11 +106,10 @@ CoordinateType Point<CoordinateType>::getY() const{
 /* Performs a rotation around another point with an angle theta
 */
 template<class CoordinateType>
-void Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
+Point<CoordinateType> Point<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
     CoordinateType newx = (cos(theta) * (x - center.x)) - (sin(theta) * (y - center.y)) + center.x;
     CoordinateType newy = (sin(theta) * (x - center.x)) + (cos(theta) * (y - center.y)) + center.y;
-    x = newx;
-    y = newy;
+    return Point(newx, newy);
 }
 
 template<class CoordinateType>

@@ -23,9 +23,9 @@ public :
 
 	void draw(sf::RenderWindow& window);
 
-	void select(const Point<double> & event);
+	void select(const Point<int> & event);
 
-	void deselect(const Point<double> & event);
+	void deselect(const Point<int> & event);
 
 	void centralizeSelected(const sf::Event::MouseMoveEvent event);
 
@@ -36,9 +36,9 @@ public :
 	void magnetize();
 
 private :
-    std::vector<Shape<double>*> pieces;
+    std::vector<Shape<int>*> pieces;
     std::list<Button> buttons;
-	Shape<double> * selected;
-	Point<double> relativePos;
-	Piece<double> * goal;
+	Shape<int> * selected;
+	Point<int> relativePos;
+	Piece<int> * goal;
 };

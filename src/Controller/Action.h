@@ -7,7 +7,9 @@
 
 #include <SFML/Graphics.hpp>
 #include <map>
+#define _USE_MATH_DEFINES
 #include <math.h>
+#include <iostream>
 #include <functional>
 #include "Game.h"
 #include <string>

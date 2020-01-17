@@ -20,6 +20,12 @@ private :
     Point<CoordinateType> a;
     Point<CoordinateType> b;
     Point<CoordinateType> c;
+    double theta;
+
+    Point<CoordinateType> unrotatedA;
+    Point<CoordinateType> unrotatedB;
+    Point<CoordinateType> unrotatedC;
+
     sf::Color color;
 
 public :
@@ -46,7 +52,8 @@ public :
 
 template<class CoordinateType>
 Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color)
-: a(_a), b(_b), c(_c), color(color){
+: a(_a), b(_b), c(_c), unrotatedA(_a), unrotatedB(_b), unrotatedC(_c), color(color){
+    theta = 0;
 }
 
 /* Calculate the barycentric coordinates of the point
@@ -79,16 +86,18 @@ bool Triangle<CoordinateType>::isClicked(const Point<CoordinateType>& p) const{
 */
 template<class CoordinateType>
 Point<CoordinateType> Triangle<CoordinateType>::center() const{
-    return Point<CoordinateType>((a.getX() + b.getX()+ c.getX()) / 3, (a.getY() + b.getY() + c.getY()) / 3);
+    return Point<CoordinateType>((unrotatedA.getX() + unrotatedB.getX()+ unrotatedC.getX()) / 3, (unrotatedA.getY() + unrotatedB.getY() + unrotatedC.getY()) / 3);
 }
 
 /* Performs a rotation around another point with an angle theta
 */
 template<class CoordinateType>
 void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double theta) {
-    a.rotate(center, theta);
-    b.rotate(center, theta);
-    c.rotate(center, theta);
+    this->theta += theta;
+    a = unrotatedA.rotate(center, this->theta);
+    b = unrotatedB.rotate(center, this->theta);
+    c = unrotatedC.rotate(center, this->theta);
+    std::cout << a << b << c << std::endl;
 }
 
 /* Centralize the triangle around the click position
@@ -107,6 +116,9 @@ void Triangle<CoordinateType>::translate(const Point<CoordinateType>& translatio
     a += translation;
     b += translation;
     c += translation;
+    unrotatedA += translation;
+    unrotatedB += translation;
+    unrotatedC += translation;
 }
 
 /* draw the triangle
