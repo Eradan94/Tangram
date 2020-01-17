@@ -97,7 +97,6 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
     a = unrotatedA.rotate(center, this->theta);
     b = unrotatedB.rotate(center, this->theta);
     c = unrotatedC.rotate(center, this->theta);
-    std::cout << a << b << c << std::endl;
 }
 
 /* Centralize the triangle around the click position

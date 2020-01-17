@@ -35,10 +35,13 @@ public :
 
 	void magnetize();
 
+	void checkValidatedGoalPoints();
+
 private :
     std::vector<Shape<int>*> pieces;
     std::list<Button> buttons;
 	Shape<int> * selected;
 	Point<int> relativePos;
 	Piece<int> * goal;
+	std::map<Point<int>, bool> validGoalPoints;
 };

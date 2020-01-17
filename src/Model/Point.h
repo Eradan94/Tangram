@@ -26,6 +26,9 @@ public :
     Point<CoordinateType> operator- (const Point& other) const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point& other);
+    bool operator< (const Point<CoordinateType>& other) const;
+
+
     double distance(const Point& otherPoint);
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
@@ -89,6 +92,14 @@ Point<CoordinateType>& Point<CoordinateType>::operator+= (const Point<Coordinate
     x += other.x;
     y += other.y;
     return *this;
+}
+
+template<class CoordinateType>
+bool Point<CoordinateType>::operator< (const Point<CoordinateType>& other) const {
+    if ( x == other.x ) {
+        return y < other.y;
+    }
+    return x < other.x;
 }
 
 /* Getters

@@ -37,6 +37,10 @@ Game * Game::init(const char * filename) {
 	game->pieces.push_back(smallTriangle2);
 
 	game -> goal = Piece<int>::createPiece(filename);
+	std::vector<Point<int>> points = game->goal->getPoints();
+	for(auto& point : points) {
+        game->validGoalPoints[point] = false;
+	}
 
 	// boutons :
 	// ???
@@ -71,6 +75,7 @@ void Game::deselect(const Point<int> & event) {
 	if (selected != nullptr) {
 		//selected->centralize(event, relativePos);
 		magnetize();
+		checkValidatedGoalPoints();
 		selected = nullptr;
 	}
 }
@@ -127,4 +132,21 @@ void Game::magnetize() {
         translation = minPoints[1] - minPoints[0];
         selected->translate(translation);
     }
+}
+
+void Game::checkValidatedGoalPoints() {
+    std::vector<Point<int>> goalPoints = goal->getPoints();
+    std::vector<Point<int>> selectedPoints = selected->getPoints();
+    for(auto& selectedPoint : selectedPoints) {
+        for(auto& goalPoint : validGoalPoints) {
+            if((selectedPoint.distance(goalPoint.first)) < 3) {
+                validGoalPoints[goalPoint.first] = true;
+            }
+        }
+    }
+
+    //test
+    /*for(auto& point : validGoalPoints) {
+        cout << point.first << " " << point.second << std::endl;
+    }*/
 }

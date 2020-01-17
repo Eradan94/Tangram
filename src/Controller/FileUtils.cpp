@@ -42,9 +42,13 @@ void FileUtils::writeFile(std::vector<Point<int>> points, const char *filename) 
 	std::string line;
 	std::ofstream level(filename);
 	string xStr, yStr;
-	int x, y;
-	int sep;
-	for_each(points.cbegin(), points.cend(), [&level](Point<int> p) {
-		level << p.getX() << " " << p.getY() << endl;
-	});
+	if(level) {
+        for_each(points.cbegin(), points.cend(), [&level](Point<int> p) {
+            level << p.getX() << " " << p.getY() << endl;
+            std::cout << p << std::endl;
+        });
+	}
+	else {
+        std::cerr << "Unable to open file" << std::endl;
+	}
 }
