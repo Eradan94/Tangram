@@ -117,6 +117,12 @@ void Game::magnetize() {
             }
         }
     }
+    // Magnetize with the goal
+    dist = selected->distance(goal, points);
+    if(dist < minDist) {
+        minDist = dist;
+        minPoints = points;
+    }
     if(minDist < 20) { // if the distance is greater than the threshold, the piece is not magnetized
         translation = minPoints[1] - minPoints[0];
         selected->translate(translation);
