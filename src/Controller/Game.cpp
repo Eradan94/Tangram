@@ -42,8 +42,11 @@ Game * Game::init(const char * filename) {
         game->validGoalPoints[point] = false;
 	}
 
-	// boutons :
-	// ???
+	game->menu = new Menu();
+	auto * test = new Button(1000, 50, 1300, 200, "TEST");
+
+	game -> menu -> addButton(test);
+
 	return game;
 }
 
@@ -53,6 +56,7 @@ Game::Game() : selected(nullptr), relativePos(Point(0, 0)) {
 void Game::draw(sf::RenderWindow& window) {
 	window.clear();
 	goal -> draw(window);
+	menu -> draw(window);
 	for (auto s : pieces) {
 		s -> draw(window);
 	}

@@ -11,8 +11,11 @@
 
 class Menu: public Drawable {
 public :
+	Menu();
 
+	void addButton(Button * button);
+	void draw(sf::RenderWindow & window);
 private :
-    std::list<Button> buttons;
+    std::vector<Button*> buttons;
 };
 

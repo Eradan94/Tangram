@@ -12,6 +12,7 @@
 #include <list>
 #include <vector>
  #include <cfloat>
+#include <Menu.h>
 
 class Game {
 public :
@@ -39,7 +40,7 @@ public :
 
 private :
     std::vector<Shape<int>*> pieces;
-    std::list<Button> buttons;
+	Menu * menu;
 	Shape<int> * selected;
 	Point<int> relativePos;
 	Piece<int> * goal;

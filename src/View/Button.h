@@ -21,9 +21,11 @@ public :
     bool isClicked(const Point<int>& p) const;
 
 private :
+	void init();
     Point<int> topLeft;
     Point<int> bottomRight;
     string text;
     bool display;
+	sf::RectangleShape * rectangle;
+	sf::Text * txt;
 };
-
