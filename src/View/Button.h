@@ -15,10 +15,11 @@ class Button: public Drawable, public Clickable<int> {
 public :
     Button(Point<int> topLeft, Point<int> bottomRight, string text);
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text);
+    ~Button();
 
     void setDisplay(bool mode);
     void draw(sf::RenderWindow& window) override;
-    bool isClicked(const Point<int>& p) const;
+    bool isClicked(const Point<int>& p) const override;
 
 private :
 	void init();

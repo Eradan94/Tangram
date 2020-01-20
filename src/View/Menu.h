@@ -12,6 +12,7 @@
 class Menu: public Drawable {
 public :
 	Menu();
+	~Menu();
 
 	void addButton(Button * button);
 	void draw(sf::RenderWindow & window);

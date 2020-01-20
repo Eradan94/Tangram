@@ -18,3 +18,9 @@ void Menu::draw(sf::RenderWindow & window) {
 		button->draw(window);
 	}
 }
+
+Menu::~Menu() {
+	for (auto * button : buttons){
+		delete button;
+	}
+}

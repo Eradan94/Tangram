@@ -97,6 +97,11 @@ void Game::rotateSelected(const double d) {
 }
 
 Game::~Game() {
+	delete menu;
+	delete goal;
+	for (auto * piece : pieces){
+		delete piece;
+	}
 }
 
 void Game::save() {

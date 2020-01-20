@@ -24,9 +24,7 @@ Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, s
 
 void Button::draw(sf::RenderWindow& window) {
     window.draw(*rectangle);
-    cout << "rctangle drawn" << endl;
 	window.draw(*txt);
-	cout << "text drawn" << endl;
 }
 
 void Button::setDisplay(bool mode) {
@@ -64,4 +62,10 @@ void Button::init() {
 
 	txt -> setOrigin(rect.left + rect.width / 2, rect.top + rect.height / 2);
 	txt -> setPosition(posX, posY);
+}
+
+Button::~Button() {
+	delete rectangle;
+	delete txt->getFont();
+	delete txt;
 }
