@@ -18,7 +18,7 @@ class Game {
 public :
 	static Game * init(const char * filename);
 
-	Game();
+	Game(Menu * menu, std::vector<Shape<int> *> pieces, Piece<int> * goal);
 
 	~Game();
 

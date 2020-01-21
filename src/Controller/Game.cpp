@@ -6,51 +6,39 @@
 #include "../Model/Triangle.h"
 #include "Game.h"
 #include "../Model/Piece.h"
-#include "../Controller/FileUtils.h"
-#include "Action.h"
+#include "GameBuilder.h"
 
 Game * Game::init(const char * filename) {
-	auto * smallTriangle1 = new Piece<int>(1, sf::Color(255, 100, 0),
-											  0, 400, 100, 300, 200, 400);
-	auto * smallTriangle2 = new Piece<int>(1, sf::Color(255, 255, 0),
-											  200, 200, 300, 100, 300, 300);
-	auto * mediumTriangle = new Piece<int>(1, sf::Color(0, 255, 0),
-											  200, 400, 400, 200, 400, 400);
-	auto * largeTriangle1 = new Piece<int>(1, sf::Color(150, 0, 100),
-											  0, 0, 200, 200, 0, 400);
-	auto * largeTriangle2 = new Piece<int>(1, sf::Color(255, 0, 150),
-											  0, 0, 400, 0, 200, 200);
-	auto * square = new Piece<int>(2, sf::Color(0, 0, 255),
-											  100, 300, 200, 200, 200, 400,
-											  200, 200, 300, 300, 200, 400);
-	auto * parallelogram = new Piece<int>(2, sf::Color(0, 255, 255),
-											  300, 100, 400, 0, 400, 200,
-											  300, 100, 400, 200, 300, 300);
+	GameBuilder builder;
 
-	Game * game = new Game;
-    game->pieces.push_back(largeTriangle1);
-	game->pieces.push_back(largeTriangle2);
-	game->pieces.push_back(mediumTriangle);
-	game->pieces.push_back(parallelogram);
-	game->pieces.push_back(square);
-	game->pieces.push_back(smallTriangle1);
-	game->pieces.push_back(smallTriangle2);
+	builder.withShape(new Piece<int>(1, sf::Color(255, 100, 0),
+			0, 400, 100, 300, 200, 400));
+	builder.withShape(new Piece<int>(1, sf::Color(255, 255, 0),
+			200, 200, 300, 100, 300, 300));
+	builder.withShape(new Piece<int>(1, sf::Color(0, 255, 0),
+			200, 400, 400, 200, 400, 400));
+	builder.withShape(new Piece<int>(1, sf::Color(150, 0, 100),
+			0, 0, 200, 200, 0, 400));
+	builder.withShape(new Piece<int>(1, sf::Color(255, 0, 150),
+			0, 0, 400, 0, 200, 200));
+	builder.withShape(new Piece<int>(2, sf::Color(0, 0, 255),
+			100, 300, 200, 200, 200, 400,
+			200, 200, 300, 300, 200, 400));
+	builder.withShape(new Piece<int>(2, sf::Color(0, 255, 255),
+			300, 100, 400, 0, 400, 200,
+			300, 100, 400, 200, 300, 300));
 
-	game -> goal = Piece<int>::createPiece(filename);
-	std::vector<Point<int>> points = game->goal->getPoints();
-	for(auto& point : points) {
-        game->validGoalPoints[point] = false;
-	}
+	builder.withButton(new Button(1200, 50, 1425, 175, "<<"));
+	builder.withButton(new Button(1450, 50, 1700, 175, ">>"));
+	builder.withButton(new Button(1200, 200, 1425, 325, "Load"));
+	builder.withButton(new Button(1450, 200, 1700, 325, "Save"));
+	builder.withButton(new Button(1200, 350, 1700, 475, "Quit"));
 
-	game->menu = new Menu();
-	auto * test = new Button(1000, 50, 1300, 200, "TEST");
-
-	game -> menu -> addButton(test);
-
-	return game;
+	return builder.build(filename);
 }
 
-Game::Game() : selected(nullptr), relativePos(Point(0, 0)) {
+Game::Game(Menu * menu, std::vector<Shape<int> *> pieces, Piece<int> * goal):
+	selected(nullptr), relativePos(Point(0, 0)), menu(menu), pieces(pieces), goal(goal) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
@@ -97,7 +85,6 @@ void Game::rotateSelected(const double d) {
 }
 
 Game::~Game() {
-	delete menu;
 	delete goal;
 	for (auto * piece : pieces){
 		delete piece;
