@@ -20,12 +20,12 @@ public :
     explicit Point(CoordinateType _x = 0, CoordinateType _y = 0);
     Point(sf::Event::MouseButtonEvent event);
     Point(sf::Event::MouseMoveEvent event);
-    bool operator== (const Point& other) const;
-    bool operator!= (const Point& other) const;
+    bool operator== (const Point<CoordinateType>& other) const;
+    bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
     Point<CoordinateType> operator- (const Point& other) const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
-    Point<CoordinateType>& operator+= (const Point& other);
+    Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
     bool operator< (const Point<CoordinateType>& other) const;
 
 
@@ -62,15 +62,9 @@ Point<CoordinateType>::Point(sf::Event::MouseMoveEvent event) : x(event.x), y(ev
 
 /* Operators
 */
-template<>
-bool Point<int>::operator==(const Point<int>& other) const {
-    return (x == other.x && y == other.y);
-}
-
-template<>
-bool Point<double>::operator==(const Point<double>& other) const {
-	// espilon
-    return (x == other.x && y == other.y);
+template<typename CoordinateType>
+bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const {
+	return (x == other.x && y == other.y);
 }
 
 template<class CoordinateType>
