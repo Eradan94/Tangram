@@ -16,7 +16,7 @@ public:
 	virtual void rotate(const Point<CoordinateType> center, double theta) = 0;
 	virtual bool isClicked(const Point<CoordinateType>& p) const = 0;
 	virtual std::vector<Point<CoordinateType>> getPoints() const = 0;
-	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<int>>& points) const = 0;
+	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<double>>& points) const = 0;
 	virtual void translate(const Point<CoordinateType>& translation) = 0;
 
 	void rotate(const float theta) {

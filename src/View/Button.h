@@ -11,20 +11,20 @@
 #include "../Model/Point.h"
 
 
-class Button: public Drawable, public Clickable<int> {
+class Button: public Drawable, public Clickable<double> {
 public :
-    Button(Point<int> topLeft, Point<int> bottomRight, string text);
+    Button(Point<double> topLeft, Point<double> bottomRight, string text);
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text);
     ~Button();
 
     void setDisplay(bool mode);
     void draw(sf::RenderWindow& window) override;
-    bool isClicked(const Point<int>& p) const override;
+    bool isClicked(const Point<double>& p) const override;
 
 private :
 	void init();
-    Point<int> topLeft;
-    Point<int> bottomRight;
+    Point<double> topLeft;
+    Point<double> bottomRight;
     string text;
     bool display;
 	sf::RectangleShape * rectangle;

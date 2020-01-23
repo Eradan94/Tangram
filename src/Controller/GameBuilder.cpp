@@ -8,7 +8,7 @@ GameBuilder::GameBuilder() : menu(new Menu) {
 
 }
 
-void GameBuilder::withShape(Shape<int> *shape) {
+void GameBuilder::withShape(Shape<double> *shape) {
 	pieces.push_back(shape);
 }
 
@@ -17,6 +17,6 @@ void GameBuilder::withButton(Button *button) {
 }
 
 Game *GameBuilder::build(const char * filename) {
-	Piece<int> * goal = Piece<int>::createPiece(filename);
+	Piece<double> * goal = Piece<double>::createPiece(filename);
 	return new Game(menu, pieces, goal);
 }

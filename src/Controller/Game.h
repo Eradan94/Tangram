@@ -18,15 +18,15 @@ class Game {
 public :
 	static Game * init(const char * filename);
 
-	Game(Menu * menu, std::vector<Shape<int> *> pieces, Piece<int> * goal);
+	Game(Menu * menu, std::vector<Shape<double> *> pieces, Piece<double> * goal);
 
 	~Game();
 
 	void draw(sf::RenderWindow& window);
 
-	void select(const Point<int> & event);
+	void select(const Point<double> & event);
 
-	void deselect(const Point<int> & event);
+	void deselect(const Point<double> & event);
 
 	void centralizeSelected(const sf::Event::MouseMoveEvent event);
 
@@ -39,10 +39,10 @@ public :
 	void checkValidatedGoalPoints();
 
 private :
-    std::vector<Shape<int>*> pieces;
+    std::vector<Shape<double>*> pieces;
 	Menu * menu;
-	Shape<int> * selected;
-	Point<int> relativePos;
-	Piece<int> * goal;
-	std::map<Point<int>, bool> validGoalPoints;
+	Shape<double> * selected;
+	Point<double> relativePos;
+	Piece<double> * goal;
+	std::map<Point<double>, bool> validGoalPoints;
 };

@@ -181,7 +181,7 @@ double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector
 
 template<class CoordinateType>
 Piece<CoordinateType>::Piece(sf::Color color, vector<Point<CoordinateType>> points) {
-	Point<int> offsetPoint(600, 50);
+	Point<double> offsetPoint(600, 50);
 	for(int i = 0; i < (int)points.size() / 3; i++) {
 		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
 		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;

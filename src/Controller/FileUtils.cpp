@@ -9,20 +9,20 @@
  * FileUtils implementation
  */
 
- /* Charge un niveau selon le nom du fichier spécifié
- * fileName : nom du niveau à charger
- * renvoie un vecteur de points qui correspond à la figure à reproduire
+ /* Charge un niveau selon le nom du fichier spï¿½cifiï¿½
+ * fileName : nom du niveau ï¿½ charger
+ * renvoie un vecteur de points qui correspond ï¿½ la figure ï¿½ reproduire
  */
-std::vector<Point<int>> FileUtils::readFile(const char* fileName) {
-    std::vector<Point<int>> points; // Liste des points de la forme à reproduire
-    std::string line; // contient la dernière ligne lue
+std::vector<Point<double>> FileUtils::readFile(const char* fileName) {
+    std::vector<Point<double>> points; // Liste des points de la forme ï¿½ reproduire
+    std::string line; // contient la derniï¿½re ligne lue
     std::ifstream level(fileName); // ouvre le fichier en lecture
-    string xStr, yStr; // contiennent les coordonnées du points
-    int x, y; // contiennent les coordonnées du points sous forme de nombres
-    int sep; // indice de la séparation entre les coordonnées x et y (un espace)
+    string xStr, yStr; // contiennent les coordonnï¿½es du points
+    double x, y; // contiennent les coordonnï¿½es du points sous forme de nombres
+    int sep; // indice de la sï¿½paration entre les coordonnï¿½es x et y (un espace)
     if(level) {
         while(getline(level, line)) { // On lit une ligne du fichier
-            sep = line.find(' '); // On cherche le premier espace pour séparer la coordonnée x et y
+            sep = line.find(' '); // On cherche le premier espace pour sï¿½parer la coordonnï¿½e x et y
             xStr = line.substr(0, sep);
             yStr = line.substr(sep, line.size());
             // On utilise stoi pour passer de string vers int
@@ -38,12 +38,12 @@ std::vector<Point<int>> FileUtils::readFile(const char* fileName) {
     return points;
 }
 
-void FileUtils::writeFile(std::vector<Point<int>> points, const char *filename) {
+void FileUtils::writeFile(std::vector<Point<double>> points, const char *filename) {
 	std::string line;
 	std::ofstream level(filename);
 	string xStr, yStr;
 	if(level) {
-        for_each(points.cbegin(), points.cend(), [&level](Point<int> p) {
+        for_each(points.cbegin(), points.cend(), [&level](Point<double> p) {
             level << p.getX() << " " << p.getY() << endl;
             std::cout << p << std::endl;
         });

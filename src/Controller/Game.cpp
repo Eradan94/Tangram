@@ -11,45 +11,45 @@
 Game * Game::init(const char * filename) {
 	GameBuilder builder;
 
-	builder.withShape(new Piece<int>(2, sf::Color(255, 100, 0),
-			100, 300, 100, 400, 000, 400,
-			100, 300, 200, 400, 100, 400));
-	builder.withShape(new Piece<int>(2, sf::Color(255, 255, 0),
-			200, 200, 300, 100, 300, 200,
-			200, 200, 300, 200, 300, 300));
-	builder.withShape(new Piece<int>(4, sf::Color(0, 255, 0),
-			300, 300, 300, 400, 200, 400,
-			300, 300, 400, 400, 300, 400,
-			300, 300, 400, 300, 400, 400,
-			300, 300, 400, 200, 400, 300));
-	builder.withShape(new Piece<int>(8, sf::Color(150, 0, 100),
-			100, 100, 000, 000, 100, 000,
-			100, 100, 100, 000, 200, 000,
-			100, 100, 200, 000, 200, 100,
-			100, 100, 200, 100, 200, 200,
-			300, 100, 200, 200, 200, 100,
-			300, 100, 200, 100, 200, 000,
-			300, 100, 200, 000, 300, 000,
-			300, 100, 300, 000, 400, 000));
-	builder.withShape(new Piece<int>(8, sf::Color(255, 0, 150),
-			100, 100, 000, 000, 000, 100,
-			100, 100, 000, 100, 000, 200,
-			100, 100, 000, 200, 100, 200,
-			100, 100, 100, 200, 200, 200,
-			100, 300, 200, 200, 100, 200,
-			100, 300, 100, 200, 000, 200,
-			100, 300, 000, 200, 000, 300,
-			100, 300, 000, 300, 000, 400));
-	builder.withShape(new Piece<int>(4, sf::Color(0, 0, 255),
-			200, 300, 100, 300, 200, 200,
-			200, 300, 200, 200, 300, 300,
-			200, 300, 300, 300, 200, 400,
-			200, 300, 200, 400, 100, 300));
-	builder.withShape(new Piece<int>(4, sf::Color(0, 255, 255),
-			300, 100, 400, 000, 400, 100,
-			300, 100, 400, 100, 400, 200,
-			400, 200, 300, 100, 300, 200,
-			400, 200, 300, 200, 300, 300));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0),
+			100., 300., 100., 400., 000., 400.,
+			100., 300., 200., 400., 100., 400.));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0),
+			200., 200., 300., 100., 300., 200.,
+			200., 200., 300., 200., 300., 300.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 0),
+			300., 300., 300., 400., 200., 400.,
+			300., 300., 400., 400., 300., 400.,
+			300., 300., 400., 300., 400., 400.,
+			300., 300., 400., 200., 400., 300.));
+	builder.withShape(new Piece<double>(8, sf::Color(150, 0, 100.),
+			100., 100., 000., 000., 100., 000.,
+			100., 100., 100., 000., 200., 000.,
+			100., 100., 200., 000., 200., 100.,
+			100., 100., 200., 100., 200., 200.,
+			300., 100., 200., 200., 200., 100.,
+			300., 100., 200., 100., 200., 000.,
+			300., 100., 200., 000., 300., 000.,
+			300., 100., 300., 000., 400., 000.));
+	builder.withShape(new Piece<double>(8, sf::Color(255, 0, 150),
+			100., 100., 000., 000., 000., 100.,
+			100., 100., 000., 100., 000., 200.,
+			100., 100., 000., 200., 100., 200.,
+			100., 100., 100., 200., 200., 200.,
+			100., 300., 200., 200., 100., 200.,
+			100., 300., 100., 200., 000., 200.,
+			100., 300., 000., 200., 000., 300.,
+			100., 300., 000., 300., 000., 400.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 0, 255),
+			200., 300., 100., 300., 200., 200.,
+			200., 300., 200., 200., 300., 300.,
+			200., 300., 300., 300., 200., 400.,
+			200., 300., 200., 400., 100., 300.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 255),
+			300., 100., 400., 000., 400., 100.,
+			300., 100., 400., 100., 400., 200.,
+			400., 200., 300., 100., 300., 200.,
+			400., 200., 300., 200., 300., 300.));
 
 	builder.withButton(new Button(1200, 50, 1425, 175, "<<"));
 	builder.withButton(new Button(1450, 50, 1700, 175, ">>"));
@@ -60,8 +60,8 @@ Game * Game::init(const char * filename) {
 	return builder.build(filename);
 }
 
-Game::Game(Menu * menu, std::vector<Shape<int> *> pieces, Piece<int> * goal):
-	selected(nullptr), relativePos(Point(0, 0)), menu(menu), pieces(pieces), goal(goal) {
+Game::Game(Menu * menu, std::vector<Shape<double> *> pieces, Piece<double> * goal):
+	selected(nullptr), relativePos(Point(0., 0.)), menu(menu), pieces(pieces), goal(goal) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
@@ -76,7 +76,7 @@ void Game::draw(sf::RenderWindow& window) {
 
 /* Select a piece when a left click is performed by the user
 */
-void Game::select(const Point<int> & event) {
+void Game::select(const Point<double> & event) {
 	selected = nullptr;
 	for (auto s : pieces) {
 		if (s->isClicked(event)){
@@ -86,7 +86,7 @@ void Game::select(const Point<int> & event) {
 	}
 }
 
-void Game::deselect(const Point<int> & event) {
+void Game::deselect(const Point<double> & event) {
 	if (selected != nullptr) {
 		//selected->centralize(event, relativePos);
 		magnetize();
@@ -116,22 +116,22 @@ Game::~Game() {
 }
 
 void Game::save() {
-	std::vector<Point<int>> points;
-	for_each(pieces.cbegin(), pieces.cend(), [&points](Shape<int> * s) {
-		vector<Point<int>> shapePoints = s -> getPoints();
+	std::vector<Point<double>> points;
+	for_each(pieces.cbegin(), pieces.cend(), [&points](Shape<double> * s) {
+		vector<Point<double>> shapePoints = s -> getPoints();
 		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
 	});
 
-	Point<int>::normalize(points);
+	Point<double>::normalize(points);
 	FileUtils::writeFile(points, "levels/save.txt");
 }
 
 void Game::magnetize() {
     double dist;
     double minDist = DBL_MAX;
-    std::vector<Point<int>> points(2);
-    std::vector<Point<int>> minPoints(2);
-    Point<int> translation;
+    std::vector<Point<double>> points(2);
+    std::vector<Point<double>> minPoints(2);
+    Point<double> translation;
     // Get the shortest distance between two points from each shape
     for(auto& piece : pieces) {
         if(piece != selected) {
@@ -155,8 +155,8 @@ void Game::magnetize() {
 }
 
 void Game::checkValidatedGoalPoints() {
-    std::vector<Point<int>> goalPoints = goal->getPoints();
-    std::vector<Point<int>> selectedPoints = selected->getPoints();
+    std::vector<Point<double>> goalPoints = goal->getPoints();
+    std::vector<Point<double>> selectedPoints = selected->getPoints();
     for(auto& selectedPoint : selectedPoints) {
         for(auto& goalPoint : validGoalPoints) {
             if((selectedPoint.distance(goalPoint.first)) < 3) {

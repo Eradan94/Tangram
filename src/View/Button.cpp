@@ -11,13 +11,13 @@
  * Button implementation
  */
 
-Button::Button(Point<int> topLeft, Point<int> bottomRight, string text) :
+Button::Button(Point<double> topLeft, Point<double> bottomRight, string text) :
 	topLeft(topLeft), bottomRight(bottomRight), text(std::move(text)), display(true)  {
 	init();
 }
 
 Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text) :
-	topLeft(Point<int>(topLeftX, topLeftY)), bottomRight(Point<int>(bottomRightX, bottomRightY)),
+	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)),
 	text(std::move(text)), display(true) {
 	init();
 }
@@ -31,7 +31,7 @@ void Button::setDisplay(bool mode) {
 	display = mode;
 }
 
-bool Button::isClicked(const Point<int> &p) const {
+bool Button::isClicked(const Point<double> &p) const {
 	return false;
 }
 

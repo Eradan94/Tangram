@@ -12,8 +12,8 @@
 #pragma once
 class FileUtils {
     public :
-        static std::vector<Point<int>> readFile(const char* fileName);
-    	static void writeFile(std::vector<Point<int>> points, const char * filename);
+        static std::vector<Point<double>> readFile(const char* fileName);
+    	static void writeFile(std::vector<Point<double>> points, const char * filename);
     private :
 
 };
