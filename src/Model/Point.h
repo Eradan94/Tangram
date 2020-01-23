@@ -62,8 +62,14 @@ Point<CoordinateType>::Point(sf::Event::MouseMoveEvent event) : x(event.x), y(ev
 
 /* Operators
 */
-template<class CoordinateType>
-bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const {
+template<>
+bool Point<int>::operator==(const Point<int>& other) const {
+    return (x == other.x && y == other.y);
+}
+
+template<>
+bool Point<double>::operator==(const Point<double>& other) const {
+	// espilon
     return (x == other.x && y == other.y);
 }
 
