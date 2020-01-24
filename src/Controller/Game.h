@@ -36,11 +36,12 @@ public :
 
 	void magnetize();
 
+	void checkPoints();
+
 private :
     std::vector<Shape<double>*> pieces;
 	Menu * menu;
 	Shape<double> * selected;
 	Point<double> relativePos;
 	Piece<double> * goal;
-	std::map<Point<double>, bool> validGoalPoints;
 };

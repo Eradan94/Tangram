@@ -90,7 +90,7 @@ void Game::deselect(const Point<double> & event) {
 	if (selected != nullptr) {
 		//selected->centralize(event, relativePos);
 		magnetize();
-		//checkValidatedGoalPoints();
+		checkPoints();
 		selected = nullptr;
 	}
 }
@@ -152,5 +152,16 @@ void Game::magnetize() {
         translation = minPoints[1] - minPoints[0];
         selected->translate(translation);
     }
+}
+
+void Game::checkPoints() {
+    std::vector<Point<double>> goalPoints = goal->getPoints();
+    std::vector<Point<double>> piecesPoints;
+    std::vector<Point<double>> piecePoints;
+    for(auto& piece : pieces) {
+        piecePoints = piece->getPoints();
+        piecesPoints.insert(piecesPoints.end(), piecePoints.begin(), piecePoints.end());
+    }
+    cout << std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end()) << std::endl;
 }
 
