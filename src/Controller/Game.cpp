@@ -90,7 +90,7 @@ void Game::deselect(const Point<double> & event) {
 	if (selected != nullptr) {
 		//selected->centralize(event, relativePos);
 		magnetize();
-		checkValidatedGoalPoints();
+		//checkValidatedGoalPoints();
 		selected = nullptr;
 	}
 }
@@ -154,19 +154,3 @@ void Game::magnetize() {
     }
 }
 
-void Game::checkValidatedGoalPoints() {
-    std::vector<Point<double>> goalPoints = goal->getPoints();
-    std::vector<Point<double>> selectedPoints = selected->getPoints();
-    for(auto& selectedPoint : selectedPoints) {
-        for(auto& goalPoint : validGoalPoints) {
-            if((selectedPoint.distance(goalPoint.first)) < 3) {
-                validGoalPoints[goalPoint.first] = true;
-            }
-        }
-    }
-
-    //test
-    /*for(auto& point : validGoalPoints) {
-        cout << point.first << " " << point.second << std::endl;
-    }*/
-}

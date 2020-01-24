@@ -7,6 +7,5 @@
 
 template<>
 bool Point<double>::operator==(const Point<double>& other) const {
-	// epsilon
-	return (x == other.x && y == other.y);
+	return this->distance(other) <= EPSILON;
 }

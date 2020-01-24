@@ -10,6 +10,8 @@
 #include <vector>
 #include <cfloat>
 
+#define EPSILON 0.1
+
 template<class CoordinateType>
 class Point {
 private :
@@ -29,7 +31,7 @@ public :
     bool operator< (const Point<CoordinateType>& other) const;
 
 
-    double distance(const Point& otherPoint);
+    double distance(const Point& otherPoint) const;
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
@@ -145,7 +147,7 @@ void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
 /* Return the distance between two points
 */
 template<class CoordinateType>
-double Point<CoordinateType>::distance(const Point& otherPoint) {
+double Point<CoordinateType>::distance(const Point& otherPoint) const {
     return sqrt((otherPoint.x - x) * (otherPoint.x - x) + (otherPoint.y - y) * (otherPoint.y - y));
 }
 

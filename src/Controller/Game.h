@@ -8,11 +8,11 @@
 #include "../View/Button.h"
 #include "../Model/Shape.h"
 #include "../Model/Piece.h"
+#include "../View/Menu.h"
 
 #include <list>
 #include <vector>
- #include <cfloat>
-#include <Menu.h>
+#include <cfloat>
 
 class Game {
 public :
@@ -35,8 +35,6 @@ public :
 	void save();
 
 	void magnetize();
-
-	void checkValidatedGoalPoints();
 
 private :
     std::vector<Shape<double>*> pieces;

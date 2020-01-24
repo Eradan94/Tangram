@@ -45,7 +45,6 @@ void FileUtils::writeFile(std::vector<Point<double>> points, const char *filenam
 	if(level) {
         for_each(points.cbegin(), points.cend(), [&level](Point<double> p) {
             level << p.getX() << " " << p.getY() << endl;
-            std::cout << p << std::endl;
         });
 	}
 	else {
