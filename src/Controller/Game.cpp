@@ -158,6 +158,7 @@ void Game::checkPoints() {
     std::vector<Point<double>> goalPoints = goal->getPoints();
     std::vector<Point<double>> piecesPoints;
     std::vector<Point<double>> piecePoints;
+    std::cout <<  " VICTORY CONDITION" << std::endl;
     for(auto& piece : pieces) {
         piecePoints = piece->getPoints();
         piecesPoints.insert(piecesPoints.end(), piecePoints.begin(), piecePoints.end());

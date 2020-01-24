@@ -10,7 +10,7 @@
 #include <vector>
 #include <cfloat>
 
-#define EPSILON 0.1
+#define EPSILON 4.0
 
 template<class CoordinateType>
 class Point {
@@ -23,6 +23,8 @@ public :
     Point(sf::Event::MouseButtonEvent event);
     Point(sf::Event::MouseMoveEvent event);
     bool operator== (const Point<CoordinateType>& other) const;
+    /*template<>
+    inline bool operator==(const Point<double>& other) const;*/
     bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
     Point<CoordinateType> operator- (const Point& other) const;
@@ -64,9 +66,15 @@ Point<CoordinateType>::Point(sf::Event::MouseMoveEvent event) : x(event.x), y(ev
 
 /* Operators
 */
-template<typename CoordinateType>
+
+template<class CoordinateType>
 bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const {
 	return (x == other.x && y == other.y);
+}
+
+template<>
+inline bool Point<double>::operator==(const Point<double>& other) const {
+    return this->distance(other) <= EPSILON;
 }
 
 template<class CoordinateType>

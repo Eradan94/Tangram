@@ -5,7 +5,8 @@
 
 #include "Point.h"
 
-template<>
+/*template<>
 inline bool Point<double>::operator==(const Point<double>& other) const {
-	return this->distance(other) <= EPSILON;
-}
+    std::cout << "DBL" << this->distance(other) << std::endl;
+    return this->distance(other) <= EPSILON;
+}*/
