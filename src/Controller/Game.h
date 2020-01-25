@@ -8,11 +8,11 @@
 #include "../View/Button.h"
 #include "../Model/Shape.h"
 #include "../Model/Piece.h"
+#include "../View/Menu.h"
 
 #include <list>
 #include <vector>
- #include <cfloat>
-#include <Menu.h>
+#include <cfloat>
 
 class Game {
 public :
@@ -36,12 +36,11 @@ public :
 
 	void magnetize();
 
-	void checkValidatedGoalPoints();
+	void checkPoints();
 
 private :
     std::vector<Shape<double>*> pieces;
 	Shape<double> * selected;
 	Point<double> relativePos;
 	Piece<double> * goal;
-	std::map<Point<double>, bool> validGoalPoints;
 };

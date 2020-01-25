@@ -10,6 +10,8 @@
 #include <vector>
 #include <cfloat>
 
+#define EPSILON 4.0
+
 template<class CoordinateType>
 class Point {
 private :
@@ -21,6 +23,8 @@ public :
     Point(sf::Event::MouseButtonEvent event);
     Point(sf::Event::MouseMoveEvent event);
     bool operator== (const Point<CoordinateType>& other) const;
+    /*template<>
+    inline bool operator==(const Point<double>& other) const;*/
     bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
     Point<CoordinateType> operator- (const Point& other) const;
@@ -29,7 +33,7 @@ public :
     bool operator< (const Point<CoordinateType>& other) const;
 
 
-    double distance(const Point& otherPoint);
+    double distance(const Point& otherPoint) const;
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
@@ -62,9 +66,15 @@ Point<CoordinateType>::Point(sf::Event::MouseMoveEvent event) : x(event.x), y(ev
 
 /* Operators
 */
-template<typename CoordinateType>
+
+template<class CoordinateType>
 bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const {
 	return (x == other.x && y == other.y);
+}
+
+template<>
+inline bool Point<double>::operator==(const Point<double>& other) const {
+    return this->distance(other) <= EPSILON;
 }
 
 template<class CoordinateType>
@@ -145,7 +155,7 @@ void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
 /* Return the distance between two points
 */
 template<class CoordinateType>
-double Point<CoordinateType>::distance(const Point& otherPoint) {
+double Point<CoordinateType>::distance(const Point& otherPoint) const {
     return sqrt((otherPoint.x - x) * (otherPoint.x - x) + (otherPoint.y - y) * (otherPoint.y - y));
 }
 

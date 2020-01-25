@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include <Shape.h>
-#include <Button.h>
+#include "../Model/Shape.h"
+#include "../View/Button.h"
 #include "Game.h"
 
 class GameBuilder {
