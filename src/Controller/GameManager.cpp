@@ -13,12 +13,14 @@ GameManager::GameManager(const char *filename) : game(Game::init(filename)), men
 }
 
 void GameManager::draw() const {
+    window->clear();
 	if(game != nullptr) {
 		game -> draw(*window);
 	}
 	if(menu != nullptr) {
 		menu -> draw(*window);
 	}
+	window->display();
 }
 
 void GameManager::play() {

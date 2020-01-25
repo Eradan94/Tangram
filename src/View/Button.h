@@ -27,7 +27,7 @@ private :
     Point<double> topLeft;
     Point<double> bottomRight;
     string text;
-	std::function<void ()> fct;
+	//std::function<void ()> fct;
     bool display;
 	sf::RectangleShape * rectangle;
 	sf::Text * txt;

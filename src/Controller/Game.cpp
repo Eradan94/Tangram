@@ -59,12 +59,11 @@ Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
 }
 
 void Game::draw(sf::RenderWindow& window) {
-	window.clear();
+	//window.clear();
 	goal -> draw(window);
 	for (auto s : pieces) {
 		s -> draw(window);
 	}
-	window.display();
 }
 
 /* Select a piece when a left click is performed by the user

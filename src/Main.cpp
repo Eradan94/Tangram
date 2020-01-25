@@ -4,8 +4,8 @@
 
 #include "Model/Point.h"
 #include "Model/Piece.h"
+#include "Controller/GameManager.h"
 
-#include <GameManager.h>
 using namespace std;
 
 int main(int argc, char const *argv[]) {
