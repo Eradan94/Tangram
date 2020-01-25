@@ -51,11 +51,11 @@ Game * Game::init(const char * filename) {
 			400., 200., 300., 100., 300., 200.,
 			400., 200., 300., 200., 300., 300.));
 
-	builder.withButton(new Button(1200, 50, 1425, 175, "<<"));
+	/*builder.withButton(new Button(1200, 50, 1425, 175, "<<"));
 	builder.withButton(new Button(1450, 50, 1700, 175, ">>"));
 	builder.withButton(new Button(1200, 200, 1425, 325, "Load"));
 	builder.withButton(new Button(1450, 200, 1700, 325, "Save"));
-	builder.withButton(new Button(1200, 350, 1700, 475, "Quit"));
+	builder.withButton(new Button(1200, 350, 1700, 475, "Quit"));*/
 
 	return builder.build(filename);
 }
@@ -121,7 +121,6 @@ void Game::save() {
 		vector<Point<double>> shapePoints = s -> getPoints();
 		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
 	});
-
 	Point<double>::normalize(points);
 	FileUtils::writeFile(points, "levels/save.txt");
 }
@@ -158,7 +157,6 @@ void Game::checkPoints() {
     std::vector<Point<double>> goalPoints = goal->getPoints();
     std::vector<Point<double>> piecesPoints;
     std::vector<Point<double>> piecePoints;
-    std::cout <<  " VICTORY CONDITION" << std::endl;
     for(auto& piece : pieces) {
         piecePoints = piece->getPoints();
         piecesPoints.insert(piecesPoints.end(), piecePoints.begin(), piecePoints.end());
