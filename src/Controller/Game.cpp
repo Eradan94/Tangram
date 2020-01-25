@@ -68,7 +68,7 @@ void Game::draw(sf::RenderWindow& window) {
 
 /* Select a piece when a left click is performed by the user
 */
-void Game::select(const Point<double> & event) {
+bool Game::select(const Point<double> & event) {
 	selected = nullptr;
 	for (auto s : pieces) {
 		if (s->isClicked(event)){

@@ -11,7 +11,7 @@
 #include <math.h>
 #include <iostream>
 #include <functional>
-#include "Game.h"
+#include "GameManager.h"
 #include <string>
 
 class Action {
@@ -21,7 +21,7 @@ public:
 	void operator()(sf::Event);
 
 	static void registerEvent(sf::Event::EventType event, const function<void (sf::Event)> action);
-	static void initActions(Game & game);
+	static void initActions(Game & game, Menu& menu);
 	static Action & getAction(sf::Event::EventType event);
 private:
 	inline static std::map<sf::Event::EventType, Action> actions;

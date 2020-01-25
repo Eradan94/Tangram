@@ -18,6 +18,7 @@ public :
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct);
     ~Button();
 
+    void callFct();
     void setDisplay(bool mode);
     void draw(sf::RenderWindow& window) override;
     bool isClicked(const Point<double>& p) const override;

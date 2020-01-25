@@ -35,6 +35,10 @@ bool Button::isClicked(const Point<double> &p) const {
     return(p.getX() >= topLeft.getX() && p.getX() <= bottomRight.getX() && p.getY() >= topLeft.getY() && p.getY() <= bottomRight.getY());
 }
 
+void Button::callFct() {
+    fct();
+}
+
 void Button::init() {
 	rectangle = new sf::RectangleShape;
 	rectangle -> setSize(sf::Vector2f(bottomRight.getX() - topLeft.getX(), bottomRight.getY() - topLeft.getY()));

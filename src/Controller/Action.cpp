@@ -19,18 +19,18 @@ void Action::operator()(sf::Event event) {
 	fct(event);
 }
 
-void Action::initActions(Game & game) {
+void Action::initActions(Game & game, Menu& menu) {
 	registerEvent(sf::Event::Closed, [&game](sf::Event event) {
 		game.save();
 	});
-	registerEvent(sf::Event::MouseButtonPressed, [&game](sf::Event event) {
+	registerEvent(sf::Event::MouseButtonPressed, [&game, &menu](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			game.select(event.mouseButton);
+			menu.select(event.mouseButton);
 		}
 	});
 	registerEvent(sf::Event::MouseButtonReleased, [&game](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
-            //game.magnetize(); fait dans deselect
 			game.deselect(event.mouseButton);
 		}
 	});
@@ -39,7 +39,6 @@ void Action::initActions(Game & game) {
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [&game](sf::Event event) {
 		game.rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
-		//game.rotateSelected(event.mouseWheelScroll.delta * 22.5 * M_PI / 180.);
 	});
 }
 

@@ -11,6 +11,8 @@ public:
 
 	bool isRunning();
 
+	void initMainMenuButtons();
+
 private:
 	Game * game;
 	Menu * menu;

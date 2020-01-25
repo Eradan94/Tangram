@@ -24,7 +24,7 @@ public :
 
 	void draw(sf::RenderWindow& window);
 
-	void select(const Point<double> & event);
+	bool select(const Point<double> & event);
 
 	void deselect(const Point<double> & event);
 
