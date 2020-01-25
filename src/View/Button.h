@@ -15,7 +15,7 @@
 class Button: public Drawable, public Clickable<double> {
 public :
     Button(Point<double> topLeft, Point<double> bottomRight, string text);
-    Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text);
+    Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct);
     ~Button();
 
     void setDisplay(bool mode);
@@ -27,7 +27,7 @@ private :
     Point<double> topLeft;
     Point<double> bottomRight;
     string text;
-	//std::function<void ()> fct;
+	std::function<void ()> fct;
     bool display;
 	sf::RectangleShape * rectangle;
 	sf::Text * txt;

@@ -16,8 +16,8 @@ Button::Button(Point<double> topLeft, Point<double> bottomRight, string text) :
 	init();
 }
 
-Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text) :
-	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)),
+Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct) :
+	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)), fct(_fct),
 	text(std::move(text)), display(true) {
 	init();
 }
@@ -32,7 +32,7 @@ void Button::setDisplay(bool mode) {
 }
 
 bool Button::isClicked(const Point<double> &p) const {
-	return false;
+    return(p.getX() >= topLeft.getX() && p.getX() <= bottomRight.getX() && p.getY() >= topLeft.getY() && p.getY() <= bottomRight.getY());
 }
 
 void Button::init() {
