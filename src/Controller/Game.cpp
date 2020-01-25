@@ -51,23 +51,16 @@ Game * Game::init(const char * filename) {
 			400., 200., 300., 100., 300., 200.,
 			400., 200., 300., 200., 300., 300.));
 
-	builder.withButton(new Button(1200, 50, 1425, 175, "<<"));
-	builder.withButton(new Button(1450, 50, 1700, 175, ">>"));
-	builder.withButton(new Button(1200, 200, 1425, 325, "Load"));
-	builder.withButton(new Button(1450, 200, 1700, 325, "Save"));
-	builder.withButton(new Button(1200, 350, 1700, 475, "Quit"));
-
 	return builder.build(filename);
 }
 
-Game::Game(Menu * menu, std::vector<Shape<double> *> pieces, Piece<double> * goal):
-	selected(nullptr), relativePos(Point(0., 0.)), menu(menu), pieces(pieces), goal(goal) {
+Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
+	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(goal) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
 	window.clear();
 	goal -> draw(window);
-	menu -> draw(window);
 	for (auto s : pieces) {
 		s -> draw(window);
 	}
@@ -109,7 +102,6 @@ void Game::rotateSelected(const double d) {
 
 Game::~Game() {
 	delete goal;
-	delete menu;
 	for (auto * piece : pieces){
 		delete piece;
 	}
@@ -164,9 +156,4 @@ void Game::checkValidatedGoalPoints() {
             }
         }
     }
-
-    //test
-    /*for(auto& point : validGoalPoints) {
-        cout << point.first << " " << point.second << std::endl;
-    }*/
 }

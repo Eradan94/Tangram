@@ -5,6 +5,7 @@
 
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <functional>
 
 #include "Drawable.h"
 #include "../Controller/Clickable.h"
@@ -26,6 +27,7 @@ private :
     Point<double> topLeft;
     Point<double> bottomRight;
     string text;
+	std::function<void ()> fct;
     bool display;
 	sf::RectangleShape * rectangle;
 	sf::Text * txt;

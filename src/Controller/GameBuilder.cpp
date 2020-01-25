@@ -4,7 +4,7 @@
 
 #include "GameBuilder.h"
 
-GameBuilder::GameBuilder() : menu(new Menu) {
+GameBuilder::GameBuilder() {
 
 }
 
@@ -12,11 +12,7 @@ void GameBuilder::withShape(Shape<double> *shape) {
 	pieces.push_back(shape);
 }
 
-void GameBuilder::withButton(Button *button) {
-	menu -> addButton(button);
-}
-
 Game *GameBuilder::build(const char * filename) {
 	Piece<double> * goal = Piece<double>::createPiece(filename);
-	return new Game(menu, pieces, goal);
+	return new Game(pieces, goal);
 }

@@ -14,6 +14,8 @@ public :
 	Menu();
 	~Menu();
 
+	static Menu * init();
+
 	void addButton(Button * button);
 	void draw(sf::RenderWindow & window);
 private :

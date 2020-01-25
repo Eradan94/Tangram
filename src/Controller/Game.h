@@ -18,7 +18,7 @@ class Game {
 public :
 	static Game * init(const char * filename);
 
-	Game(Menu * menu, std::vector<Shape<double> *> pieces, Piece<double> * goal);
+	Game(std::vector<Shape<double> *> pieces, Piece<double> * goal);
 
 	~Game();
 
@@ -40,7 +40,6 @@ public :
 
 private :
     std::vector<Shape<double>*> pieces;
-	Menu * menu;
 	Shape<double> * selected;
 	Point<double> relativePos;
 	Piece<double> * goal;

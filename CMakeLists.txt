@@ -29,6 +29,6 @@ add_executable(Tangram
         src/View/Drawable.h
         src/View/Menu.cpp
         src/View/Menu.h
-        src/Main.cpp src/Controller/GameBuilder.cpp src/Controller/GameBuilder.h)
+        src/Main.cpp src/Controller/GameBuilder.cpp src/Controller/GameBuilder.h src/Controller/GameManager.cpp src/Controller/GameManager.h)
 
 target_link_libraries(Tangram sfml-graphics)
