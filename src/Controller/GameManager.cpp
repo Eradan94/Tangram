@@ -12,36 +12,43 @@ GameManager::GameManager(const char *filename) : game(Game::init(filename)), men
 	Action::initActions(*game, *menu);
 }
 
-void GameManager::initMainMenuButtons() {
-    //Here, initialize the main menu buttons
-	menu -> addButton(new Button(5, 975, 205, 1075, "Load",
+void GameManager::initMainGameButtons() {
+    //Here, initialize the main game buttons
+	menu -> addButton(new Button(5, 775, 205, 975, "Load",
         []{
             std::cout << "Load" << std::endl;
         }
     ));
-	menu -> addButton(new Button(205, 975, 405, 1075, "<<",
+	menu -> addButton(new Button(205, 775, 405, 975, "Save",
+        [this]{
+            std::cout << "Save" << std::endl;
+            game -> save();
+        }
+    ));
+	menu -> addButton(new Button(405, 775, 605, 975, "<<",
         []{
             std::cout << "<<" << std::endl;
         }
     ));
-	menu -> addButton(new Button(405, 975, 605, 1075, ">>",
+	menu -> addButton(new Button(605, 775, 805, 975, ">>",
         []{
             std::cout << ">>" << std::endl;
         }
     ));
-	menu -> addButton(new Button(605, 975, 805, 1075, "Options",
+	menu -> addButton(new Button(805, 775, 1005, 975, "Hint",
         []{
-            std::cout << "Options" << std::endl;
+            std::cout << "Hint" << std::endl;
         }
     ));
-	menu -> addButton(new Button(805, 975, 1005, 1075, "Clue",
+	menu -> addButton(new Button(1005, 775, 1205, 975, "Option",
         []{
-            std::cout << "Clue" << std::endl;
+            std::cout << "Option" << std::endl;
         }
     ));
-	menu -> addButton(new Button(1005, 975, 1205, 1075, "Quit",
-        []{
+	menu -> addButton(new Button(1205, 775, 1405, 975, "Quit",
+        [this]{
             std::cout << "Quit" << std::endl;
+            window->close();
         }
     ));
 }

@@ -11,7 +11,7 @@ public:
 
 	bool isRunning();
 
-	void initMainMenuButtons();
+	void initMainGameButtons();
 
 private:
 	Game * game;
