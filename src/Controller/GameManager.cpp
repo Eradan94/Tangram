@@ -14,39 +14,45 @@ GameManager::GameManager(const char *filename) : game(Game::init(filename)), men
 
 void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
-	menu -> addButton(new Button(5, 775, 205, 975, "Load",
+    const int width = window->getView().getSize().x;
+    const int height = window->getView().getSize().y;
+    const int buttonCount = 7;
+	const int buttonOutline = 5;
+    const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
+    const int buttonHeight = 0.1 * height;
+	menu -> addButton(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline, "Load",
         []{
             std::cout << "Load" << std::endl;
         }
     ));
-	menu -> addButton(new Button(205, 775, 405, 975, "Save",
-        [this]{
+	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
+			"Save", [this]{
             std::cout << "Save" << std::endl;
             game -> save();
         }
     ));
-	menu -> addButton(new Button(405, 775, 605, 975, "<<",
-        []{
+	menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
+			"<<", []{
             std::cout << "<<" << std::endl;
         }
     ));
-	menu -> addButton(new Button(605, 775, 805, 975, ">>",
-        []{
+	menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
+			">>", []{
             std::cout << ">>" << std::endl;
         }
     ));
-	menu -> addButton(new Button(805, 775, 1005, 975, "Hint",
-        []{
+	menu -> addButton(new Button(buttonOutline + 4 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 5 * buttonWidth, height - buttonOutline,
+			"Hint", []{
             std::cout << "Hint" << std::endl;
         }
     ));
-	menu -> addButton(new Button(1005, 775, 1205, 975, "Option",
-        []{
+	menu -> addButton(new Button(buttonOutline + 5 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 6 * buttonWidth, height - buttonOutline,
+			"Option", []{
             std::cout << "Option" << std::endl;
         }
     ));
-	menu -> addButton(new Button(1205, 775, 1405, 975, "Quit",
-        [this]{
+	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
+			"Quit", [this]{
             std::cout << "Quit" << std::endl;
             window->close();
         }
