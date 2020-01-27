@@ -13,6 +13,8 @@ public:
 
 	void initMainGameButtons();
 
+	void initMainMenuButtons();
+
 private:
 	Game * game;
 	Menu * menu;
