@@ -19,6 +19,7 @@ public :
 	void addButton(Button * button);
 	void draw(sf::RenderWindow & window);
 	void select(const Point<double> & event);
+	void clear();
 private :
     std::vector<Button*> buttons;
 };

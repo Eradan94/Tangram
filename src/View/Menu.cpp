@@ -14,9 +14,9 @@ void Menu::addButton(Button * button) {
 }
 
 void Menu::draw(sf::RenderWindow & window) {
-	for (auto & button : buttons) {
-		button->draw(window);
-	}
+    for (auto & button : buttons) {
+        button->draw(window);
+    }
 }
 
 Menu::~Menu() {
@@ -28,6 +28,13 @@ Menu::~Menu() {
 Menu *Menu::init() {
 	auto * menu = new Menu;
 	return menu;
+}
+
+void Menu::clear() {
+    for (auto* button : buttons){
+		delete button;
+	}
+    buttons.clear();
 }
 
 void Menu::select(const Point<double> & event) {

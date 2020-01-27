@@ -4,7 +4,8 @@
 
 class GameManager {
 public:
-	GameManager(const char * filename);
+	//GameManager(const char * filename);
+	GameManager();
 	~GameManager();
 	void draw() const;
 	void play();

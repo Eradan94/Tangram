@@ -9,7 +9,8 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-	GameManager manager(argv[1]);
+	//GameManager manager(argv[1]);
+	GameManager manager;
 	manager.initMainMenuButtons();
 	while (manager.isRunning())
 	{

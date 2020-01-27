@@ -54,15 +54,20 @@ Game * Game::init(const char * filename) {
 	return builder.build(filename);
 }
 
+Game::Game():
+	selected(nullptr), goal(nullptr) {
+}
+
 Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
 	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(goal) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
-	//window.clear();
-	goal -> draw(window);
-	for (auto s : pieces) {
-		s -> draw(window);
+	if(goal != nullptr) {
+        goal -> draw(window);
+        for (auto s : pieces) {
+            s -> draw(window);
+        }
 	}
 }
 

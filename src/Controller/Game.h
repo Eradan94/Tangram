@@ -20,6 +20,8 @@ public :
 
 	Game(std::vector<Shape<double> *> pieces, Piece<double> * goal);
 
+	Game();
+
 	~Game();
 
 	void draw(sf::RenderWindow& window);

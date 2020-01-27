@@ -7,10 +7,16 @@ GameManager::~GameManager() {
 	delete window;
 }
 
-GameManager::GameManager(const char *filename) : game(Game::init(filename)), menu(Menu::init()),
+GameManager::GameManager() : menu(Menu::init()),
 	window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
+    game = new Game();
 	Action::initActions(*game, *menu);
 }
+
+/*GameManager::GameManager(const char *filename) : game(Game::init(filename)), menu(Menu::init()),
+	window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
+	Action::initActions(*game, *menu);
+}*/
 
 void GameManager::initMainMenuButtons() {
     //Here, initialize the main menu buttons
@@ -24,8 +30,12 @@ void GameManager::initMainMenuButtons() {
     const int interButtonGap = menuHeight / (buttonCount * 2);
     const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
-        []{
+        [this]{
             std::cout << "Load" << std::endl;
+            game = Game::init("../Tangram/levels/7.txt");
+            menu->clear(); // BUG
+            initMainGameButtons();
+            Action::initActions(*game, *menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -39,8 +49,9 @@ void GameManager::initMainMenuButtons() {
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 3 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 4 * buttonHeight, "Quit",
-        []{
+        [this]{
             std::cout << "Quit" << std::endl;
+            window->close();
         }
     ));
 }
@@ -80,8 +91,8 @@ void GameManager::initMainGameButtons() {
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 5 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 6 * buttonWidth, height - buttonOutline,
-			"Option", []{
-            std::cout << "Option" << std::endl;
+			"Options", []{
+            std::cout << "Options" << std::endl;
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
