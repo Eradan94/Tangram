@@ -33,9 +33,14 @@ void GameManager::initMainMenuButtons() {
         [this]{
             std::cout << "Load" << std::endl;
             game = Game::init("../Tangram/levels/7.txt");
-            menu->clear(); // BUG
+            menu->clear();
+            std::cout << " a : " << menu << std::endl;
+            //delete menu; // BUG
+            //menu = Menu::init(); // BUG
+            std::cout << " b : " << menu << std::endl;
             initMainGameButtons();
-            Action::initActions(*game, *menu);
+            std::cout << " f : " << menu << std::endl;
+            //Action::initActions(*game, *menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -54,10 +59,12 @@ void GameManager::initMainMenuButtons() {
             window->close();
         }
     ));
+
 }
 
 void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
+    std::cout << " c : " << menu << std::endl;
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
     const int buttonCount = 7;
@@ -101,6 +108,8 @@ void GameManager::initMainGameButtons() {
             window->close();
         }
     ));
+    std::cout << " d : " << menu << std::endl;
+    std::cout << " e : " << *menu << std::endl;
 }
 
 void GameManager::draw() const {

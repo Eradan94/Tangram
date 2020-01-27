@@ -23,6 +23,12 @@ public :
     void draw(sf::RenderWindow& window) override;
     bool isClicked(const Point<double>& p) const override;
 
+    friend std::ostream& operator<< (std::ostream& os, const Button& button) {
+        os << "bouton : ";
+        os << button.text;
+        return os;
+    }
+
 private :
 	void init();
     Point<double> topLeft;

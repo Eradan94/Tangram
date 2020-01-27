@@ -20,6 +20,14 @@ public :
 	void draw(sf::RenderWindow & window);
 	void select(const Point<double> & event);
 	void clear();
+	friend std::ostream& operator<< (std::ostream& os, const Menu& menu) {
+	    os << "menu : " << std::endl;
+	    os << menu.buttons.size() << std::endl;
+        for(Button* b : menu.buttons) {
+            os << *b << std::endl;
+        }
+        return os;
+    }
 private :
     std::vector<Button*> buttons;
 };

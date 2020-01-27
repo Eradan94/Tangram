@@ -20,7 +20,7 @@ void Menu::draw(sf::RenderWindow & window) {
 }
 
 Menu::~Menu() {
-	for (auto * button : buttons){
+	for (auto button : buttons){
 		delete button;
 	}
 }
@@ -31,9 +31,9 @@ Menu *Menu::init() {
 }
 
 void Menu::clear() {
-    for (auto* button : buttons){
+    /*for (auto button : buttons){
 		delete button;
-	}
+	}*/ //BUG
     buttons.clear();
 }
 
@@ -41,6 +41,7 @@ void Menu::select(const Point<double> & event) {
 	for (auto button : buttons) {
 		if (button->isClicked(event)){
 			button->callFct();
+			return;
 		}
 	}
 }
