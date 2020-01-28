@@ -16,6 +16,8 @@ public:
 
 	void initMainMenuButtons();
 
+	void initCreateLevelButtons();
+
 private:
 	Game * game;
 	Menu * menu;

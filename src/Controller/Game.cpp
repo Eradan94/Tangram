@@ -54,6 +54,51 @@ Game * Game::init(const char * filename) {
 	return builder.build(filename);
 }
 
+Game * Game::init() {
+    GameBuilder builder;
+
+	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0),
+			100., 300., 100., 400., 000., 400.,
+			100., 300., 200., 400., 100., 400.));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0),
+			200., 200., 300., 100., 300., 200.,
+			200., 200., 300., 200., 300., 300.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 0),
+			300., 300., 300., 400., 200., 400.,
+			300., 300., 400., 400., 300., 400.,
+			300., 300., 400., 300., 400., 400.,
+			300., 300., 400., 200., 400., 300.));
+	builder.withShape(new Piece<double>(8, sf::Color(150, 0, 100.),
+			100., 100., 000., 000., 100., 000.,
+			100., 100., 100., 000., 200., 000.,
+			100., 100., 200., 000., 200., 100.,
+			100., 100., 200., 100., 200., 200.,
+			300., 100., 200., 200., 200., 100.,
+			300., 100., 200., 100., 200., 000.,
+			300., 100., 200., 000., 300., 000.,
+			300., 100., 300., 000., 400., 000.));
+	builder.withShape(new Piece<double>(8, sf::Color(255, 0, 150),
+			100., 100., 000., 000., 000., 100.,
+			100., 100., 000., 100., 000., 200.,
+			100., 100., 000., 200., 100., 200.,
+			100., 100., 100., 200., 200., 200.,
+			100., 300., 200., 200., 100., 200.,
+			100., 300., 100., 200., 000., 200.,
+			100., 300., 000., 200., 000., 300.,
+			100., 300., 000., 300., 000., 400.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 0, 255),
+			200., 300., 100., 300., 200., 200.,
+			200., 300., 200., 200., 300., 300.,
+			200., 300., 300., 300., 200., 400.,
+			200., 300., 200., 400., 100., 300.));
+	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 255),
+			300., 100., 400., 000., 400., 100.,
+			300., 100., 400., 100., 400., 200.,
+			400., 200., 300., 100., 300., 200.,
+			400., 200., 300., 200., 300., 300.));
+    return builder.build();
+}
+
 Game::Game():
 	selected(nullptr), goal(nullptr) {
 }
@@ -65,10 +110,10 @@ Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
 void Game::draw(sf::RenderWindow& window) {
 	if(goal != nullptr) {
         goal -> draw(window);
-        for (auto s : pieces) {
-            s -> draw(window);
-        }
 	}
+	for (auto s : pieces) {
+        s -> draw(window);
+    }
 }
 
 /* Select a piece when a left click is performed by the user
@@ -139,10 +184,12 @@ void Game::magnetize() {
         }
     }
     // Magnetize with the goal
-    dist = selected->distance(goal, points);
-    if(dist < minDist) {
-        minDist = dist;
-        minPoints = points;
+    if(goal != nullptr) {
+        dist = selected->distance(goal, points);
+        if(dist < minDist) {
+            minDist = dist;
+            minPoints = points;
+        }
     }
     if(minDist < 20) { // if the distance is greater than the threshold, the piece is not magnetized
         translation = minPoints[1] - minPoints[0];
@@ -151,6 +198,9 @@ void Game::magnetize() {
 }
 
 void Game::checkPoints() {
+    if(goal == nullptr) {
+        return;
+    }
     std::vector<Point<double>> goalPoints = goal->getPoints();
     std::vector<Point<double>> piecesPoints;
     std::vector<Point<double>> piecePoints;

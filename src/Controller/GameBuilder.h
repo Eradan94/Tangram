@@ -13,6 +13,7 @@ public:
 	GameBuilder();
 	void withShape(Shape<double> * shape);
 	Game * build(const char * filename);
+	Game * build();
 
 private:
 	std::vector<Shape<double> *> pieces;

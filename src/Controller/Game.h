@@ -18,6 +18,8 @@ class Game {
 public :
 	static Game * init(const char * filename);
 
+	static Game * init();
+
 	Game(std::vector<Shape<double> *> pieces, Piece<double> * goal);
 
 	Game();
