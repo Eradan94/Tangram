@@ -34,13 +34,10 @@ void GameManager::initMainMenuButtons() {
             std::cout << "Load" << std::endl;
             game = Game::init("../Tangram/levels/7.txt");
             menu->clear();
-            std::cout << " a : " << menu << std::endl;
             //delete menu; // BUG
             //menu = Menu::init(); // BUG
-            std::cout << " b : " << menu << std::endl;
             initMainGameButtons();
-            std::cout << " f : " << menu << std::endl;
-            //Action::initActions(*game, *menu);
+            Action::initActions(*game, *menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -64,10 +61,9 @@ void GameManager::initMainMenuButtons() {
 
 void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
-    std::cout << " c : " << menu << std::endl;
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
-    const int buttonCount = 7;
+    const int buttonCount = 8;
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     const int buttonHeight = 0.1 * height;
@@ -102,14 +98,23 @@ void GameManager::initMainGameButtons() {
             std::cout << "Options" << std::endl;
         }
     ));
-	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
+    menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
+			"Menu", [this]{
+            std::cout << "Menu" << std::endl;
+            delete game;
+            game = new Game();
+            menu->clear();
+            initMainMenuButtons();
+            Action::initActions(*game, *menu);
+        }
+    ));
+	menu -> addButton(new Button(buttonOutline + 7 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 8 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             std::cout << "Quit" << std::endl;
             window->close();
         }
     ));
-    std::cout << " d : " << menu << std::endl;
-    std::cout << " e : " << *menu << std::endl;
+    //std::cout << " e : " << *menu << std::endl;
 }
 
 void GameManager::draw() const {
