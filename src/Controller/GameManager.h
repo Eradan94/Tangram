@@ -2,6 +2,8 @@
 
 #include "Game.h"
 
+#include <dirent.h>
+
 class GameManager {
 public:
 	//GameManager(const char * filename);
@@ -17,6 +19,8 @@ public:
 	void initMainMenuButtons();
 
 	void initCreateLevelButtons();
+
+	void initLoadGameButtons();
 
 private:
 	Game * game;
