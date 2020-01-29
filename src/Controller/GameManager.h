@@ -23,6 +23,8 @@ public:
 
 	void initLoadGameButtons();
 
+	void initWinScreenButtons();
+
 private:
 	Game * game;
 	Menu * menu;
