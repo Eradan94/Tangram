@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Game.h"
+#include "ActionManager.h"
 
 class GameManager {
 public:
@@ -21,5 +22,6 @@ public:
 private:
 	Game * game;
 	Menu * menu;
+	ActionManager * manager;
 	sf::RenderWindow * window;
 };

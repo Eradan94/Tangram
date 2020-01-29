@@ -31,9 +31,9 @@ Menu *Menu::init() {
 }
 
 void Menu::clear() {
-    /*for (auto button : buttons){
-		delete button;
-	}*/ //BUG
+//    for (auto button : buttons){
+//		delete button;
+//	} //BUG
     buttons.clear();
 }
 

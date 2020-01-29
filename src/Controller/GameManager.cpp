@@ -5,18 +5,12 @@ GameManager::~GameManager() {
 	delete game;
 	delete menu;
 	delete window;
+	delete manager;
 }
 
-GameManager::GameManager() : menu(Menu::init()),
+GameManager::GameManager() : menu(Menu::init()), game(new Game()), manager(new ActionManager(game, menu)),
 	window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
-    game = new Game();
-	Action::initActions(*game, *menu);
 }
-
-/*GameManager::GameManager(const char *filename) : game(Game::init(filename)), menu(Menu::init()),
-	window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
-	Action::initActions(*game, *menu);
-}*/
 
 void GameManager::initMainMenuButtons() {
     //Here, initialize the main menu buttons
@@ -37,7 +31,8 @@ void GameManager::initMainMenuButtons() {
             //delete menu; // BUG
             //menu = Menu::init(); // BUG
             initMainGameButtons();
-            Action::initActions(*game, *menu);
+            manager->setGame(game);
+            manager->setMenu(menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -46,7 +41,8 @@ void GameManager::initMainMenuButtons() {
             game = Game::init();
             menu->clear();
             initCreateLevelButtons();
-            Action::initActions(*game, *menu);
+			manager->setGame(game);
+			manager->setMenu(menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Options",
@@ -104,7 +100,8 @@ void GameManager::initMainGameButtons() {
             game = new Game();
             menu->clear();
             initMainMenuButtons();
-            Action::initActions(*game, *menu);
+			manager->setGame(game);
+			manager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
@@ -142,7 +139,8 @@ void GameManager::initCreateLevelButtons() {
             game = new Game();
             menu->clear();
             initMainMenuButtons();
-            Action::initActions(*game, *menu);
+			manager->setGame(game);
+			manager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
@@ -170,7 +168,7 @@ void GameManager::play() {
 	{
 		if (event.type == sf::Event::Closed)
 			window -> close();
-		Action act = Action::getAction(event.type);
+		Action act = manager -> getAction(event.type);
 		act(event);
 	}
 	draw();
