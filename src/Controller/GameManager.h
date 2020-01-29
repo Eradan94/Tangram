@@ -3,6 +3,8 @@
 #include "Game.h"
 #include "ActionManager.h"
 
+#include <dirent.h>
+
 class GameManager {
 public:
 	//GameManager(const char * filename);
@@ -18,6 +20,8 @@ public:
 	void initMainMenuButtons();
 
 	void initCreateLevelButtons();
+
+	void initLoadGameButtons();
 
 private:
 	Game * game;

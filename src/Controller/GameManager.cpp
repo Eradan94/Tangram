@@ -1,3 +1,4 @@
+#include <cstring>
 #include "GameManager.h"
 #include "Action.h"
 
@@ -26,13 +27,13 @@ void GameManager::initMainMenuButtons() {
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
         [this]{
             std::cout << "Load" << std::endl;
-            game = Game::init("../Tangram/levels/7.txt");
             menu->clear();
             //delete menu; // BUG
             //menu = Menu::init(); // BUG
-            initMainGameButtons();
-            manager->setGame(game);
-            manager->setMenu(menu);
+            //initMainGameButtons();
+            //manager->setGame(game);
+            //manager->setMenu(menu);
+            initLoadGameButtons();
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -68,9 +69,14 @@ void GameManager::initMainGameButtons() {
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     const int buttonHeight = 0.1 * height;
 	menu -> addButton(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline, "Load",
-        []{
+        [this]{
             std::cout << "Load" << std::endl;
-
+            menu->clear();
+            delete game;
+            game = new Game();
+            initLoadGameButtons();
+			manager->setGame(game);
+			manager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
@@ -111,6 +117,41 @@ void GameManager::initMainGameButtons() {
         }
     ));
     //std::cout << " e : " << *menu << std::endl;
+}
+
+void GameManager::initLoadGameButtons() {
+    //Here, initialize the main game buttons
+    const int width = window->getView().getSize().x;
+    const int buttonWidth = 250;
+    const int buttonHeight = 60;
+
+    int i = 0;
+    DIR *dpdf;
+    struct dirent *epdf;
+    dpdf = opendir("../Tangram/levels/");
+    char level[260];
+    if (dpdf != NULL){
+        while (epdf = readdir(dpdf)){
+            if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) {
+                strcpy(level, epdf->d_name);
+                menu -> addButton(new Button(width / 2 - (buttonWidth / 2), i * buttonHeight, width / 2 + (buttonWidth / 2), (i + 1) * buttonHeight, epdf->d_name,
+                    [this, level]{
+                        char prefix[300] = "../Tangram/levels/";
+                        strcat(prefix, level);
+                        menu->clear();
+                        game = Game::init(prefix);
+                        initMainGameButtons();
+						manager->setGame(game);
+						manager->setMenu(menu);
+                    }
+                ));
+            }
+            i++;
+        }
+    }
+    closedir(dpdf);
+	manager->setGame(game);
+	manager->setMenu(menu);
 }
 
 void GameManager::initCreateLevelButtons() {
