@@ -11,6 +11,9 @@ public:
 	void registerEvent(sf::Event::EventType event, const function<void (sf::Event)> action);
 	Action & getAction(sf::Event::EventType event);
 
+	void testGame();
+	void testMenu();
+
 private:
 	std::map<sf::Event::EventType, Action> actions;
 	Game * game;

@@ -28,6 +28,6 @@ public:
 private:
 	Game * game;
 	Menu * menu;
-	ActionManager * manager;
+	ActionManager * actionManager;
 	sf::RenderWindow * window;
 };

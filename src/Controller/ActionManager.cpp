@@ -1,22 +1,32 @@
 #include "ActionManager.h"
 
 ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
-	registerEvent(sf::Event::MouseButtonPressed, [*this](sf::Event event) {
+	registerEvent(sf::Event::MouseButtonPressed, [this](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
-			this -> menu -> select(event.mouseButton);
-			this -> game -> select(event.mouseButton);
+			if (this -> menu != nullptr) {
+				this -> menu -> select(event.mouseButton);
+			}
+			if (this -> game != nullptr) {
+				this -> game -> select(event.mouseButton);
+			}
 		}
 	});
-	registerEvent(sf::Event::MouseButtonReleased, [*this](sf::Event event) {
+	registerEvent(sf::Event::MouseButtonReleased, [this](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
-			this -> game -> deselect(event.mouseButton);
+			if (this -> game != nullptr){
+				this -> game -> deselect(event.mouseButton);
+			}
 		}
 	});
-	registerEvent(sf::Event::MouseMoved, [*this](sf::Event event) {
-		this -> game -> centralizeSelected(event.mouseMove);
+	registerEvent(sf::Event::MouseMoved, [this](sf::Event event) {
+		if (this -> game != nullptr){
+			this -> game -> centralizeSelected(event.mouseMove);
+		}
 	});
-	registerEvent(sf::Event::MouseWheelScrolled, [*this](sf::Event event) {
-		this -> game -> rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
+	registerEvent(sf::Event::MouseWheelScrolled, [this](sf::Event event) {
+		if (this -> game != nullptr) {
+			this->game->rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
+		}
 	});
 }
 
@@ -34,4 +44,12 @@ void ActionManager::setGame(Game * newGame) {
 
 void ActionManager::setMenu(Menu * newMenu) {
 	menu = newMenu;
+}
+
+void ActionManager::testGame() {
+	cout << game << endl;
+}
+
+void ActionManager::testMenu() {
+	cout << menu << endl;
 }

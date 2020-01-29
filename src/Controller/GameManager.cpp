@@ -6,11 +6,11 @@ GameManager::~GameManager() {
 	delete game;
 	delete menu;
 	delete window;
-	delete manager;
+	delete actionManager;
 }
 
-GameManager::GameManager() : menu(Menu::init()), game(new Game()), manager(new ActionManager(game, menu)),
-	window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
+GameManager::GameManager() : menu(Menu::init()), game(new Game()), actionManager(new ActionManager(game, menu)),
+							 window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
 }
 
 void GameManager::initMainMenuButtons() {
@@ -24,6 +24,7 @@ void GameManager::initMainMenuButtons() {
     const int menuHeight = (height - buttonBorderGap);
     const int interButtonGap = menuHeight / (buttonCount * 2);
     const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
+
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
         [this]{
             std::cout << "Load" << std::endl;
@@ -34,11 +35,12 @@ void GameManager::initMainMenuButtons() {
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
         [this]{
             std::cout << "Create level" << std::endl;
+            delete game;
             game = Game::init();
+			actionManager->setGame(game);
             menu->clear();
             initCreateLevelButtons();
-			manager->setGame(game);
-			manager->setMenu(menu);
+			actionManager->setMenu(menu);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Options",
@@ -52,14 +54,13 @@ void GameManager::initMainMenuButtons() {
             window->close();
         }
     ));
-
 }
 
 void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
-    const int buttonCount = 8;
+    const int buttonCount = 7;
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     const int buttonHeight = 0.1 * height;
@@ -67,10 +68,8 @@ void GameManager::initMainGameButtons() {
         [this]{
             std::cout << "Load" << std::endl;
             menu->clear();
-            delete game;
             initLoadGameButtons();
-			manager->setGame(game);
-			manager->setMenu(menu);
+			actionManager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
@@ -98,10 +97,10 @@ void GameManager::initMainGameButtons() {
             std::cout << "Menu" << std::endl;
             delete game;
             game = new Game();
-            menu->clear();
-            initMainMenuButtons();
-			manager->setGame(game);
-			manager->setMenu(menu);
+			actionManager->setGame(game);
+			menu->clear();
+			initMainMenuButtons();
+			actionManager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
@@ -110,7 +109,6 @@ void GameManager::initMainGameButtons() {
             window->close();
         }
     ));
-    //std::cout << " e : " << *menu << std::endl;
 }
 
 void GameManager::initWinScreenButtons() {
@@ -127,10 +125,8 @@ void GameManager::initWinScreenButtons() {
 		 [this]{
 			 std::cout << "Load" << std::endl;
 			 menu->clear();
-			 delete game;
 			 initLoadGameButtons();
-			 manager->setGame(game);
-			 manager->setMenu(menu);
+			 actionManager->setMenu(menu);
 		 }
 	));
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 1 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 2 * buttonHeight, "Main menu",
@@ -138,10 +134,10 @@ void GameManager::initWinScreenButtons() {
 			 std::cout << "Main menu" << std::endl;
 			 delete game;
 			 game = new Game();
+			 actionManager->setGame(game);
 			 menu->clear();
 			 initMainMenuButtons();
-			 manager->setGame(game);
-			 manager->setMenu(menu);
+			 actionManager->setMenu(menu);
 		 }
 	));
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Quit",
@@ -173,9 +169,9 @@ void GameManager::initLoadGameButtons() {
                         strcat(prefix, level);
                         menu->clear();
                         game = Game::init(prefix);
-                        initMainGameButtons();
-						manager->setGame(game);
-						manager->setMenu(menu);
+						actionManager->setGame(game);
+						initMainGameButtons();
+						actionManager->setMenu(menu);
                     }
                 ));
 				i++;
@@ -183,8 +179,8 @@ void GameManager::initLoadGameButtons() {
         }
     }
     closedir(dpdf);
-	manager->setGame(game);
-	manager->setMenu(menu);
+	actionManager->setGame(game);
+	actionManager->setMenu(menu);
 }
 
 void GameManager::initCreateLevelButtons() {
@@ -211,10 +207,10 @@ void GameManager::initCreateLevelButtons() {
             std::cout << "Menu" << std::endl;
             delete game;
             game = new Game();
-            menu->clear();
-            initMainMenuButtons();
-			manager->setGame(game);
-			manager->setMenu(menu);
+			actionManager->setGame(game);
+			menu->clear();
+			initMainMenuButtons();
+			actionManager->setMenu(menu);
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
@@ -242,7 +238,7 @@ void GameManager::play() {
 	{
 		if (event.type == sf::Event::Closed)
 			window -> close();
-		Action act = manager -> getAction(event.type);
+		Action act = actionManager -> getAction(event.type);
 		act(event);
 	}
 	draw();
