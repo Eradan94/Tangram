@@ -40,7 +40,7 @@ public :
 
 	void magnetize();
 
-	void checkPoints();
+	bool isWon();
 
 private :
     std::vector<Shape<double>*> pieces;

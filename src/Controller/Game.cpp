@@ -132,7 +132,6 @@ void Game::deselect(const Point<double> & event) {
 	if (selected != nullptr) {
 		//selected->centralize(event, relativePos);
 		magnetize();
-		checkPoints();
 		selected = nullptr;
 	}
 }
@@ -197,9 +196,9 @@ void Game::magnetize() {
     }
 }
 
-void Game::checkPoints() {
+bool Game::isWon() {
     if(goal == nullptr) {
-        return;
+        return false;
     }
     std::vector<Point<double>> goalPoints = goal->getPoints();
     std::vector<Point<double>> piecesPoints;
@@ -208,6 +207,6 @@ void Game::checkPoints() {
         piecePoints = piece->getPoints();
         piecesPoints.insert(piecesPoints.end(), piecePoints.begin(), piecePoints.end());
     }
-    cout << std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end()) << std::endl;
+    return std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end());
 }
 
