@@ -1,3 +1,7 @@
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <iostream>
+
 #include "Game.h"
 #include "Action.h"
 

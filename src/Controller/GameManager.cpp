@@ -73,26 +73,16 @@ void GameManager::initMainGameButtons() {
         }
     ));
 	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
-			"<<", []{
-            std::cout << "<<" << std::endl;
-        }
-    ));
-	menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
-			">>", []{
-            std::cout << ">>" << std::endl;
-        }
-    ));
-	menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
 			"Hint", []{
             std::cout << "Hint" << std::endl;
         }
     ));
-	menu -> addButton(new Button(buttonOutline + 4 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 5 * buttonWidth, height - buttonOutline,
+	menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Options", []{
             std::cout << "Options" << std::endl;
         }
     ));
-    menu -> addButton(new Button(buttonOutline + 5 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 6 * buttonWidth, height - buttonOutline,
+    menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             std::cout << "Menu" << std::endl;
             delete game;
@@ -103,7 +93,7 @@ void GameManager::initMainGameButtons() {
 			actionManager->setMenu(menu);
         }
     ));
-	menu -> addButton(new Button(buttonOutline + 6 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 7 * buttonWidth, height - buttonOutline,
+	menu -> addButton(new Button(buttonOutline + 4 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 5 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             std::cout << "Quit" << std::endl;
             window->close();
