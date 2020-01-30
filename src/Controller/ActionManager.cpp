@@ -15,6 +15,7 @@ ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			if (this -> game != nullptr){
 				this -> game -> deselect(event.mouseButton);
+				this -> game -> isWon();
 			}
 		}
 	});

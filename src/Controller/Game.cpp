@@ -100,11 +100,11 @@ Game * Game::init() {
 }
 
 Game::Game():
-	selected(nullptr), goal(nullptr) {
+	selected(nullptr), goal(nullptr), gameState(false) {
 }
 
 Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
-	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(goal) {
+	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(goal), gameState(false) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
@@ -196,9 +196,9 @@ void Game::magnetize() {
     }
 }
 
-bool Game::isWon() {
+void Game::isWon() {
     if(goal == nullptr) {
-        return false;
+        return;
     }
     std::vector<Point<double>> goalPoints = goal->getPoints();
     std::vector<Point<double>> piecesPoints;
@@ -207,6 +207,13 @@ bool Game::isWon() {
         piecePoints = piece->getPoints();
         piecesPoints.insert(piecesPoints.end(), piecePoints.begin(), piecePoints.end());
     }
-    return std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end());
+    if(std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end())) {
+        gameState = true;
+    }
+    //return std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end());
+}
+
+bool Game::getGameState() {
+    return gameState;
 }
 

@@ -106,11 +106,16 @@ void GameManager::initWinScreenButtons() {
 	const int height = window->getView().getSize().y;
 	const int buttonCount = 3;
 	const int buttonOutline = 5;
-	const int buttonBorderGap = 100;
+	const int buttonBorderGap = 300;
 	const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
 	const int menuHeight = (height - buttonBorderGap);
 	const int interButtonGap = menuHeight / (buttonCount * 2);
 	const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
+	//Bouton sans action, à remplacer par autre chsoe de plus adapté
+	menu -> addButton(new Button(200, 100, width - 200, 200, "You win!",
+		 []{
+		 }
+	));
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
 		 [this]{
 			 std::cout << "Load" << std::endl;
@@ -224,12 +229,18 @@ void GameManager::draw() const {
 
 void GameManager::play() {
 	sf::Event event{};
-	while (window -> pollEvent(event))
-	{
+	while (window -> pollEvent(event)) {
 		if (event.type == sf::Event::Closed)
 			window -> close();
 		Action act = actionManager -> getAction(event.type);
 		act(event);
+		if(game->getGameState()) {
+            delete game;
+            game = new Game();
+            actionManager->setGame(game);
+            menu->clear();
+            initWinScreenButtons();
+		}
 	}
 	draw();
 }

@@ -40,11 +40,14 @@ public :
 
 	void magnetize();
 
-	bool isWon();
+	void isWon();
+
+	bool getGameState();
 
 private :
     std::vector<Shape<double>*> pieces;
 	Shape<double> * selected;
 	Point<double> relativePos;
 	Piece<double> * goal;
+	bool gameState;
 };
