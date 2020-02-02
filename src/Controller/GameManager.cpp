@@ -111,8 +111,8 @@ void GameManager::initWinScreenButtons() {
 	const int menuHeight = (height - buttonBorderGap);
 	const int interButtonGap = menuHeight / (buttonCount * 2);
 	const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
-	//Bouton sans action, à remplacer par autre chsoe de plus adapté
-	menu -> addButton(new Button(200, 100, width - 200, 200, "You win!",
+	//Bouton sans action, a remplacer par autre chose de plus adapte
+	menu -> addButton(new Button(200, 100, width - 200, 200, "You won !",
 		 []{
 		 }
 	));
