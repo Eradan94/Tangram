@@ -3,7 +3,7 @@
  */
 
 
-#include "Point.h"
+#include "../../include/Model/Point.h"
 
 /*template<>
 inline bool Point<double>::operator==(const Point<double>& other) const {

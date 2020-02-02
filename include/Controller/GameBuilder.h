@@ -4,9 +4,9 @@
 
 #pragma once
 
-#include "../Model/Shape.h"
-#include "../View/Button.h"
-#include "Game.h"
+#include "../../include/Model/Shape.h"
+#include "../../include/View/Button.h"
+#include "../../include/Controller/Game.h"
 
 class GameBuilder {
 public:

@@ -2,8 +2,8 @@
 #include <cmath>
 #include <iostream>
 
-#include "Game.h"
-#include "Action.h"
+#include "../../include/Controller/Game.h"
+#include "../../include/Controller/Action.h"
 
 #pragma once
 

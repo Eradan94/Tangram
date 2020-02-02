@@ -1,4 +1,4 @@
-#include "ActionManager.h"
+#include "../../include/Controller/ActionManager.h"
 
 ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
 	registerEvent(sf::Event::MouseButtonPressed, [this](sf::Event event) {

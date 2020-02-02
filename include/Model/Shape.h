@@ -4,9 +4,9 @@
 
 
 #pragma once
-#include "../Controller/Clickable.h"
-#include "../View/Drawable.h"
-#include "Point.h"
+#include "../../include/Controller/Clickable.h"
+#include "../../include/View/Drawable.h"
+#include "../../include/Model/Point.h"
 
 template<class CoordinateType>
 class Shape: public Clickable<CoordinateType>, public Drawable {

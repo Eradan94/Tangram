@@ -2,7 +2,7 @@
 // Created by odomar on 20/01/2020.
 //
 
-#include "GameBuilder.h"
+#include "../../include/Controller/GameBuilder.h"
 
 GameBuilder::GameBuilder() {
 

@@ -3,7 +3,7 @@
  */
 
 
-#include "Piece.h"
+#include "../../include/Model/Piece.h"
 
 /**
  * Piece implementation

@@ -8,9 +8,9 @@
 #include <list>
 #include <cstdarg>
 
-#include "../Controller/FileUtils.h"
-#include "Shape.h"
-#include "Triangle.h"
+#include "../../include/Controller/FileUtils.h"
+#include "../../include/Model/Shape.h"
+#include "../../include/Model/Triangle.h"
 
 template<class CoordinateType>
 class Piece: public Shape<CoordinateType> {

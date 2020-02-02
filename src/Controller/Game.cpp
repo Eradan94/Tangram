@@ -3,10 +3,10 @@
  */
 
 
-#include "../Model/Triangle.h"
-#include "Game.h"
-#include "../Model/Piece.h"
-#include "GameBuilder.h"
+#include "../../include/Model/Triangle.h"
+#include "../../include/Controller/Game.h"
+#include "../../include/Model/Piece.h"
+#include "../../include/Controller/GameBuilder.h"
 
 Game * Game::init(const char * filename) {
 	GameBuilder builder;

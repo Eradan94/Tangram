@@ -4,8 +4,8 @@
 
 
 #pragma once
-#include "Drawable.h"
-#include "Button.h"
+#include "../../include/View/Drawable.h"
+#include "../../include/View/Button.h"
 
 #include <list>
 

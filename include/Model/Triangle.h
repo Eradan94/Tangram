@@ -11,8 +11,8 @@
 #include <vector>
 #include <cfloat>
 
-#include "Point.h"
-#include "Shape.h"
+#include "../../include/Model/Point.h"
+#include "../../include/Model/Shape.h"
 
 template<class CoordinateType>
 class Triangle: public Shape<CoordinateType> {

@@ -2,7 +2,7 @@
  * Project Tangram
  */
 
-#include "../Model/Point.h"
+#include "../../include/Model/Point.h"
 
 #include <iostream>
 #include <fstream>

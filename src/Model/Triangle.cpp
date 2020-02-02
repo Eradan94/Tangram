@@ -3,7 +3,7 @@
  */
 
 
-#include "Triangle.h"
+#include "../../include/Model/Triangle.h"
 
 /**
  * Triangle implementation

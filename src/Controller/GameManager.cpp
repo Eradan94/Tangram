@@ -1,6 +1,5 @@
 #include <cstring>
-#include "GameManager.h"
-#include "Action.h"
+#include "../../include/Controller/GameManager.h"
 
 GameManager::~GameManager() {
 	delete game;

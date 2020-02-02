@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game.h"
-#include "ActionManager.h"
+#include "../../include/Controller/Game.h"
+#include "../../include/Controller/ActionManager.h"
 
 #include <dirent.h>
 

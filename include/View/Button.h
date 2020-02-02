@@ -7,9 +7,9 @@
 #include <SFML/Graphics.hpp>
 #include <functional>
 
-#include "Drawable.h"
-#include "../Controller/Clickable.h"
-#include "../Model/Point.h"
+#include "../../include/View/Drawable.h"
+#include "../../include/Controller/Clickable.h"
+#include "../../include/Model/Point.h"
 
 
 class Button: public Drawable, public Clickable<double> {

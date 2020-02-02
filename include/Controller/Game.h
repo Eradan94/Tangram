@@ -4,11 +4,11 @@
 
 
 #pragma once
-#include "../View/Drawable.h"
-#include "../View/Button.h"
-#include "../Model/Shape.h"
-#include "../Model/Piece.h"
-#include "../View/Menu.h"
+#include "../../include/View/Drawable.h"
+#include "../../include/View/Button.h"
+#include "../../include/Model/Shape.h"
+#include "../../include/Model/Piece.h"
+#include "../../include/View/Menu.h"
 
 #include <list>
 #include <vector>
