@@ -118,7 +118,7 @@ void Game::draw(sf::RenderWindow& window) {
 
 /* Select a piece when a left click is performed by the user
 */
-bool Game::select(const Point<double> & event) {
+void Game::select(const Point<double> & event) {
 	selected = nullptr;
 	for (auto s : pieces) {
 		if (s->isClicked(event)){
@@ -196,7 +196,7 @@ void Game::magnetize() {
     }
 }
 
-void Game::isWon() {
+void Game::validateShape() {
     if(goal == nullptr) {
         return;
     }
@@ -210,7 +210,6 @@ void Game::isWon() {
     if(std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end())) {
         gameState = true;
     }
-    //return std::is_permutation(goalPoints.begin(), goalPoints.end(), piecesPoints.begin(), piecesPoints.end());
 }
 
 bool Game::getGameState() {

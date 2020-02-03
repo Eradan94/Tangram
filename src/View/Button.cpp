@@ -11,35 +11,9 @@
  * Button implementation
  */
 
-Button::Button(Point<double> topLeft, Point<double> bottomRight, string text) :
-	topLeft(topLeft), bottomRight(bottomRight), text(std::move(text)), display(true)  {
-	init();
-}
-
 Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct) :
 	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)), fct(_fct),
 	text(std::move(text)), display(true) {
-	init();
-}
-
-void Button::draw(sf::RenderWindow& window) {
-    window.draw(*rectangle);
-	window.draw(*txt);
-}
-
-void Button::setDisplay(bool mode) {
-	display = mode;
-}
-
-bool Button::isClicked(const Point<double> &p) const {
-    return(p.getX() >= topLeft.getX() && p.getX() <= bottomRight.getX() && p.getY() >= topLeft.getY() && p.getY() <= bottomRight.getY());
-}
-
-void Button::callFct() {
-    fct();
-}
-
-void Button::init() {
 	rectangle = new sf::RectangleShape;
 	rectangle -> setSize(sf::Vector2f(bottomRight.getX() - topLeft.getX(), bottomRight.getY() - topLeft.getY()));
 	rectangle -> setFillColor(sf::Color::Black);
@@ -57,7 +31,7 @@ void Button::init() {
 	txt = new sf::Text;
 	txt -> setFont(*font);
 	txt -> setFillColor(sf::Color::White);
-	txt -> setString(text);
+	txt -> setString(this -> text);
 	txt -> setCharacterSize(50);
 
 	sf::FloatRect rect = txt -> getGlobalBounds();
@@ -66,6 +40,23 @@ void Button::init() {
 
 	txt -> setOrigin(rect.left + rect.width / 2, rect.top + rect.height / 2);
 	txt -> setPosition(posX, posY);
+}
+
+void Button::draw(sf::RenderWindow& window) {
+    window.draw(*rectangle);
+	window.draw(*txt);
+}
+
+void Button::setDisplay(bool mode) {
+	display = mode;
+}
+
+bool Button::isClicked(const Point<double> &p) const {
+    return(p.getX() >= topLeft.getX() && p.getX() <= bottomRight.getX() && p.getY() >= topLeft.getY() && p.getY() <= bottomRight.getY());
+}
+
+void Button::callFct() {
+    fct();
 }
 
 Button::~Button() {

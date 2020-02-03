@@ -3,7 +3,7 @@
  */
 
 
-#include "Action.h"
+#include "../../include/Controller/Action.h"
 
 
 Action::Action(const std::function<void (sf::Event)> &fct) : fct(fct) {}

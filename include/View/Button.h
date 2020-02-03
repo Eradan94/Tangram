@@ -14,7 +14,6 @@
 
 class Button: public Drawable, public Clickable<double> {
 public :
-    Button(Point<double> topLeft, Point<double> bottomRight, string text);
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct);
     ~Button();
 
@@ -30,7 +29,6 @@ public :
     }
 
 private :
-	void init();
     Point<double> topLeft;
     Point<double> bottomRight;
     string text;

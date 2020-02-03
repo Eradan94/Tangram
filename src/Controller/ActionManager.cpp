@@ -15,7 +15,7 @@ ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			if (this -> game != nullptr){
 				this -> game -> deselect(event.mouseButton);
-				this -> game -> isWon();
+				this -> game -> validateShape();
 			}
 		}
 	});
@@ -26,7 +26,7 @@ ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [this](sf::Event event) {
 		if (this -> game != nullptr) {
-			this->game->rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
+			this -> game -> rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
 		}
 	});
 }
@@ -45,12 +45,4 @@ void ActionManager::setGame(Game * newGame) {
 
 void ActionManager::setMenu(Menu * newMenu) {
 	menu = newMenu;
-}
-
-void ActionManager::testGame() {
-	cout << game << endl;
-}
-
-void ActionManager::testMenu() {
-	cout << menu << endl;
 }

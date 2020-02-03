@@ -28,7 +28,7 @@ public :
 
 	void draw(sf::RenderWindow& window);
 
-	bool select(const Point<double> & event);
+	void select(const Point<double> & event);
 
 	void deselect(const Point<double> & event);
 
@@ -40,7 +40,7 @@ public :
 
 	void magnetize();
 
-	void isWon();
+	void validateShape();
 
 	bool getGameState();
 
