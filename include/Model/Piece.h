@@ -17,6 +17,7 @@ class Piece: public Shape<CoordinateType> {
 public :
     Piece();
 	Piece(int size, sf::Color color, ...);
+	Piece(int size, sf::Color color, const CoordinateType * points);
 	Piece(sf::Color color, std::vector<Point<CoordinateType>> points);
 	~Piece();
 
@@ -196,4 +197,22 @@ Piece<CoordinateType> * Piece<CoordinateType>::createPiece(const char *filename)
 
 	std::vector<Point<CoordinateType>> points = FileUtils::readFile(filename);
 	return new Piece(sf::Color(255, 255, 255), points);
+}
+
+template<class CoordinateType>
+Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * points) {
+	for(int i = 0; i < size; i++) {
+		cout << points[i * 6] << endl;
+		CoordinateType x = points[i * 6];
+		CoordinateType y = points[i * 6 + 1];
+		Point<CoordinateType> p1 = Point<CoordinateType>(x, y);
+		x = points[i * 6 + 2];
+		y = points[i * 6 + 3];
+		Point<CoordinateType> p2 = Point<CoordinateType>(x, y);
+		x = points[i * 6 + 4];
+		y = points[i * 6 + 5];
+		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
+		Triangle<CoordinateType> t(p1, p2, p3, color);
+		triangles.push_back(t);
+	}
 }

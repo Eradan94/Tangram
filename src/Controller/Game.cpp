@@ -11,45 +11,13 @@
 Game * Game::init(const char * filename) {
 	GameBuilder builder;
 
-	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0),
-			100., 300., 100., 400., 000., 400.,
-			100., 300., 200., 400., 100., 400.));
-	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0),
-			200., 200., 300., 100., 300., 200.,
-			200., 200., 300., 200., 300., 300.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 0),
-			300., 300., 300., 400., 200., 400.,
-			300., 300., 400., 400., 300., 400.,
-			300., 300., 400., 300., 400., 400.,
-			300., 300., 400., 200., 400., 300.));
-	builder.withShape(new Piece<double>(8, sf::Color(150, 0, 100.),
-			100., 100., 000., 000., 100., 000.,
-			100., 100., 100., 000., 200., 000.,
-			100., 100., 200., 000., 200., 100.,
-			100., 100., 200., 100., 200., 200.,
-			300., 100., 200., 200., 200., 100.,
-			300., 100., 200., 100., 200., 000.,
-			300., 100., 200., 000., 300., 000.,
-			300., 100., 300., 000., 400., 000.));
-	builder.withShape(new Piece<double>(8, sf::Color(255, 0, 150),
-			100., 100., 000., 000., 000., 100.,
-			100., 100., 000., 100., 000., 200.,
-			100., 100., 000., 200., 100., 200.,
-			100., 100., 100., 200., 200., 200.,
-			100., 300., 200., 200., 100., 200.,
-			100., 300., 100., 200., 000., 200.,
-			100., 300., 000., 200., 000., 300.,
-			100., 300., 000., 300., 000., 400.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 0, 255),
-			200., 300., 100., 300., 200., 200.,
-			200., 300., 200., 200., 300., 300.,
-			200., 300., 300., 300., 200., 400.,
-			200., 300., 200., 400., 100., 300.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 255),
-			300., 100., 400., 000., 400., 100.,
-			300., 100., 400., 100., 400., 200.,
-			400., 200., 300., 100., 300., 200.,
-			400., 200., 300., 200., 300., 300.));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0), littleTriangle2));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 0), mediumTriangle));
+	builder.withShape(new Piece<double>(8, sf::Color(150, 0,   100), largeTriangle1));
+	builder.withShape(new Piece<double>(8, sf::Color(255, 0,   150), largeTriangle2));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   0,   255), square));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 255), parallelogram));
 
 	return builder.build(filename);
 }
@@ -57,45 +25,14 @@ Game * Game::init(const char * filename) {
 Game * Game::init() {
     GameBuilder builder;
 
-	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0),
-			100., 300., 100., 400., 000., 400.,
-			100., 300., 200., 400., 100., 400.));
-	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0),
-			200., 200., 300., 100., 300., 200.,
-			200., 200., 300., 200., 300., 300.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 0),
-			300., 300., 300., 400., 200., 400.,
-			300., 300., 400., 400., 300., 400.,
-			300., 300., 400., 300., 400., 400.,
-			300., 300., 400., 200., 400., 300.));
-	builder.withShape(new Piece<double>(8, sf::Color(150, 0, 100.),
-			100., 100., 000., 000., 100., 000.,
-			100., 100., 100., 000., 200., 000.,
-			100., 100., 200., 000., 200., 100.,
-			100., 100., 200., 100., 200., 200.,
-			300., 100., 200., 200., 200., 100.,
-			300., 100., 200., 100., 200., 000.,
-			300., 100., 200., 000., 300., 000.,
-			300., 100., 300., 000., 400., 000.));
-	builder.withShape(new Piece<double>(8, sf::Color(255, 0, 150),
-			100., 100., 000., 000., 000., 100.,
-			100., 100., 000., 100., 000., 200.,
-			100., 100., 000., 200., 100., 200.,
-			100., 100., 100., 200., 200., 200.,
-			100., 300., 200., 200., 100., 200.,
-			100., 300., 100., 200., 000., 200.,
-			100., 300., 000., 200., 000., 300.,
-			100., 300., 000., 300., 000., 400.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 0, 255),
-			200., 300., 100., 300., 200., 200.,
-			200., 300., 200., 200., 300., 300.,
-			200., 300., 300., 300., 200., 400.,
-			200., 300., 200., 400., 100., 300.));
-	builder.withShape(new Piece<double>(4, sf::Color(0, 255, 255),
-			300., 100., 400., 000., 400., 100.,
-			300., 100., 400., 100., 400., 200.,
-			400., 200., 300., 100., 300., 200.,
-			400., 200., 300., 200., 300., 300.));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1));
+	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0), littleTriangle2));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 0), mediumTriangle));
+	builder.withShape(new Piece<double>(8, sf::Color(150, 0,   100), largeTriangle1));
+	builder.withShape(new Piece<double>(8, sf::Color(255, 0,   150), largeTriangle2));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   0,   255), square));
+	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 255), parallelogram));
+
     return builder.build();
 }
 

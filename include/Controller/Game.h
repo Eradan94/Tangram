@@ -4,6 +4,7 @@
 
 
 #pragma once
+
 #include "../../include/View/Drawable.h"
 #include "../../include/View/Button.h"
 #include "../../include/Model/Shape.h"
@@ -26,7 +27,7 @@ public :
 
 	~Game();
 
-	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderWindow & window);
 
 	void select(const Point<double> & event);
 
@@ -45,9 +46,66 @@ public :
 	bool getGameState();
 
 private :
-    std::vector<Shape<double>*> pieces;
+	std::vector<Shape<double> *> pieces;
 	Shape<double> * selected;
 	Point<double> relativePos;
 	Piece<double> * goal;
 	bool gameState;
+
+	// All shapes
+	// little triangles
+	static constexpr double littleTriangle1[2 * 3 * 2] = {
+			100., 300., 100., 400., 000., 400.,
+			100., 300., 200., 400., 100., 400.
+	};
+	static constexpr double littleTriangle2[2 * 3 * 2] = {
+			200., 200., 300., 100., 300., 200.,
+			200., 200., 300., 200., 300., 300.
+	};
+
+	// medium triangle
+	static constexpr double mediumTriangle[2 * 3 * 4] = {
+			300., 300., 300., 400., 200., 400.,
+			300., 300., 400., 400., 300., 400.,
+			300., 300., 400., 300., 400., 400.,
+			300., 300., 400., 200., 400., 300.
+	};
+
+	// large triangle
+	static constexpr double largeTriangle1[2 * 3 * 8] = {
+			100., 100., 000., 000., 100., 000.,
+			100., 100., 100., 000., 200., 000.,
+			100., 100., 200., 000., 200., 100.,
+			100., 100., 200., 100., 200., 200.,
+			300., 100., 200., 200., 200., 100.,
+			300., 100., 200., 100., 200., 000.,
+			300., 100., 200., 000., 300., 000.,
+			300., 100., 300., 000., 400., 000.
+	};
+	static constexpr double largeTriangle2[2 * 3 * 8] = {
+			100., 100., 000., 000., 000., 100.,
+			100., 100., 000., 100., 000., 200.,
+			100., 100., 000., 200., 100., 200.,
+			100., 100., 100., 200., 200., 200.,
+			100., 300., 200., 200., 100., 200.,
+			100., 300., 100., 200., 000., 200.,
+			100., 300., 000., 200., 000., 300.,
+			100., 300., 000., 300., 000., 400.
+	};
+
+	// square
+	static constexpr double square[2 * 3 * 4] = {
+			200., 300., 100., 300., 200., 200.,
+			200., 300., 200., 200., 300., 300.,
+			200., 300., 300., 300., 200., 400.,
+			200., 300., 200., 400., 100., 300.
+	};
+
+	// parallelogram
+	static constexpr double parallelogram[2 * 3 * 4] = {
+			300., 100., 400., 000., 400., 100.,
+			300., 100., 400., 100., 400., 200.,
+			400., 200., 300., 100., 300., 200.,
+			400., 200., 300., 200., 300., 300.
+	};
 };
