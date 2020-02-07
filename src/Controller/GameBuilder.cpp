@@ -13,11 +13,6 @@ void GameBuilder::withShape(Shape<double> *shape) {
 }
 
 Game *GameBuilder::build(const char * filename) {
-	Piece<double> * goal = Piece<double>::createPiece(filename);
-	return new Game(pieces, goal);
-}
-
-Game *GameBuilder::build() {
-	Piece<double> * goal = nullptr;
+	Piece<double> * goal = filename != nullptr ? Piece<double>::createPiece(filename) : nullptr;
 	return new Game(pieces, goal);
 }

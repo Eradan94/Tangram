@@ -35,7 +35,7 @@ void GameManager::initMainMenuButtons() {
         [this]{
             std::cout << "Create level" << std::endl;
             delete game;
-            game = Game::init();
+            game = Game::init(nullptr);
 			actionManager->setGame(game);
             menu->clear();
             initCreateLevelButtons();

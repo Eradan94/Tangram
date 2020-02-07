@@ -22,20 +22,6 @@ Game * Game::init(const char * filename) {
 	return builder.build(filename);
 }
 
-Game * Game::init() {
-    GameBuilder builder;
-
-	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1));
-	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0), littleTriangle2));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 0), mediumTriangle));
-	builder.withShape(new Piece<double>(8, sf::Color(150, 0,   100), largeTriangle1));
-	builder.withShape(new Piece<double>(8, sf::Color(255, 0,   150), largeTriangle2));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   0,   255), square));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 255), parallelogram));
-
-    return builder.build();
-}
-
 Game::Game():
 	selected(nullptr), goal(nullptr), gameState(false) {
 }
