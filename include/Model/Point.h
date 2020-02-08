@@ -77,7 +77,6 @@ bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const
 template<>
 inline bool Point<double>::operator==(const Point<double>& other) const {
     Preferences& pref = Preferences::getInstance();
-    std::cout << pref.getTolerance() << std::endl;
     return this->distance(other) <= pref.getTolerance();
 }
 
