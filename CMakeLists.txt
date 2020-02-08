@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.10)
 project(Tangram)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -11,24 +11,30 @@ find_package(SFML 2.5 COMPONENTS graphics REQUIRED)
 
 add_executable(Tangram
         src/Controller/Action.cpp
-        src/Controller/Action.h
-        src/Controller/Clickable.h
+        include/Controller/Action.h
+        include/Controller/Clickable.h
         src/Controller/FileUtils.cpp
-        src/Controller/FileUtils.h
+        include/Controller/FileUtils.h
         src/Controller/Game.cpp
-        src/Controller/Game.h
+        include/Controller/Game.h
         src/Model/Piece.cpp
-        src/Model/Piece.h
+        include/Model/Piece.h
         src/Model/Point.cpp
-        src/Model/Point.h
-        src/Model/Shape.h
+        include/Model/Point.h
+        include/Model/Shape.h
         src/Model/Triangle.cpp
-        src/Model/Triangle.h
+        include/Model/Triangle.h
         src/View/Button.cpp
-        src/View/Button.h
-        src/View/Drawable.h
+        include/View/Button.h
+        include/View/Drawable.h
         src/View/Menu.cpp
-        src/View/Menu.h
-        src/Main.cpp src/Controller/GameBuilder.cpp src/Controller/GameBuilder.h src/Controller/GameManager.cpp src/Controller/GameManager.h src/Controller/ActionManager.cpp src/Controller/ActionManager.h)
+        include/View/Menu.h
+        src/Main.cpp
+        src/Controller/GameBuilder.cpp
+        include/Controller/GameBuilder.h
+        src/Controller/GameManager.cpp
+        include/Controller/GameManager.h
+        src/Controller/ActionManager.cpp
+        include/Controller/ActionManager.h)
 
 target_link_libraries(Tangram sfml-graphics)
