@@ -202,7 +202,6 @@ Piece<CoordinateType> * Piece<CoordinateType>::createPiece(const char *filename)
 template<class CoordinateType>
 Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * points) {
 	for(int i = 0; i < size; i++) {
-		cout << points[i * 6] << endl;
 		CoordinateType x = points[i * 6];
 		CoordinateType y = points[i * 6 + 1];
 		Point<CoordinateType> p1 = Point<CoordinateType>(x, y);

@@ -2,9 +2,9 @@
  * Project Tangram
  */
 
-#include "../../include/Model/Point.h"
-#include "../../include/Model/Piece.h"
-#include "../../include/Controller/GameManager.h"
+#include "../include/Model/Point.h"
+#include "../include/Model/Piece.h"
+#include "../include/Controller/GameManager.h"
 
 using namespace std;
 
