@@ -10,7 +10,9 @@
 #include <vector>
 #include <cfloat>
 
-#define EPSILON 4.0
+#include "../../include/Controller/Preferences.h"
+
+#define EPSILON 4.0 // devrait etre dans preferences
 
 template<class CoordinateType>
 class Point {
@@ -74,7 +76,8 @@ bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const
 
 template<>
 inline bool Point<double>::operator==(const Point<double>& other) const {
-    return this->distance(other) <= EPSILON;
+    Preferences& pref = Preferences::getInstance();
+    return this->distance(other) <= pref.getTolerance();
 }
 
 template<class CoordinateType>

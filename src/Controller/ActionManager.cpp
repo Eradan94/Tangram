@@ -26,7 +26,8 @@ ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [this](sf::Event event) {
 		if (this -> game != nullptr) {
-			this -> game -> rotateSelected(event.mouseWheelScroll.delta * M_PI / 16);
+            Preferences& pref = Preferences::getInstance();
+			this -> game -> rotateSelected(event.mouseWheelScroll.delta * pref.getRotationPerSpinning());
 		}
 	});
 }
