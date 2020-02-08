@@ -31,6 +31,7 @@ public :
 	virtual bool isClicked(const Point<CoordinateType> & p) const;
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
+	virtual int isInsideWindow(const Point<CoordinateType>& translation) const;
 
     void draw(sf::RenderWindow& window);
 
@@ -112,7 +113,21 @@ template<class CoordinateType>
 void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
     Point<CoordinateType> point = center() - relativePos;
     Point<CoordinateType> translation = clickPos - point;
-    translate(translation);
+    int res = isInsideWindow(translation);
+    //std::cout << res << std::endl;
+    switch(res) {
+        case 0 :
+            translate(translation);
+            break;
+        case 1 :
+            translate(Point(translation.getX(), 0.));
+            break;
+        case 2 :
+            translate(Point(0., translation.getY()));
+            break;
+        default :
+            break;
+    }
 }
 
 /* Translate a piece
@@ -214,4 +229,16 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * p
 		Triangle<CoordinateType> t(p1, p2, p3, color);
 		triangles.push_back(t);
 	}
+}
+
+template<class CoordinateType>
+int Piece<CoordinateType>::isInsideWindow(const Point<CoordinateType>& translation) const {
+    int res;
+    for(auto& triangle : this->triangles) {
+        res = triangle.isInsideWindow(translation);
+        if(res) {
+            return res;
+        }
+    }
+    return 0;
 }

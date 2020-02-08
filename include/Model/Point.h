@@ -7,6 +7,7 @@
 #include <iostream>
 #include <cmath>
 #include <SFML/Window/Event.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include <cfloat>
 
@@ -25,17 +26,14 @@ public :
     Point(sf::Event::MouseButtonEvent event);
     Point(sf::Event::MouseMoveEvent event);
     bool operator== (const Point<CoordinateType>& other) const;
-    /*template<>
-    inline bool operator==(const Point<double>& other) const;*/
     bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
     Point<CoordinateType> operator- (const Point& other) const;
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
     bool operator< (const Point<CoordinateType>& other) const;
-
-
     double distance(const Point& otherPoint) const;
+    int isInsideWindow(const Point<CoordinateType>& translation) const;
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
@@ -160,5 +158,18 @@ void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
 template<class CoordinateType>
 double Point<CoordinateType>::distance(const Point& otherPoint) const {
     return sqrt((otherPoint.x - x) * (otherPoint.x - x) + (otherPoint.y - y) * (otherPoint.y - y));
+}
+
+template<class CoordinateType>
+int Point<CoordinateType>::isInsideWindow(const Point<CoordinateType>& translation) const {
+    Point p = *this + translation;
+    if(p.y < 0 || p.y > sf::VideoMode::getDesktopMode().height) {
+        return 1;
+    }
+    else if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {
+        return 2;
+    }
+    return 0;
+    //return (p.x >= 0 && p.x <= sf::VideoMode::getDesktopMode().width && p.y >= 0 && p.y <= sf::VideoMode::getDesktopMode().height);
 }
 
