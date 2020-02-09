@@ -39,7 +39,7 @@ public :
     virtual void translate(const Point<CoordinateType>& translation);
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
-	virtual int isInsideWindow(const Point<CoordinateType>& translation) const;
+	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
 
 
     void draw(sf::RenderWindow& window);
@@ -173,20 +173,10 @@ double Triangle<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vec
 }
 
 template<class CoordinateType>
-int Triangle<CoordinateType>::isInsideWindow(const Point<CoordinateType>& translation) const {
-    int resA  = a.isInsideWindow(translation);
-    int resB  = b.isInsideWindow(translation);
-    int resC  = c.isInsideWindow(translation);
-    if(resA) {
-        return resA;
-    }
-    else if(resB) {
-        return resB;
-    }
-    else if(resC) {
-        return resC;
-    }
-    return 0;
+void Triangle<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
+    a.isInsideWindow(translation);
+    b.isInsideWindow(translation);
+    c.isInsideWindow(translation);
     //return (a.isInsideWindow(translation) && b.isInsideWindow(translation) && c.isInsideWindow(translation));
 }
 

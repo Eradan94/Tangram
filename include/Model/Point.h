@@ -33,7 +33,7 @@ public :
     Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
     bool operator< (const Point<CoordinateType>& other) const;
     double distance(const Point& otherPoint) const;
-    int isInsideWindow(const Point<CoordinateType>& translation) const;
+    void isInsideWindow(Point<CoordinateType>& translation) const;
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
@@ -161,15 +161,14 @@ double Point<CoordinateType>::distance(const Point& otherPoint) const {
 }
 
 template<class CoordinateType>
-int Point<CoordinateType>::isInsideWindow(const Point<CoordinateType>& translation) const {
+void Point<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
     Point p = *this + translation;
     if(p.y < 0 || p.y > sf::VideoMode::getDesktopMode().height) {
-        return 1;
+        translation.y = 0;
     }
-    else if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {
-        return 2;
+    if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {
+        translation.x = 0;
     }
-    return 0;
     //return (p.x >= 0 && p.x <= sf::VideoMode::getDesktopMode().width && p.y >= 0 && p.y <= sf::VideoMode::getDesktopMode().height);
 }
 
