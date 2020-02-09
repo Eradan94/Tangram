@@ -163,12 +163,12 @@ double Point<CoordinateType>::distance(const Point& otherPoint) const {
 template<class CoordinateType>
 void Point<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
     Point p = *this + translation;
-    if(p.y < 0 || p.y > sf::VideoMode::getDesktopMode().height) {
+    Preferences& pref = Preferences::getInstance();
+    if(p.y < 0 || p.y > (sf::VideoMode::getDesktopMode().height - pref.getGameButtonHeight())) {
         translation.y = 0;
     }
     if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {
         translation.x = 0;
     }
-    //return (p.x >= 0 && p.x <= sf::VideoMode::getDesktopMode().width && p.y >= 0 && p.y <= sf::VideoMode::getDesktopMode().height);
 }
 

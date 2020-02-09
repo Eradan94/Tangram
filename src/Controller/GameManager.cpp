@@ -62,7 +62,8 @@ void GameManager::initMainGameButtons() {
     const int buttonCount = 7;
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
-    const int buttonHeight = 0.1 * height;
+    Preferences& pref = Preferences::getInstance();
+    const int buttonHeight = (int)pref.getGameButtonHeight();
 	menu -> addButton(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline, "Load",
         [this]{
             std::cout << "Load" << std::endl;

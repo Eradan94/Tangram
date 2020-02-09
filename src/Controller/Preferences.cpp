@@ -21,6 +21,12 @@ void Preferences::setTolerance(double tolerance) {
     options["tolerance"] = tolerance;
 }
 
+void Preferences::setGameButtonHeight(double buttonHeight) {
+    options["gameButtonHeight"] = buttonHeight;
+}
+
+
+
 double Preferences::getMagnetism() {
     return options["magnetism"];
 }
@@ -31,4 +37,8 @@ double Preferences::getRotationPerSpinning() {
 
 double Preferences::getTolerance() {
     return options["tolerance"];
+}
+
+double Preferences::getGameButtonHeight() {
+    return options["gameButtonHeight"];
 }
