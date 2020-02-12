@@ -18,7 +18,6 @@ public :
     ~Button();
 
     void callFct();
-    void setDisplay(bool mode);
     void draw(sf::RenderWindow& window) override;
     bool isClicked(const Point<double>& p) const override;
 
@@ -33,7 +32,6 @@ private :
     Point<double> bottomRight;
     string text;
 	std::function<void ()> fct;
-    bool display;
 	sf::RectangleShape * rectangle;
 	sf::Text * txt;
 };

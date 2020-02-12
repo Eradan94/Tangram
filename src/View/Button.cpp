@@ -13,7 +13,7 @@
 
 Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct) :
 	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)), fct(_fct),
-	text(std::move(text)), display(true) {
+	text(std::move(text)) {
 	rectangle = new sf::RectangleShape;
 	rectangle -> setSize(sf::Vector2f(bottomRight.getX() - topLeft.getX(), bottomRight.getY() - topLeft.getY()));
 	rectangle -> setFillColor(sf::Color::Black);
@@ -45,10 +45,6 @@ Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, s
 void Button::draw(sf::RenderWindow& window) {
     window.draw(*rectangle);
 	window.draw(*txt);
-}
-
-void Button::setDisplay(bool mode) {
-	display = mode;
 }
 
 bool Button::isClicked(const Point<double> &p) const {
