@@ -147,9 +147,14 @@ void GameManager::initLoadGameButtons(int loadIndex) {
     //Here, initialize the main game buttons
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
-    const int buttonWidth = 250;
-    const int buttonHeight = 60;
-    const int levelByLoadIndex = 5;
+    const int levelByLoadIndex = 9;
+
+    const int xOffset = 160;
+    const int yOffset = 100;
+    const int interButtonGap = 50;
+    const int levelByLine = sqrt(levelByLoadIndex);
+    const int buttonWidth = (width - 2 * xOffset - (levelByLine - 1) * interButtonGap) / levelByLine;
+    const int buttonHeight = (height - 2 * yOffset - (levelByLine - 1) * interButtonGap) / levelByLine;
 
     int i = 0; // Nombre de niveau actuel à afficher sur le menu
     int j = 0; // nombre de niveaux parcourus (à afficher ou non)
@@ -162,7 +167,10 @@ void GameManager::initLoadGameButtons(int loadIndex) {
             if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) { // . et .. ne sont pas des niveaux, donc on ne les compte pas
                 if(j >= loadIndex * levelByLoadIndex && j < loadIndex * levelByLoadIndex + levelByLoadIndex) {
                     strcpy(level, epdf->d_name);
-                    menu -> addButton(new Button(width / 2 - (buttonWidth / 2), (i + 1) * buttonHeight, width / 2 + (buttonWidth / 2), (i + 2) * buttonHeight, epdf->d_name,
+                    menu -> addButton(new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
+                                                 yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap,
+                                                 xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap + buttonWidth,
+                                                 yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap + buttonHeight, epdf->d_name,
                         [this, level]{
                             char prefix[300] = "../Tangram/levels/";
                             strcat(prefix, level);
