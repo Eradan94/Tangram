@@ -28,7 +28,7 @@ void GameManager::initMainMenuButtons() {
         [this]{
             std::cout << "Load" << std::endl;
             menu->clear();
-            initLoadGameButtons();
+            initLoadGameButtons(0);
         }
     ));
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
@@ -68,7 +68,7 @@ void GameManager::initMainGameButtons() {
         [this]{
             std::cout << "Load" << std::endl;
             menu->clear();
-            initLoadGameButtons();
+            initLoadGameButtons(0);
 			actionManager->setMenu(menu);
         }
     ));
@@ -120,7 +120,7 @@ void GameManager::initWinScreenButtons() {
 		 [this]{
 			 std::cout << "Load" << std::endl;
 			 menu->clear();
-			 initLoadGameButtons();
+			 initLoadGameButtons(0);
 			 actionManager->setMenu(menu);
 		 }
 	));
@@ -143,37 +143,63 @@ void GameManager::initWinScreenButtons() {
 	));
 }
 
-void GameManager::initLoadGameButtons() {
+void GameManager::initLoadGameButtons(int loadIndex) {
     //Here, initialize the main game buttons
     const int width = window->getView().getSize().x;
+    const int height = window->getView().getSize().y;
     const int buttonWidth = 250;
     const int buttonHeight = 60;
+    const int levelByLoadIndex = 5;
 
-    int i = 0;
+    int i = 0; // Nombre de niveau actuel à afficher sur le menu
+    int j = 0; // nombre de niveaux parcourus (à afficher ou non)
     DIR *dpdf;
     struct dirent *epdf;
     dpdf = opendir("../Tangram/levels/");
     char level[260];
     if (dpdf != NULL){
         while ((epdf = readdir(dpdf))){
-            if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) {
-                strcpy(level, epdf->d_name);
-                menu -> addButton(new Button(width / 2 - (buttonWidth / 2), (i + 1) * buttonHeight, width / 2 + (buttonWidth / 2), (i + 2) * buttonHeight, epdf->d_name,
-                    [this, level]{
-                        char prefix[300] = "../Tangram/levels/";
-                        strcat(prefix, level);
-                        menu->clear();
-                        game = Game::init(prefix);
-						actionManager->setGame(game);
-						initMainGameButtons();
-						actionManager->setMenu(menu);
-                    }
-                ));
-				i++;
+            if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) { // . et .. ne sont pas des niveaux, donc on ne les compte pas
+                if(j >= loadIndex * levelByLoadIndex && j < loadIndex * levelByLoadIndex + levelByLoadIndex) {
+                    strcpy(level, epdf->d_name);
+                    menu -> addButton(new Button(width / 2 - (buttonWidth / 2), (i + 1) * buttonHeight, width / 2 + (buttonWidth / 2), (i + 2) * buttonHeight, epdf->d_name,
+                        [this, level]{
+                            char prefix[300] = "../Tangram/levels/";
+                            strcat(prefix, level);
+                            menu->clear();
+                            game = Game::init(prefix);
+                            actionManager->setGame(game);
+                            initMainGameButtons();
+                            actionManager->setMenu(menu);
+                        }
+                    ));
+                    i++;
+                }
+                j++;
             }
         }
     }
     closedir(dpdf);
+
+    menu -> addButton(new Button(40, height / 2 - 35, 110, height / 2 + 35, "<<",
+        [this, loadIndex]{
+        if(loadIndex > 0) {
+            std::cout << "<<" << std::endl;
+            menu->clear();
+            initLoadGameButtons(loadIndex - 1);
+        }
+    }
+    ));
+    menu -> addButton(new Button(width - 110, height / 2 - 35, width - 40, height / 2 + 35, ">>",
+        [this, loadIndex, i]{
+            if(i == levelByLoadIndex) {
+                std::cout << ">>" << std::endl;
+                menu->clear();
+                initLoadGameButtons(loadIndex + 1);
+            }
+        }
+    ));
+
 	actionManager->setGame(game);
 	actionManager->setMenu(menu);
 }

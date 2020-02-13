@@ -21,7 +21,7 @@ public:
 
 	void initCreateLevelButtons();
 
-	void initLoadGameButtons();
+	void initLoadGameButtons(int loadIndex);
 
 	void initWinScreenButtons();
 
