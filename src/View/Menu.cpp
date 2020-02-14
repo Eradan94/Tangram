@@ -6,7 +6,6 @@
 #include "../../include/View/Menu.h"
 
 Menu::Menu() {
-
 }
 
 void Menu::addButton(Button * button) {
@@ -16,6 +15,10 @@ void Menu::addButton(Button * button) {
 void Menu::draw(sf::RenderWindow & window) {
     for (auto & button : buttons) {
         button->draw(window);
+    }
+    //TEST
+    for (auto & piece : decorationPieces) {
+        piece->draw(window);
     }
 }
 
@@ -35,6 +38,11 @@ void Menu::clear() {
 //		delete button;
 //	} //BUG
     buttons.clear();
+    decorationPieces.clear();
+}
+
+void Menu::addDecorationPiece(Piece<double>* piece) {
+    decorationPieces.push_back(piece);
 }
 
 void Menu::select(const Point<double> & event) {

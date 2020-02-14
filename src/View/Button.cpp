@@ -60,3 +60,9 @@ Button::~Button() {
 	delete txt->getFont();
 	delete txt;
 }
+
+Point<double> Button::center() {
+    double length = bottomRight.getX() - topLeft.getX();
+    double height = bottomRight.getY() - topLeft.getY();
+    return Point(topLeft.getX() + length / 2, topLeft.getY() + height / 2);
+}

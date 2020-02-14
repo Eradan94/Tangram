@@ -183,6 +183,9 @@ void Triangle<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation
 
 template<class CoordinateType>
 void Triangle<CoordinateType>::reduceSize(int coeff) {
+    unrotatedA.reduceSize(coeff);
+    unrotatedB.reduceSize(coeff);
+    unrotatedC.reduceSize(coeff);
     a.reduceSize(coeff);
     b.reduceSize(coeff);
     c.reduceSize(coeff);

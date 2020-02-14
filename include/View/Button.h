@@ -20,6 +20,7 @@ public :
     void callFct();
     void draw(sf::RenderWindow& window) override;
     bool isClicked(const Point<double>& p) const override;
+    Point<double> center();
 
     friend std::ostream& operator<< (std::ostream& os, const Button& button) {
         os << "bouton : ";

@@ -158,23 +158,21 @@ void GameManager::initLoadGameButtons(int loadIndex) {
 
     int i = 0; // Nombre de niveau actuel à afficher sur le menu
     int j = 0; // nombre de niveaux parcourus (à afficher ou non)
-    DIR *dpdf;
-    struct dirent *epdf;
+    DIR* dpdf = nullptr;
+    struct dirent* epdf = nullptr;
     dpdf = opendir("../Tangram/levels/");
     char level[260];
-    if (dpdf != NULL){
+    if (dpdf != nullptr){
         while ((epdf = readdir(dpdf))){
             if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) { // . et .. ne sont pas des niveaux, donc on ne les compte pas
                 if(j >= loadIndex * levelByLoadIndex && j < loadIndex * levelByLoadIndex + levelByLoadIndex) {
                     strcpy(level, epdf->d_name);
                     char prefix[300] = "../Tangram/levels/";
                     strcat(prefix, level);
-                    Piece<double>* goal = Piece<double>::createPiece(prefix);
-
-                    menu -> addButton(new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
+                    Button* button = new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
                                                  yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap,
                                                  xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap + buttonWidth,
-                                                 yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap + buttonHeight, epdf->d_name,
+                                                 yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap + buttonHeight, "",
                         [this, prefix]{
                             menu->clear();
                             game = Game::init(prefix);
@@ -182,7 +180,15 @@ void GameManager::initLoadGameButtons(int loadIndex) {
                             initMainGameButtons();
                             actionManager->setMenu(menu);
                         }
-                    ));
+                    );
+                    Piece<double> * goal = Piece<double>::createPiece(prefix);
+                    Point<double> buttonCenter = button->center();
+                    goal->reduceSize(4);
+                    Point<double> pieceCenter = goal->center();
+                    Point<double> translation = buttonCenter - pieceCenter;
+                    goal->translate(translation);
+                    menu->addDecorationPiece(goal);
+                    menu -> addButton(button);
                     i++;
                 }
                 j++;
