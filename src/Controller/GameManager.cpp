@@ -167,13 +167,15 @@ void GameManager::initLoadGameButtons(int loadIndex) {
             if(strcmp(epdf->d_name, ".") && strcmp(epdf->d_name, "..")) { // . et .. ne sont pas des niveaux, donc on ne les compte pas
                 if(j >= loadIndex * levelByLoadIndex && j < loadIndex * levelByLoadIndex + levelByLoadIndex) {
                     strcpy(level, epdf->d_name);
+                    char prefix[300] = "../Tangram/levels/";
+                    strcat(prefix, level);
+                    Piece<double>* goal = Piece<double>::createPiece(prefix);
+
                     menu -> addButton(new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
                                                  yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap,
                                                  xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap + buttonWidth,
                                                  yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap + buttonHeight, epdf->d_name,
-                        [this, level]{
-                            char prefix[300] = "../Tangram/levels/";
-                            strcat(prefix, level);
+                        [this, prefix]{
                             menu->clear();
                             game = Game::init(prefix);
                             actionManager->setGame(game);
@@ -189,24 +191,24 @@ void GameManager::initLoadGameButtons(int loadIndex) {
     }
     closedir(dpdf);
 
-    menu -> addButton(new Button(40, height / 2 - 35, 110, height / 2 + 35, "<<",
+    if(loadIndex > 0) {
+        menu -> addButton(new Button(40, height / 2 - 35, 110, height / 2 + 35, "<<",
         [this, loadIndex]{
-        if(loadIndex > 0) {
             std::cout << "<<" << std::endl;
             menu->clear();
             initLoadGameButtons(loadIndex - 1);
         }
+        ));
     }
-    ));
+    if(i == levelByLoadIndex) {
     menu -> addButton(new Button(width - 110, height / 2 - 35, width - 40, height / 2 + 35, ">>",
         [this, loadIndex, i]{
-            if(i == levelByLoadIndex) {
-                std::cout << ">>" << std::endl;
-                menu->clear();
-                initLoadGameButtons(loadIndex + 1);
-            }
+            std::cout << ">>" << std::endl;
+            menu->clear();
+            initLoadGameButtons(loadIndex + 1);
         }
-    ));
+        ));
+    }
 
 	actionManager->setGame(game);
 	actionManager->setMenu(menu);

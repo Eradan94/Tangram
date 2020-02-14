@@ -33,6 +33,8 @@ public :
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
 
+	virtual void reduceSize(int coeff);
+
     void draw(sf::RenderWindow& window);
 
     // friends functions
@@ -223,5 +225,12 @@ void Piece<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) c
     int res;
     for(auto& triangle : this->triangles) {
         triangle.isInsideWindow(translation);
+    }
+}
+
+template<class CoordinateType>
+void Piece<CoordinateType>::reduceSize(int coeff) {
+    for(auto& triangle : this->triangles) {
+        triangle.reduceSize(coeff);
     }
 }

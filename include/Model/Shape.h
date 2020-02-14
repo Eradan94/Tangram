@@ -19,6 +19,7 @@ public:
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<double>>& points) const = 0;
 	virtual void translate(const Point<CoordinateType>& translation) = 0;
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const = 0;
+	virtual void reduceSize(int coeff) = 0;
 
 	void rotate(const float theta) {
 		rotate(center(), theta);

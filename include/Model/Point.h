@@ -34,6 +34,7 @@ public :
     bool operator< (const Point<CoordinateType>& other) const;
     double distance(const Point& otherPoint) const;
     void isInsideWindow(Point<CoordinateType>& translation) const;
+    void reduceSize(int coeff);
 
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
@@ -170,5 +171,11 @@ void Point<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) c
     if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {
         translation.x = 0;
     }
+}
+
+template<class CoordinateType>
+void Point<CoordinateType>::reduceSize(int coeff) {
+    x /= coeff;
+    y /= coeff;
 }
 
