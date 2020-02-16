@@ -6,6 +6,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <functional>
+#include <memory>
 
 #include "../../include/View/Drawable.h"
 #include "../../include/Controller/Clickable.h"
@@ -33,6 +34,6 @@ private :
     Point<double> bottomRight;
     string text;
 	std::function<void ()> fct;
-	sf::RectangleShape * rectangle;
-	sf::Text * txt;
+	std::unique_ptr<sf::RectangleShape> rectangle;
+	std::unique_ptr<sf::Text> txt;
 };

@@ -12,8 +12,8 @@ class GameBuilder {
 public:
 	GameBuilder();
 	void withShape(Shape<double> * shape);
-	Game * build(const char * filename);
-	Game * build();
+	std::shared_ptr<Game> build(const char * filename);
+	std::shared_ptr<Game> build();
 
 private:
 	std::vector<Shape<double> *> pieces;

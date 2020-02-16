@@ -2,13 +2,11 @@
 #include "../../include/Controller/GameManager.h"
 
 GameManager::~GameManager() {
-	delete game;
-	delete menu;
 	delete window;
 	delete actionManager;
 }
 
-GameManager::GameManager() : menu(Menu::init()), game(new Game()), actionManager(new ActionManager(game, menu)),
+GameManager::GameManager() : menu(Menu::init()), game(std::shared_ptr<Game> (new Game())), actionManager(new ActionManager(game, menu)),
 							 window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
 }
 
@@ -34,7 +32,7 @@ void GameManager::initMainMenuButtons() {
     menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
         [this]{
             std::cout << "Create level" << std::endl;
-            delete game;
+            game.reset();
             game = Game::init(nullptr);
 			actionManager->setGame(game);
             menu->clear();
@@ -85,8 +83,8 @@ void GameManager::initMainGameButtons() {
     menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             std::cout << "Menu" << std::endl;
-            delete game;
-            game = new Game();
+            game.reset();
+            game = std::shared_ptr<Game>(new Game());
 			actionManager->setGame(game);
 			menu->clear();
 			initMainMenuButtons();
@@ -127,8 +125,8 @@ void GameManager::initWinScreenButtons() {
 	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 1 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 2 * buttonHeight, "Main menu",
 		 [this]{
 			 std::cout << "Main menu" << std::endl;
-			 delete game;
-			 game = new Game();
+			 game.reset();
+			 game = std::shared_ptr<Game>(new Game());
 			 actionManager->setGame(game);
 			 menu->clear();
 			 initMainMenuButtons();
@@ -242,8 +240,8 @@ void GameManager::initCreateLevelButtons() {
     menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             std::cout << "Menu" << std::endl;
-            delete game;
-            game = new Game();
+            game.reset();
+            game = std::shared_ptr<Game>(new Game());
 			actionManager->setGame(game);
 			menu->clear();
 			initMainMenuButtons();
@@ -277,8 +275,8 @@ void GameManager::play() {
 		Action act = actionManager -> getAction(event.type);
 		act(event);
 		if(game->getGameState()) {
-            delete game;
-            game = new Game();
+            game.reset();
+            game = std::shared_ptr<Game>(new Game());
             actionManager->setGame(game);
             menu->clear();
             initWinScreenButtons();

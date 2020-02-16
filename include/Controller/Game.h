@@ -14,12 +14,13 @@
 #include <list>
 #include <vector>
 #include <cfloat>
+#include <memory>
 
 class Game {
 public :
-	static Game * init(const char * filename);
+	static std::shared_ptr<Game> init(const char * filename);
 
-	static Game * init();
+	static std::shared_ptr<Game> init();
 
 	Game(std::vector<Shape<double> *> pieces, Piece<double> * goal);
 

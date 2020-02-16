@@ -222,7 +222,6 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * p
 
 template<class CoordinateType>
 void Piece<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
-    int res;
     for(auto& triangle : this->triangles) {
         triangle.isInsideWindow(translation);
     }

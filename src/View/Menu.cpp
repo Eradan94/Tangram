@@ -28,8 +28,8 @@ Menu::~Menu() {
 	}
 }
 
-Menu *Menu::init() {
-	auto * menu = new Menu;
+std::shared_ptr<Menu> Menu::init() {
+	std::shared_ptr<Menu> menu = std::shared_ptr<Menu>(new Menu);
 	return menu;
 }
 

@@ -10,13 +10,14 @@
 #include "../../include/Model/Piece.h"
 
 #include <list>
+#include <memory>
 
 class Menu: public Drawable {
 public :
 	Menu();
 	~Menu();
 
-	static Menu * init();
+	static std::shared_ptr<Menu> init();
 
 	void addButton(Button * button);
 	void draw(sf::RenderWindow & window);

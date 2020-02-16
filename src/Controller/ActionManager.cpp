@@ -1,6 +1,6 @@
 #include "../../include/Controller/ActionManager.h"
 
-ActionManager::ActionManager(Game *game, Menu *menu) : game(game), menu(menu) {
+ActionManager::ActionManager(std::shared_ptr<Game> game, std::shared_ptr<Menu> menu) : game(game), menu(menu) {
 	registerEvent(sf::Event::MouseButtonPressed, [this](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			if (this -> menu != nullptr) {
@@ -40,10 +40,10 @@ Action & ActionManager::getAction(sf::Event::EventType event) {
 	return actions[event];
 }
 
-void ActionManager::setGame(Game * newGame) {
+void ActionManager::setGame(std::shared_ptr<Game> newGame) {
 	game = newGame;
 }
 
-void ActionManager::setMenu(Menu * newMenu) {
+void ActionManager::setMenu(std::shared_ptr<Menu> newMenu) {
 	menu = newMenu;
 }

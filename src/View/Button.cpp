@@ -14,7 +14,7 @@
 Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct) :
 	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)), fct(_fct),
 	text(std::move(text)) {
-	rectangle = new sf::RectangleShape;
+	rectangle = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape);
 	rectangle -> setSize(sf::Vector2f(bottomRight.getX() - topLeft.getX(), bottomRight.getY() - topLeft.getY()));
 	rectangle -> setFillColor(sf::Color::Black);
 	rectangle -> setOutlineColor(sf::Color::White);
@@ -28,7 +28,7 @@ Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, s
 		exit(1);
 	}
 
-	txt = new sf::Text;
+	txt = std::unique_ptr<sf::Text>(new sf::Text);
 	txt -> setFont(*font);
 	txt -> setFillColor(sf::Color::White);
 	txt -> setString(this -> text);
@@ -56,9 +56,9 @@ void Button::callFct() {
 }
 
 Button::~Button() {
-	delete rectangle;
-	delete txt->getFont();
-	delete txt;
+	//delete rectangle;
+	//delete txt->getFont();
+	//delete txt;
 }
 
 Point<double> Button::center() {

@@ -8,7 +8,7 @@
 #include "../../include/Model/Piece.h"
 #include "../../include/Controller/GameBuilder.h"
 
-Game * Game::init(const char * filename) {
+std::shared_ptr<Game> Game::init(const char * filename) {
 	GameBuilder builder;
 
 	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1));

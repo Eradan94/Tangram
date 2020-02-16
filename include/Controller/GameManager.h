@@ -26,8 +26,8 @@ public:
 	void initWinScreenButtons();
 
 private:
-	Game * game;
-	Menu * menu;
+	std::shared_ptr<Game> game;
+	std::shared_ptr<Menu> menu;
 	ActionManager * actionManager;
 	sf::RenderWindow * window;
 };

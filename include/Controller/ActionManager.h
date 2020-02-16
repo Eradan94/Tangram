@@ -10,15 +10,15 @@
 
 class ActionManager {
 public:
-	ActionManager(Game * game = nullptr, Menu * menu = nullptr);
-	void setGame(Game * game);
-	void setMenu(Menu * menu);
+	ActionManager(std::shared_ptr<Game> game = nullptr, std::shared_ptr<Menu> menu = nullptr);
+	void setGame(std::shared_ptr<Game> game);
+	void setMenu(std::shared_ptr<Menu> menu);
 	void registerEvent(sf::Event::EventType event, const function<void (sf::Event)> action);
 	Action & getAction(sf::Event::EventType event);
 
 private:
 	std::map<sf::Event::EventType, Action> actions;
-	Game * game;
-	Menu * menu;
+	std::shared_ptr<Game> game;
+	std::shared_ptr<Menu> menu;
 };
 

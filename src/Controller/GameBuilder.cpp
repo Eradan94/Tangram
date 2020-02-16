@@ -12,7 +12,7 @@ void GameBuilder::withShape(Shape<double> *shape) {
 	pieces.push_back(shape);
 }
 
-Game *GameBuilder::build(const char * filename) {
+std::shared_ptr<Game> GameBuilder::build(const char * filename) {
 	Piece<double> * goal = filename != nullptr ? Piece<double>::createPiece(filename) : nullptr;
-	return new Game(pieces, goal);
+	return std::shared_ptr<Game>(new Game(pieces, goal));
 }
