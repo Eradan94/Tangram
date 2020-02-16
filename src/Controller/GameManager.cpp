@@ -24,9 +24,9 @@ void GameManager::initMainMenuButtons() {
     const int interButtonGap = menuHeight / (buttonCount * 2);
     const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
 
-	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
+	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Play",
         [this]{
-            std::cout << "Load" << std::endl;
+            std::cout << "Play" << std::endl;
             menu->clear();
             initLoadGameButtons(0);
         }
