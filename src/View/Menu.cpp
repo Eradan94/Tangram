@@ -8,8 +8,8 @@
 Menu::Menu() {
 }
 
-void Menu::addButton(Button * button) {
-	buttons.push_back(button);
+void Menu::addButton(std::unique_ptr<Button> button) {
+	buttons.push_back(std::move(button));
 }
 
 void Menu::draw(sf::RenderWindow & window) {
@@ -23,9 +23,9 @@ void Menu::draw(sf::RenderWindow & window) {
 }
 
 Menu::~Menu() {
-	for (auto button : buttons){
+	/*for (auto button : buttons){
 		delete button;
-	}
+	}*/
 }
 
 std::shared_ptr<Menu> Menu::init() {
@@ -34,9 +34,6 @@ std::shared_ptr<Menu> Menu::init() {
 }
 
 void Menu::clear() {
-//    for (auto button : buttons){
-//		delete button;
-//	} //BUG
     buttons.clear();
     decorationPieces.clear();
 }
@@ -46,7 +43,7 @@ void Menu::addDecorationPiece(Piece<double>* piece) {
 }
 
 void Menu::select(const Point<double> & event) {
-	for (auto button : buttons) {
+	for (auto& button : buttons) {
 		if (button->isClicked(event)){
 			button->callFct();
 			return;

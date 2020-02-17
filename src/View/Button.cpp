@@ -52,7 +52,8 @@ bool Button::isClicked(const Point<double> &p) const {
 }
 
 void Button::callFct() {
-    fct();
+    std::function<void ()> c = fct;
+    c();
 }
 
 Button::~Button() {

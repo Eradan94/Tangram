@@ -22,35 +22,35 @@ void GameManager::initMainMenuButtons() {
     const int interButtonGap = menuHeight / (buttonCount * 2);
     const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
 
-	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Play",
+	menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Play",
         [this]{
             std::cout << "Play" << std::endl;
             menu->clear();
             initLoadGameButtons(0);
         }
-    ));
-    menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + interButtonGap + buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + interButtonGap + 2 * buttonHeight, "Create",
         [this]{
             std::cout << "Create level" << std::endl;
             game.reset();
             game = Game::init(nullptr);
 			actionManager->setGame(game);
-            menu->clear();
+			menu->clear();
             initCreateLevelButtons();
 			actionManager->setMenu(menu);
         }
-    ));
-    menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Options",
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Options",
         []{
             std::cout << "Options" << std::endl;
         }
-    ));
-    menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 3 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 4 * buttonHeight, "Quit",
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 3 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 3 * interButtonGap + 4 * buttonHeight, "Quit",
         [this]{
             std::cout << "Quit" << std::endl;
             window->close();
         }
-    ));
+    )));
 }
 
 void GameManager::initMainGameButtons() {
@@ -62,25 +62,25 @@ void GameManager::initMainGameButtons() {
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     Preferences& pref = Preferences::getInstance();
     const int buttonHeight = (int)pref.getGameButtonHeight();
-	menu -> addButton(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline, "Load",
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline, "Load",
         [this]{
             std::cout << "Load" << std::endl;
             menu->clear();
             initLoadGameButtons(0);
 			actionManager->setMenu(menu);
         }
-    ));
-	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
+    )));
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
 			"Hint", []{
             std::cout << "Hint" << std::endl;
         }
-    ));
-	menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
+    )));
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Options", []{
             std::cout << "Options" << std::endl;
         }
-    ));
-    menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             std::cout << "Menu" << std::endl;
             game.reset();
@@ -90,13 +90,13 @@ void GameManager::initMainGameButtons() {
 			initMainMenuButtons();
 			actionManager->setMenu(menu);
         }
-    ));
-	menu -> addButton(new Button(buttonOutline + 4 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 5 * buttonWidth, height - buttonOutline,
+    )));
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 4 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 5 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             std::cout << "Quit" << std::endl;
             window->close();
         }
-    ));
+    )));
 }
 
 void GameManager::initWinScreenButtons() {
@@ -110,19 +110,19 @@ void GameManager::initWinScreenButtons() {
 	const int interButtonGap = menuHeight / (buttonCount * 2);
 	const int buttonHeight = (menuHeight - buttonCount * interButtonGap) / buttonCount;
 	//Bouton sans action, a remplacer par autre chose de plus adapte
-	menu -> addButton(new Button(200, 100, width - 200, 200, "You won !",
+	menu -> addButton(std::unique_ptr<Button>(new Button(200, 100, width - 200, 200, "You won !",
 		 []{
 		 }
-	));
-	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
+	)));
+	menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap, width / 2 + (buttonWidth / 2), buttonBorderGap + buttonHeight, "Load",
 		 [this]{
 			 std::cout << "Load" << std::endl;
 			 menu->clear();
 			 initLoadGameButtons(0);
 			 actionManager->setMenu(menu);
 		 }
-	));
-	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 1 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 2 * buttonHeight, "Main menu",
+	)));
+	menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 1 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 1 * interButtonGap + 2 * buttonHeight, "Main menu",
 		 [this]{
 			 std::cout << "Main menu" << std::endl;
 			 game.reset();
@@ -132,13 +132,13 @@ void GameManager::initWinScreenButtons() {
 			 initMainMenuButtons();
 			 actionManager->setMenu(menu);
 		 }
-	));
-	menu -> addButton(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Quit",
+	)));
+	menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 - (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 2 * buttonHeight, width / 2 + (buttonWidth / 2), buttonBorderGap + 2 * interButtonGap + 3 * buttonHeight, "Quit",
 		 [this]{
 			 std::cout << "Quit" << std::endl;
 			 window->close();
 		 }
-	));
+	)));
 }
 
 void GameManager::initLoadGameButtons(int loadIndex) {
@@ -167,7 +167,7 @@ void GameManager::initLoadGameButtons(int loadIndex) {
                     strcpy(level, epdf->d_name);
                     char prefix[300] = "../Tangram/levels/";
                     strcat(prefix, level);
-                    Button* button = new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
+                    std::unique_ptr<Button> button = std::unique_ptr<Button>(new Button(xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap,
                                                  yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap,
                                                  xOffset + (i % levelByLine) * buttonWidth + (i % levelByLine) * interButtonGap + buttonWidth,
                                                  yOffset + (i / levelByLine) * buttonHeight + (i / levelByLine) * interButtonGap + buttonHeight, "",
@@ -178,7 +178,7 @@ void GameManager::initLoadGameButtons(int loadIndex) {
                             initMainGameButtons();
                             actionManager->setMenu(menu);
                         }
-                    );
+                    ));
                     Piece<double> * goal = Piece<double>::createPiece(prefix);
                     Point<double> buttonCenter = button->center();
                     goal->reduceSize(4);
@@ -186,7 +186,7 @@ void GameManager::initLoadGameButtons(int loadIndex) {
                     Point<double> translation = buttonCenter - pieceCenter;
                     goal->translate(translation);
                     menu->addDecorationPiece(goal);
-                    menu -> addButton(button);
+                    menu -> addButton(std::move(button));
                     i++;
                 }
                 j++;
@@ -196,22 +196,22 @@ void GameManager::initLoadGameButtons(int loadIndex) {
     closedir(dpdf);
 
     if(loadIndex > 0) {
-        menu -> addButton(new Button(40, height / 2 - 35, 110, height / 2 + 35, "<<",
+        menu -> addButton(std::unique_ptr<Button>(new Button(40, height / 2 - 35, 110, height / 2 + 35, "<<",
         [this, loadIndex]{
             std::cout << "<<" << std::endl;
             menu->clear();
             initLoadGameButtons(loadIndex - 1);
         }
-        ));
+        )));
     }
     if(i == levelByLoadIndex) {
-    menu -> addButton(new Button(width - 110, height / 2 - 35, width - 40, height / 2 + 35, ">>",
+    menu -> addButton(std::unique_ptr<Button>(new Button(width - 110, height / 2 - 35, width - 40, height / 2 + 35, ">>",
         [this, loadIndex, i]{
             std::cout << ">>" << std::endl;
             menu->clear();
             initLoadGameButtons(loadIndex + 1);
         }
-        ));
+        )));
     }
 
 	actionManager->setGame(game);
@@ -226,18 +226,18 @@ void GameManager::initCreateLevelButtons() {
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     const int buttonHeight = 0.1 * height;
-	menu -> addButton(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline,
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline,
 			"Save level", [this]{
             std::cout << "Save level" << std::endl;
             game -> save();
         }
-    ));
-	menu -> addButton(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
+    )));
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
 			"Options", []{
             std::cout << "Options" << std::endl;
         }
-    ));
-    menu -> addButton(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             std::cout << "Menu" << std::endl;
             game.reset();
@@ -247,13 +247,13 @@ void GameManager::initCreateLevelButtons() {
 			initMainMenuButtons();
 			actionManager->setMenu(menu);
         }
-    ));
-	menu -> addButton(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
+    )));
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             std::cout << "Quit" << std::endl;
             window->close();
         }
-    ));
+    )));
 }
 
 void GameManager::draw() const {

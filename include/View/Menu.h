@@ -19,7 +19,7 @@ public :
 
 	static std::shared_ptr<Menu> init();
 
-	void addButton(Button * button);
+	void addButton(std::unique_ptr<Button> button);
 	void draw(sf::RenderWindow & window);
 	void select(const Point<double> & event);
 	void clear();
@@ -27,13 +27,13 @@ public :
 	friend std::ostream& operator<< (std::ostream& os, const Menu& menu) {
 	    os << "menu : " << std::endl;
 	    os << menu.buttons.size() << std::endl;
-        for(Button* b : menu.buttons) {
+        for(auto& b : menu.buttons) {
             os << *b << std::endl;
         }
         return os;
     }
 private :
-    std::vector<Button*> buttons;
+    std::vector<std::unique_ptr<Button>> buttons;
     std::vector<Shape<double> *> decorationPieces;
 };
 
