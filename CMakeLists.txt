@@ -35,6 +35,8 @@ add_executable(Tangram
         src/Controller/GameManager.cpp
         include/Controller/GameManager.h
         src/Controller/ActionManager.cpp
-        include/Controller/ActionManager.h)
+        include/Controller/ActionManager.h
+        src/Controller/Preferences.cpp
+        include/Controller/Preferences.h)
 
 target_link_libraries(Tangram sfml-graphics)
