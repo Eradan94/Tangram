@@ -1,0 +1,68 @@
+\hypertarget{class_triangle}{}\doxysection{Triangle$<$ Coordinate\+Type $>$ Class Template Reference}
+\label{class_triangle}\index{Triangle$<$ CoordinateType $>$@{Triangle$<$ CoordinateType $>$}}
+
+
+{\ttfamily \#include $<$Triangle.\+h$>$}
+
+Inheritance diagram for Triangle$<$ Coordinate\+Type $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_triangle}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_triangle_ad77bda66a6b975cbb72c092b4520b69f}\label{class_triangle_ad77bda66a6b975cbb72c092b4520b69f}} 
+{\bfseries Triangle} (\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \+\_\+a, \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \+\_\+b, \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \+\_\+c, sf\+::\+Color color)
+\item 
+\mbox{\Hypertarget{class_triangle_a6ab256065ab433991ac578f38bc4b7c0}\label{class_triangle_a6ab256065ab433991ac578f38bc4b7c0}} 
+std\+::vector$<$ Coordinate\+Type $>$ {\bfseries calculate\+Barycentric\+Coordinates} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&p) const
+\item 
+\mbox{\Hypertarget{class_triangle_a4713b35686afeb0c63a905fd496a2adb}\label{class_triangle_a4713b35686afeb0c63a905fd496a2adb}} 
+bool {\bfseries is\+Clicked} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&p) const
+\item 
+\mbox{\Hypertarget{class_triangle_a4f67dba5872acbcc0db2482a0e651aa2}\label{class_triangle_a4f67dba5872acbcc0db2482a0e651aa2}} 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ {\bfseries center} () const
+\item 
+\mbox{\Hypertarget{class_triangle_ac3b62602ac3b51b4cb7247a69a73fe5f}\label{class_triangle_ac3b62602ac3b51b4cb7247a69a73fe5f}} 
+virtual void {\bfseries rotate} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&center, double theta)
+\item 
+\mbox{\Hypertarget{class_triangle_a7a2754672d3098ae5b36dab5b7d09dad}\label{class_triangle_a7a2754672d3098ae5b36dab5b7d09dad}} 
+virtual void {\bfseries centralize} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&click\+Pos, const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&relative\+Pos)
+\item 
+\mbox{\Hypertarget{class_triangle_a194cb0e7dcbdf84310d918de8349644e}\label{class_triangle_a194cb0e7dcbdf84310d918de8349644e}} 
+virtual void {\bfseries translate} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&translation)
+\item 
+\mbox{\Hypertarget{class_triangle_a7a566ae9aaac4002aa7476609ccb48ab}\label{class_triangle_a7a566ae9aaac4002aa7476609ccb48ab}} 
+virtual std\+::vector$<$ \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ $>$ {\bfseries get\+Points} () const
+\item 
+\mbox{\Hypertarget{class_triangle_a5ac1fc676a5c50618f216d32fbac4967}\label{class_triangle_a5ac1fc676a5c50618f216d32fbac4967}} 
+virtual double {\bfseries distance} (\mbox{\hyperlink{class_shape}{Shape}}$<$ Coordinate\+Type $>$ $\ast$shape, std\+::vector$<$ \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$$>$ \&points) const
+\item 
+\mbox{\Hypertarget{class_triangle_a2678d382547fc1b98ad4b1addae2b4a3}\label{class_triangle_a2678d382547fc1b98ad4b1addae2b4a3}} 
+virtual void {\bfseries is\+Inside\+Window} (\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&translation) const
+\item 
+\mbox{\Hypertarget{class_triangle_a1eb757004d131ef79e280d81344a10f3}\label{class_triangle_a1eb757004d131ef79e280d81344a10f3}} 
+virtual void {\bfseries reduce\+Size} (int coeff)
+\item 
+\mbox{\Hypertarget{class_triangle_aa6baae79d3a304190c21523b10ea9548}\label{class_triangle_aa6baae79d3a304190c21523b10ea9548}} 
+void {\bfseries draw} (sf\+::\+Render\+Window \&window)
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_triangle_a2d61643972481d1514e9c8661ba329d2}\label{class_triangle_a2d61643972481d1514e9c8661ba329d2}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_triangle}{Triangle}}$<$ Coordinate\+Type $>$ \&triangle)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Coordinate\+Type$>$\newline
+class Triangle$<$ Coordinate\+Type $>$}
+
+Project Tangram 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Model/Triangle.\+h\end{DoxyCompactItemize}
