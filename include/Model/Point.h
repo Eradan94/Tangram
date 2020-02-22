@@ -23,6 +23,17 @@ public :
     explicit Point(CoordinateType _x = 0, CoordinateType _y = 0);
     Point(sf::Event::MouseButtonEvent event);
     Point(sf::Event::MouseMoveEvent event);
+
+    double distance(const Point& otherPoint) const;
+    void isInsideWindow(Point<CoordinateType>& translation) const;
+    void reduceSize(int coeff);
+    Point<CoordinateType> rotate(const Point<CoordinateType>& c, double theta);
+
+    static void normalize(std::vector<Point<CoordinateType>> & points);
+
+    CoordinateType getX() const;
+    CoordinateType getY() const;
+
     bool operator== (const Point<CoordinateType>& other) const;
     bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
@@ -30,25 +41,11 @@ public :
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
     bool operator< (const Point<CoordinateType>& other) const;
-    double distance(const Point& otherPoint) const;
-    void isInsideWindow(Point<CoordinateType>& translation) const;
-    void reduceSize(int coeff);
-
-    static void normalize(std::vector<Point<CoordinateType>> & points);
-
-    CoordinateType getX() const;
-    CoordinateType getY() const;
-
-    Point<CoordinateType> rotate(const Point<CoordinateType>& c, double theta);
-
-    // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
         os << "(" << point.x << ", " << point.y << ")";
         return os;
     }
 };
-
-using namespace std;
 
 template<class CoordinateType>
 Point<CoordinateType>::Point(CoordinateType _x, CoordinateType _y)
@@ -134,7 +131,7 @@ Point<CoordinateType> Point<CoordinateType>::rotate(const Point<CoordinateType>&
 }
 
 template<class CoordinateType>
-void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
+void Point<CoordinateType>::normalize(std::vector<Point<CoordinateType>> & points) {
 	double minX = DBL_MAX;
 	double minY = DBL_MAX;
 

@@ -11,7 +11,7 @@
  * Button implementation
  */
 
-Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct) :
+Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, std::string text, std::function<void()> _fct) :
 	topLeft(Point<double>(topLeftX, topLeftY)), bottomRight(Point<double>(bottomRightX, bottomRightY)), fct(_fct),
 	text(std::move(text)) {
 	rectangle = std::unique_ptr<sf::RectangleShape>(new sf::RectangleShape);
@@ -24,7 +24,7 @@ Button::Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, s
 	sf::Font * font = new sf::Font;
 	if (!font -> loadFromFile("fonts/LiberationSans-Regular.ttf"))
 	{
-		cerr << "unable to load font" << endl;
+		std::cerr << "unable to load font" << std::endl;
 		exit(1);
 	}
 
@@ -60,7 +60,7 @@ Button::~Button() {
 	delete txt->getFont();
 }
 
-Point<double> Button::center() {
+Point<double> Button::center() const {
     double length = bottomRight.getX() - topLeft.getX();
     double height = bottomRight.getY() - topLeft.getY();
     return Point(topLeft.getX() + length / 2, topLeft.getY() + height / 2);

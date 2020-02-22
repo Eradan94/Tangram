@@ -15,24 +15,18 @@
 
 class Button: public Drawable, public Clickable<double> {
 public :
-    Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, string text, std::function<void()> _fct);
+    Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, std::string text, std::function<void()> _fct);
     ~Button();
 
     void callFct();
     void draw(sf::RenderWindow& window) override;
     bool isClicked(const Point<double>& p) const override;
-    Point<double> center();
-
-    friend std::ostream& operator<< (std::ostream& os, const Button& button) {
-        os << "bouton : ";
-        os << button.text;
-        return os;
-    }
+    Point<double> center() const;
 
 private :
     Point<double> topLeft;
     Point<double> bottomRight;
-    string text;
+    std::string text;
 	std::function<void ()> fct;
 	std::unique_ptr<sf::RectangleShape> rectangle;
 	std::unique_ptr<sf::Text> txt;

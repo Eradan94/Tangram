@@ -77,7 +77,7 @@ Game::~Game() {
 void Game::save() {
 	std::vector<Point<double>> points;
 	for_each(pieces.cbegin(), pieces.cend(), [&points](std::shared_ptr<Shape<double>> s) {
-		vector<Point<double>> shapePoints = s -> getPoints();
+		std::vector<Point<double>> shapePoints = s -> getPoints();
 		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
 	});
 

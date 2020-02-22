@@ -29,12 +29,10 @@ class Preferences {
         std::map<std::string, double> options;
 
         Preferences() {
-            //Temporaire
             options["magnetism"] = 20;
             options["rotation"] = 0.19634954084936;
             options["tolerance"] = 4;
             options["gameButtonHeight"] = 100;
-            //TODO : faire une fonction pour parser le fichier .ini, en créer un par défaut s'il n'existe pas
         }
 };
 

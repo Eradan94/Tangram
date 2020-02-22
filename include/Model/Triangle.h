@@ -21,31 +21,26 @@ private :
     Point<CoordinateType> b;
     Point<CoordinateType> c;
     double theta;
-
     Point<CoordinateType> unrotatedA;
     Point<CoordinateType> unrotatedB;
     Point<CoordinateType> unrotatedC;
-
     sf::Color color;
 
 public :
     Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color);
 
-    vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType>& p) const;
+    std::vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType>& p) const;
     bool isClicked(const Point<CoordinateType>& p) const;
     Point<CoordinateType> center() const;
-    virtual void rotate(const Point<CoordinateType> center, double theta);
-    virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
+    virtual void rotate(const Point<CoordinateType>& center, double theta);
+    virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
     virtual void translate(const Point<CoordinateType>& translation);
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
-
 	virtual void reduceSize(int coeff);
-
     void draw(sf::RenderWindow& window);
 
-    // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
         os << "Triangle : " << std::endl << "   Point A : " << triangle.a << std::endl << "   Point B : " << triangle.b << std::endl << "   Point C : " << triangle.c;
         return os;
@@ -61,8 +56,8 @@ Triangle<CoordinateType>::Triangle(Point<CoordinateType> _a, Point<CoordinateTyp
 /* Calculate the barycentric coordinates of the point
 */
 template<class CoordinateType>
-vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates(const Point<CoordinateType>& p) const{
-	vector<CoordinateType> barCoordinates;
+std::vector<CoordinateType> Triangle<CoordinateType>::calculateBarycentricCoordinates(const Point<CoordinateType>& p) const{
+	std::vector<CoordinateType> barCoordinates;
 	Point<CoordinateType> pa = p - a;
     Point<CoordinateType> pb = p - b;
 	Point<CoordinateType> pc = p - c;
@@ -94,7 +89,7 @@ Point<CoordinateType> Triangle<CoordinateType>::center() const{
 /* Performs a rotation around another point with an angle theta
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double theta) {
+void Triangle<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
     this->theta += theta;
     a = unrotatedA.rotate(center, this->theta);
     b = unrotatedB.rotate(center, this->theta);
@@ -104,7 +99,7 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType> center, double
 /* Centralize the triangle around the click position
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
+void Triangle<CoordinateType>::centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
 	Point<CoordinateType> point = center() - relativePos;
 	Point<CoordinateType> translation = clickPos - point;
     translate(translation);
@@ -139,8 +134,8 @@ void Triangle<CoordinateType>::draw(sf::RenderWindow& window) {
 }
 
 template<class CoordinateType>
-vector<Point<CoordinateType>> Triangle<CoordinateType>::getPoints() const {
-	vector<Point<CoordinateType>> points;
+std::vector<Point<CoordinateType>> Triangle<CoordinateType>::getPoints() const {
+	std::vector<Point<CoordinateType>> points;
 	points.push_back(a);
 	points.push_back(b);
 	points.push_back(c);
@@ -155,8 +150,8 @@ vector<Point<CoordinateType>> Triangle<CoordinateType>::getPoints() const {
 template<class CoordinateType>
 double Triangle<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const {
     // First, get the points from each triangle
-    vector<Point<CoordinateType>> selectedPiecePoints = this->getPoints();
-    vector<Point<CoordinateType>> otherPoints = shape->getPoints();
+    std::vector<Point<CoordinateType>> selectedPiecePoints = this->getPoints();
+    std::vector<Point<CoordinateType>> otherPoints = shape->getPoints();
     double minDist = DBL_MAX;
     double dist;
     // Calculate the distance between each possible couple of points (p1, p2), where p1 is a point of shape and p2 is a point of the current instance

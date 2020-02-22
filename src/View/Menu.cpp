@@ -16,14 +16,9 @@ void Menu::draw(sf::RenderWindow & window) {
     for (auto & button : buttons) {
         button->draw(window);
     }
-    //TEST
     for (auto & piece : decorationPieces) {
         piece->draw(window);
     }
-}
-
-Menu::~Menu() {
-
 }
 
 std::shared_ptr<Menu> Menu::init() {
