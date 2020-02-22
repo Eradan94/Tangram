@@ -1,4 +1,6 @@
 # CLion files
 .idea/
 cmake-build-debug/
-/levels/save.txt
+levels/save.txt
+doc/html
+doc/latex
