@@ -7,22 +7,16 @@
 
 class GameManager {
 public:
-	//GameManager(const char * filename);
 	GameManager();
 	~GameManager();
+
 	void draw() const;
 	void play();
-
 	bool isRunning();
-
 	void initMainGameButtons();
-
 	void initMainMenuButtons();
-
 	void initCreateLevelButtons();
-
 	void initLoadGameButtons(int loadIndex);
-
 	void initWinScreenButtons();
 
 private:

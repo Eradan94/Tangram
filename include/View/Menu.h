@@ -15,25 +15,15 @@
 class Menu: public Drawable {
 public :
 	Menu();
-	~Menu();
-
 	static std::shared_ptr<Menu> init();
 
 	void addButton(std::unique_ptr<Button> button);
 	void draw(sf::RenderWindow & window);
 	void select(const Point<double> & event);
 	void clear();
-	void addDecorationPiece(Piece<double>* piece);
-	friend std::ostream& operator<< (std::ostream& os, const Menu& menu) {
-	    os << "menu : " << std::endl;
-	    os << menu.buttons.size() << std::endl;
-        for(auto& b : menu.buttons) {
-            os << *b << std::endl;
-        }
-        return os;
-    }
+	void addDecorationPiece(std::shared_ptr<Shape<double>> piece);
 private :
     std::vector<std::unique_ptr<Button>> buttons;
-    std::vector<Shape<double> *> decorationPieces;
+    std::vector<std::shared_ptr<Shape<double>>> decorationPieces;
 };
 

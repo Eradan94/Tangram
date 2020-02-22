@@ -1,0 +1,56 @@
+\hypertarget{class_game}{}\doxysection{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+
+
+{\ttfamily \#include $<$Game.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_a546204efec741476d62b926abf9a9165}\label{class_game_a546204efec741476d62b926abf9a9165}} 
+{\bfseries Game} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_shape}{Shape}}$<$ double $>$$>$$>$ pieces, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_piece}{Piece}}$<$ double $>$$>$ goal)
+\item 
+\mbox{\Hypertarget{class_game_af145d292afe50b7ed11422be89d5cce6}\label{class_game_af145d292afe50b7ed11422be89d5cce6}} 
+void {\bfseries draw} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_game_a263cfd4de7a0fa113f0849db6e90d760}\label{class_game_a263cfd4de7a0fa113f0849db6e90d760}} 
+void {\bfseries select} (const \mbox{\hyperlink{class_point}{Point}}$<$ double $>$ \&event)
+\item 
+\mbox{\Hypertarget{class_game_a2e25e651f23d51fb8ae8a509fb131173}\label{class_game_a2e25e651f23d51fb8ae8a509fb131173}} 
+void {\bfseries deselect} (const \mbox{\hyperlink{class_point}{Point}}$<$ double $>$ \&event)
+\item 
+\mbox{\Hypertarget{class_game_a01c3de97791cc6026d8d50ec202255e8}\label{class_game_a01c3de97791cc6026d8d50ec202255e8}} 
+void {\bfseries centralize\+Selected} (const sf\+::\+Event\+::\+Mouse\+Move\+Event event)
+\item 
+\mbox{\Hypertarget{class_game_affccae560be29c8c21cbc6f2de1ac30e}\label{class_game_affccae560be29c8c21cbc6f2de1ac30e}} 
+void {\bfseries rotate\+Selected} (const double d)
+\item 
+\mbox{\Hypertarget{class_game_a042f79c6a3aeffafd6bbca2bb31ae891}\label{class_game_a042f79c6a3aeffafd6bbca2bb31ae891}} 
+void {\bfseries save} ()
+\item 
+\mbox{\Hypertarget{class_game_a611363257dcdfaa25bbd55141686d702}\label{class_game_a611363257dcdfaa25bbd55141686d702}} 
+void {\bfseries magnetize} ()
+\item 
+\mbox{\Hypertarget{class_game_af18a0c990d44c1e9d0a97da28f0c8cf8}\label{class_game_af18a0c990d44c1e9d0a97da28f0c8cf8}} 
+void {\bfseries validate\+Shape} ()
+\item 
+\mbox{\Hypertarget{class_game_a2d1ed72c903868c72d04d8177dc7a264}\label{class_game_a2d1ed72c903868c72d04d8177dc7a264}} 
+bool {\bfseries get\+Game\+State} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_ab4661972ee42f9005ee02a1d2736a791}\label{class_game_ab4661972ee42f9005ee02a1d2736a791}} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_game}{Game}} $>$ {\bfseries init} (const char $\ast$filename)
+\item 
+\mbox{\Hypertarget{class_game_a242b575ee28757844bbb488546ce31ad}\label{class_game_a242b575ee28757844bbb488546ce31ad}} 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_game}{Game}} $>$ {\bfseries init} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Project Tangram 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Controller/Game.\+h\end{DoxyCompactItemize}

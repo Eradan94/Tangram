@@ -4,16 +4,16 @@
 
 #include "../../include/Controller/Game.h"
 #include "../../include/Controller/Action.h"
-//#include "../../include/Controller/Preferences.h"
 
 #pragma once
 
 class ActionManager {
 public:
 	ActionManager(std::shared_ptr<Game> game = nullptr, std::shared_ptr<Menu> menu = nullptr);
+
 	void setGame(std::shared_ptr<Game> game);
 	void setMenu(std::shared_ptr<Menu> menu);
-	void registerEvent(sf::Event::EventType event, const function<void (sf::Event)> action);
+	void registerEvent(sf::Event::EventType event, const std::function<void (sf::Event)> action);
 	Action & getAction(sf::Event::EventType event);
 
 private:

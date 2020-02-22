@@ -15,6 +15,7 @@ class Action {
 public:
 	Action(const std::function<void (sf::Event)> &fct);
 	Action();
+
 	void operator()(sf::Event);
 
 private:

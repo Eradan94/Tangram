@@ -11,13 +11,13 @@
 std::shared_ptr<Game> Game::init(const char * filename) {
 	GameBuilder builder;
 
-	builder.withShape(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1));
-	builder.withShape(new Piece<double>(2, sf::Color(255, 255, 0), littleTriangle2));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 0), mediumTriangle));
-	builder.withShape(new Piece<double>(8, sf::Color(150, 0,   100), largeTriangle1));
-	builder.withShape(new Piece<double>(8, sf::Color(255, 0,   150), largeTriangle2));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   0,   255), square));
-	builder.withShape(new Piece<double>(4, sf::Color(0,   255, 255), parallelogram));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(2, sf::Color(255, 100, 0), littleTriangle1)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(2, sf::Color(255, 255, 0), littleTriangle2)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(4, sf::Color(0,   255, 0), mediumTriangle)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(8, sf::Color(150, 0,   100), largeTriangle1)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(8, sf::Color(255, 0,   150), largeTriangle2)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(4, sf::Color(0,   0,   255), square)));
+	builder.withShape(std::shared_ptr<Piece<double>>(new Piece<double>(4, sf::Color(0,   255, 255), parallelogram)));
 
 	return builder.build(filename);
 }
@@ -26,8 +26,8 @@ Game::Game():
 	selected(nullptr), goal(nullptr), gameState(false) {
 }
 
-Game::Game(std::vector<Shape<double> *> pieces, Piece<double> * goal):
-	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(goal), gameState(false) {
+Game::Game(std::vector<std::shared_ptr<Shape<double>>> pieces, std::unique_ptr<Piece<double>> goal):
+	selected(nullptr), relativePos(Point(0., 0.)), pieces(pieces), goal(std::move(goal)), gameState(false) {
 }
 
 void Game::draw(sf::RenderWindow& window) {
@@ -72,16 +72,12 @@ void Game::rotateSelected(const double d) {
 }
 
 Game::~Game() {
-	delete goal;
-	for (auto * piece : pieces){
-		delete piece;
-	}
 }
 
 void Game::save() {
 	std::vector<Point<double>> points;
-	for_each(pieces.cbegin(), pieces.cend(), [&points](Shape<double> * s) {
-		vector<Point<double>> shapePoints = s -> getPoints();
+	for_each(pieces.cbegin(), pieces.cend(), [&points](std::shared_ptr<Shape<double>> s) {
+		std::vector<Point<double>> shapePoints = s -> getPoints();
 		points.insert(points.cend(), shapePoints.cbegin(), shapePoints.cend());
 	});
 
@@ -99,7 +95,7 @@ void Game::magnetize() {
     // Get the shortest distance between two points from each shape
     for(auto& piece : pieces) {
         if(piece != selected) {
-            dist = selected->distance(piece, points);
+            dist = selected->distance(piece.get(), points);
             if(dist < minDist) {
                 minDist = dist;
                 minPoints = points;
@@ -108,7 +104,7 @@ void Game::magnetize() {
     }
     // Magnetize with the goal
     if(goal != nullptr) {
-        dist = selected->distance(goal, points);
+        dist = selected->distance(goal.get(), points);
         if(dist < minDist) {
             minDist = dist;
             minPoints = points;

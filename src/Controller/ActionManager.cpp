@@ -32,7 +32,7 @@ ActionManager::ActionManager(std::shared_ptr<Game> game, std::shared_ptr<Menu> m
 	});
 }
 
-void ActionManager::registerEvent(sf::Event::EventType event, const function<void (sf::Event)> action) {
+void ActionManager::registerEvent(sf::Event::EventType event, const std::function<void (sf::Event)> action) {
 	actions.insert_or_assign(event, Action(action));
 }
 

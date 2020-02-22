@@ -22,7 +22,7 @@ public :
 
 	static std::shared_ptr<Game> init();
 
-	Game(std::vector<Shape<double> *> pieces, Piece<double> * goal);
+	Game(std::vector<std::shared_ptr<Shape<double>>> pieces, std::unique_ptr<Piece<double>> goal);
 
 	Game();
 
@@ -47,10 +47,10 @@ public :
 	bool getGameState();
 
 private :
-	std::vector<Shape<double> *> pieces;
-	Shape<double> * selected;
+	std::vector<std::shared_ptr<Shape<double>>> pieces;
+	std::shared_ptr<Shape<double>> selected;
+	std::unique_ptr<Piece<double>> goal;
 	Point<double> relativePos;
-	Piece<double> * goal;
 	bool gameState;
 
 	// All shapes

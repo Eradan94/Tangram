@@ -1,5 +1,11 @@
 /**
- * Project Tangram
+ * \file Main.cpp
+ * \brief Main class.
+ * \author Biguenet Denis & Gosset Severin
+ * \date 22/02/2019
+ *
+ * Main class of Tangram project.
+ *
  */
 
 #include "../include/Model/Point.h"

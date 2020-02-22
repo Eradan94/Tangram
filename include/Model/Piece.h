@@ -19,25 +19,20 @@ public :
 	Piece(int size, sf::Color color, ...);
 	Piece(int size, sf::Color color, const CoordinateType * points);
 	Piece(sf::Color color, std::vector<Point<CoordinateType>> points);
-	~Piece();
+	static std::unique_ptr<Piece<CoordinateType>> createPiece(const char * filename);
 
-	static Piece<CoordinateType> * createPiece(const char * filename);
     void addTriangle(Triangle<CoordinateType> t);
-
     virtual void translate(const Point<CoordinateType>& translation);
-    virtual void rotate(const Point<CoordinateType> center, double theta);
+    virtual void rotate(const Point<CoordinateType>& center, double theta);
     virtual Point<CoordinateType> center() const;
-    virtual void centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos);
+    virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
 	virtual bool isClicked(const Point<CoordinateType> & p) const;
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
-
 	virtual void reduceSize(int coeff);
-
     void draw(sf::RenderWindow& window);
 
-    // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
         os << "Piece : " << std::endl;
         for(auto& t : piece.triangles) {
@@ -102,7 +97,7 @@ Point<CoordinateType> Piece<CoordinateType>::center() const {
 /* Performs a rotation with an angle theta
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::rotate(const Point<CoordinateType> center, double theta) {
+void Piece<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
     //Point<CoordinateType> c = center();
     for(auto& t : triangles) {
         t.rotate(center, theta);
@@ -112,7 +107,7 @@ void Piece<CoordinateType>::rotate(const Point<CoordinateType> center, double th
 /* Centralize the piece on the mouse cursor
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::centralize(const Point<CoordinateType> clickPos, const Point<CoordinateType> relativePos) {
+void Piece<CoordinateType>::centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
     Point<CoordinateType> point = center() - relativePos;
     Point<CoordinateType> translation = clickPos - point;
     isInsideWindow(translation);
@@ -127,9 +122,6 @@ void Piece<CoordinateType>::translate(const Point<CoordinateType>& translation) 
         t.translate(translation);
     }
 }
-
-template<class CoordinateType>
-Piece<CoordinateType>::~Piece() = default;
 
 /* draw a piece
 */
@@ -154,10 +146,10 @@ bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
 }
 
 template<class CoordinateType>
-vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
-	vector<Point<CoordinateType>> points;
+std::vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
+	std::vector<Point<CoordinateType>> points;
 	for_each(triangles.cbegin(), triangles.cend(), [&points](Triangle<CoordinateType> t){
-		vector<Point<CoordinateType>> trianglePoints = t.getPoints();
+		std::vector<Point<CoordinateType>> trianglePoints = t.getPoints();
 		points.insert(points.cend(), trianglePoints.cbegin(), trianglePoints.cend());
 	});
 
@@ -185,7 +177,7 @@ double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector
 }
 
 template<class CoordinateType>
-Piece<CoordinateType>::Piece(sf::Color color, vector<Point<CoordinateType>> points) {
+Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>> points) {
 	Point<double> offsetPoint(600, 50);
 	for(int i = 0; i < (int)points.size() / 3; i++) {
 		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
@@ -197,10 +189,9 @@ Piece<CoordinateType>::Piece(sf::Color color, vector<Point<CoordinateType>> poin
 }
 
 template<class CoordinateType>
-Piece<CoordinateType> * Piece<CoordinateType>::createPiece(const char *filename) {
-
+std::unique_ptr<Piece<CoordinateType>> Piece<CoordinateType>::createPiece(const char *filename) {
 	std::vector<Point<CoordinateType>> points = FileUtils::readFile(filename);
-	return new Piece(sf::Color(255, 255, 255), points);
+	return std::move(std::unique_ptr<Piece<CoordinateType>>(new Piece(sf::Color(255, 255, 255), points)));
 }
 
 template<class CoordinateType>

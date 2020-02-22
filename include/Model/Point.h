@@ -1,7 +1,9 @@
-/**
- * Project Tangram
+/*!
+ * \file Point.h
+ * \brief Defines a representation of point.
+ * \author Biguenet Denis & Gosset Severin
+ * \date 22/02/2019
  */
-
 
 #pragma once
 #include <iostream>
@@ -13,18 +15,83 @@
 
 #include "../../include/Controller/Preferences.h"
 
-#define EPSILON 4.0 // devrait etre dans preferences
-
+/*! \class Point
+ * \brief Representation of point
+ *
+ * A point is represented by two coordinates x and y.
+ * This class is a template, mainly used with int, double, float or short types.
+ */
 template<class CoordinateType>
 class Point {
 private :
-	CoordinateType x;
-    CoordinateType y;
+	CoordinateType x; /*!X coordinate*/
+    CoordinateType y; /*!Y coordinate*/
 
 public :
+    /*!
+     * \brief Base constructor
+     * \param x : x coordinate
+     * \param y : y coordinate
+     *
+     * Creates a point with x and y coordinates
+     */
     explicit Point(CoordinateType _x = 0, CoordinateType _y = 0);
+    /*!
+     * \brief Point constructor with mouse click event
+     * \param event : SFML MouseButtonEvent event
+     *
+     * Creates a point with the coordinates of mouse click
+     */
     Point(sf::Event::MouseButtonEvent event);
+    /*!
+     * \brief Point constructor with mouse motion event
+     * \param event : SFML MouseMoveEvent event
+     *
+     * Creates a point with the coordinates of mouse motion
+     */
     Point(sf::Event::MouseMoveEvent event);
+
+    /*!
+     * \brief Calculate the distance between two points
+     * \param otherPoint : the other point
+     * \return the distance between this and other
+     */
+    double distance(const Point& otherPoint) const;
+    /*!
+     * \brief Calculate if the translated point is inside the window
+     * \param translation : a translation got from mouse moves
+     *
+     * The translation is performed on the current point.
+     * If the point is outside the window, the translation is truncated to avoid this.
+     */
+    void isInsideWindow(Point<CoordinateType>& translation) const;
+    /*!
+     * \brief Reduce the size of a piece by coefficient
+     * \param coeff : the coefficient, more this coefficient is high, more the piece is reduce
+     *
+     * This method is used to reduce the size of a piece.
+     * In facts, the point's coordinate are divided by the coefficient to translate it.
+     */
+    void reduceSize(int coeff);
+    /*!
+     * \brief Rotate a point around another point (a center)
+     * \param c : the center
+     * \param theta : the angle of rotation (in radians)
+     *
+     * Rotates the point the current point around c, with theta angle.
+     */
+    Point<CoordinateType> rotate(const Point<CoordinateType>& c, double theta);
+
+    /*!
+     * \brief Normalizes points
+     * \param points : vector of points
+     *
+     */
+    static void normalize(std::vector<Point<CoordinateType>> & points);
+
+    CoordinateType getX() const;
+    CoordinateType getY() const;
+
     bool operator== (const Point<CoordinateType>& other) const;
     bool operator!= (const Point<CoordinateType>& other) const;
     Point<CoordinateType> operator+ (const Point& other) const;
@@ -32,25 +99,11 @@ public :
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
     Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
     bool operator< (const Point<CoordinateType>& other) const;
-    double distance(const Point& otherPoint) const;
-    void isInsideWindow(Point<CoordinateType>& translation) const;
-    void reduceSize(int coeff);
-
-    static void normalize(std::vector<Point<CoordinateType>> & points);
-
-    CoordinateType getX() const;
-    CoordinateType getY() const;
-
-    Point<CoordinateType> rotate(const Point<CoordinateType>& c, double theta);
-
-    // friends functions
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
         os << "(" << point.x << ", " << point.y << ")";
         return os;
     }
 };
-
-using namespace std;
 
 template<class CoordinateType>
 Point<CoordinateType>::Point(CoordinateType _x, CoordinateType _y)
@@ -136,7 +189,7 @@ Point<CoordinateType> Point<CoordinateType>::rotate(const Point<CoordinateType>&
 }
 
 template<class CoordinateType>
-void Point<CoordinateType>::normalize(vector<Point<CoordinateType>> & points) {
+void Point<CoordinateType>::normalize(std::vector<Point<CoordinateType>> & points) {
 	double minX = DBL_MAX;
 	double minY = DBL_MAX;
 

@@ -16,16 +16,9 @@ void Menu::draw(sf::RenderWindow & window) {
     for (auto & button : buttons) {
         button->draw(window);
     }
-    //TEST
     for (auto & piece : decorationPieces) {
         piece->draw(window);
     }
-}
-
-Menu::~Menu() {
-	/*for (auto button : buttons){
-		delete button;
-	}*/
 }
 
 std::shared_ptr<Menu> Menu::init() {
@@ -38,7 +31,7 @@ void Menu::clear() {
     decorationPieces.clear();
 }
 
-void Menu::addDecorationPiece(Piece<double>* piece) {
+void Menu::addDecorationPiece(std::shared_ptr<Shape<double>> piece) {
     decorationPieces.push_back(piece);
 }
 

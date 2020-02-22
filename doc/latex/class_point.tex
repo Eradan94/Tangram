@@ -1,0 +1,222 @@
+\hypertarget{class_point}{}\doxysection{Point$<$ Coordinate\+Type $>$ Class Template Reference}
+\label{class_point}\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+
+
+Representation of point.  
+
+
+
+
+{\ttfamily \#include $<$Point.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_point_a6fe6cf7329eb85a3d4edcdd1127006bc}{Point}} (Coordinate\+Type \+\_\+x=0, Coordinate\+Type \+\_\+y=0)
+\begin{DoxyCompactList}\small\item\em Base constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point_aeabd36a4385c4d75c7952570165e914f}{Point}} (sf\+::\+Event\+::\+Mouse\+Button\+Event event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_point}{Point}} constructor with mouse click event. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point_ae2b922b9f2d5a97f4970f4293e1ac546}{Point}} (sf\+::\+Event\+::\+Mouse\+Move\+Event event)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_point}{Point}} constructor with mouse motion event. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{class_point_abf225c9151aa7834fea60f014010f476}{distance}} (const \mbox{\hyperlink{class_point}{Point}} \&other\+Point) const
+\begin{DoxyCompactList}\small\item\em Calculate the distance between two points. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_a69d2528b9385766d874dce626609a044}{is\+Inside\+Window}} (\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&translation) const
+\begin{DoxyCompactList}\small\item\em Calculate if the translated point is inside the window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_point_a04093b4a1d2e7effa56a85ac19e36d02}{reduce\+Size}} (int coeff)
+\begin{DoxyCompactList}\small\item\em Reduce the size of a piece by coefficient. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \mbox{\hyperlink{class_point_ac166ded95db8f0a94eb2d8ebfc36217a}{rotate}} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&c, double theta)
+\begin{DoxyCompactList}\small\item\em Rotate a point around another point (a center) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_point_a2ce04c3321b142c5a05c4f16cb438315}\label{class_point_a2ce04c3321b142c5a05c4f16cb438315}} 
+Coordinate\+Type {\bfseries getX} () const
+\item 
+\mbox{\Hypertarget{class_point_a8f2c08032d44a145ca833592c5ee9ea2}\label{class_point_a8f2c08032d44a145ca833592c5ee9ea2}} 
+Coordinate\+Type {\bfseries getY} () const
+\item 
+\mbox{\Hypertarget{class_point_a0d625accdefbbcc54f732cf6e7ed226e}\label{class_point_a0d625accdefbbcc54f732cf6e7ed226e}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&other) const
+\item 
+\mbox{\Hypertarget{class_point_a1f41db73de3417a781f3290dbfcca9f5}\label{class_point_a1f41db73de3417a781f3290dbfcca9f5}} 
+bool {\bfseries operator!=} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&other) const
+\item 
+\mbox{\Hypertarget{class_point_a880ca697f3cc9c353dae618d5789f8e4}\label{class_point_a880ca697f3cc9c353dae618d5789f8e4}} 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ {\bfseries operator+} (const \mbox{\hyperlink{class_point}{Point}} \&other) const
+\item 
+\mbox{\Hypertarget{class_point_ae0ed8462a023a958886e02d9ff3bff61}\label{class_point_ae0ed8462a023a958886e02d9ff3bff61}} 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ {\bfseries operator-\/} (const \mbox{\hyperlink{class_point}{Point}} \&other) const
+\item 
+\mbox{\Hypertarget{class_point_a165afdf584f7a4c0c0b8dce93b63ccb1}\label{class_point_a165afdf584f7a4c0c0b8dce93b63ccb1}} 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ {\bfseries operator/} (const Coordinate\+Type \&val) const
+\item 
+\mbox{\Hypertarget{class_point_a164832fa4e315b1e7da38b2de1f8f9e1}\label{class_point_a164832fa4e315b1e7da38b2de1f8f9e1}} 
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \& {\bfseries operator+=} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&other)
+\item 
+\mbox{\Hypertarget{class_point_a8c592e9104f0174868ddcda2bc4190ef}\label{class_point_a8c592e9104f0174868ddcda2bc4190ef}} 
+bool {\bfseries operator$<$} (const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_point_a1e4ea33b31ecc62aeb1a770c11822340}{normalize}} (std\+::vector$<$ \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$$>$ \&points)
+\begin{DoxyCompactList}\small\item\em Normalizes points. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_point_a9266ec4cb8ae3d1ade87fbcade0dad71}\label{class_point_a9266ec4cb8ae3d1ade87fbcade0dad71}} 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&os, const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&point)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$class Coordinate\+Type$>$\newline
+class Point$<$ Coordinate\+Type $>$}
+
+Representation of point. 
+
+A point is represented by two coordinates x and y. This class is a template, mainly used with int, double, float or short types. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_point_a6fe6cf7329eb85a3d4edcdd1127006bc}\label{class_point_a6fe6cf7329eb85a3d4edcdd1127006bc}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!Point@{Point}}
+\index{Point@{Point}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::\mbox{\hyperlink{class_point}{Point}} (\begin{DoxyParamCaption}\item[{Coordinate\+Type}]{\+\_\+x = {\ttfamily 0},  }\item[{Coordinate\+Type}]{\+\_\+y = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Base constructor. 
+
+Y coordinate
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & \+: x coordinate \\
+\hline
+{\em y} & \+: y coordinate\\
+\hline
+\end{DoxyParams}
+Creates a point with x and y coordinates \mbox{\Hypertarget{class_point_aeabd36a4385c4d75c7952570165e914f}\label{class_point_aeabd36a4385c4d75c7952570165e914f}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!Point@{Point}}
+\index{Point@{Point}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::\mbox{\hyperlink{class_point}{Point}} (\begin{DoxyParamCaption}\item[{sf\+::\+Event\+::\+Mouse\+Button\+Event}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_point}{Point}} constructor with mouse click event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \+: S\+F\+ML Mouse\+Button\+Event event\\
+\hline
+\end{DoxyParams}
+Creates a point with the coordinates of mouse click \mbox{\Hypertarget{class_point_ae2b922b9f2d5a97f4970f4293e1ac546}\label{class_point_ae2b922b9f2d5a97f4970f4293e1ac546}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!Point@{Point}}
+\index{Point@{Point}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{Point()}{Point()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::\mbox{\hyperlink{class_point}{Point}} (\begin{DoxyParamCaption}\item[{sf\+::\+Event\+::\+Mouse\+Move\+Event}]{event }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_point}{Point}} constructor with mouse motion event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em event} & \+: S\+F\+ML Mouse\+Move\+Event event\\
+\hline
+\end{DoxyParams}
+Creates a point with the coordinates of mouse motion 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_point_abf225c9151aa7834fea60f014010f476}\label{class_point_abf225c9151aa7834fea60f014010f476}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!distance@{distance}}
+\index{distance@{distance}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{distance()}{distance()}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+double \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::distance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&}]{other\+Point }\end{DoxyParamCaption}) const}
+
+
+
+Calculate the distance between two points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other\+Point} & \+: the other point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the distance between this and other 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_point_a69d2528b9385766d874dce626609a044}\label{class_point_a69d2528b9385766d874dce626609a044}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!isInsideWindow@{isInsideWindow}}
+\index{isInsideWindow@{isInsideWindow}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{isInsideWindow()}{isInsideWindow()}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+void \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::is\+Inside\+Window (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&}]{translation }\end{DoxyParamCaption}) const}
+
+
+
+Calculate if the translated point is inside the window. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em translation} & \+: a translation got from mouse moves\\
+\hline
+\end{DoxyParams}
+The translation is performed on the current point. If the point is outside the window, the translation is truncated to avoid this. \mbox{\Hypertarget{class_point_a1e4ea33b31ecc62aeb1a770c11822340}\label{class_point_a1e4ea33b31ecc62aeb1a770c11822340}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!normalize@{normalize}}
+\index{normalize@{normalize}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+void \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::normalize (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$$>$ \&}]{points }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Normalizes points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em points} & \+: vector of points \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_point_a04093b4a1d2e7effa56a85ac19e36d02}\label{class_point_a04093b4a1d2e7effa56a85ac19e36d02}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!reduceSize@{reduceSize}}
+\index{reduceSize@{reduceSize}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{reduceSize()}{reduceSize()}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+void \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::reduce\+Size (\begin{DoxyParamCaption}\item[{int}]{coeff }\end{DoxyParamCaption})}
+
+
+
+Reduce the size of a piece by coefficient. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coeff} & \+: the coefficient, more this coefficient is high, more the piece is reduce\\
+\hline
+\end{DoxyParams}
+This method is used to reduce the size of a piece. In facts, the point\textquotesingle{}s coordinate are divided by the coefficient to translate it. \mbox{\Hypertarget{class_point_ac166ded95db8f0a94eb2d8ebfc36217a}\label{class_point_ac166ded95db8f0a94eb2d8ebfc36217a}} 
+\index{Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}!rotate@{rotate}}
+\index{rotate@{rotate}!Point$<$ CoordinateType $>$@{Point$<$ CoordinateType $>$}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily template$<$class Coordinate\+Type $>$ \\
+\mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$\+::rotate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_point}{Point}}$<$ Coordinate\+Type $>$ \&}]{c,  }\item[{double}]{theta }\end{DoxyParamCaption})}
+
+
+
+Rotate a point around another point (a center) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & \+: the center \\
+\hline
+{\em theta} & \+: the angle of rotation (in radians)\\
+\hline
+\end{DoxyParams}
+Rotates the point the current point around c, with theta angle. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+Model/\mbox{\hyperlink{_point_8h}{Point.\+h}}\end{DoxyCompactItemize}
