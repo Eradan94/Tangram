@@ -1,12 +1,13 @@
-/**
- * Project Tangram
+/*!
+ * \file Triangle.h
+ * \brief Defines a representation of triangle.
+ * \author Biguenet Denis & Gosset Severin
+ * \date 22/02/2019
  */
-
 
 #pragma once
 
 #include <SFML/Graphics.hpp>
-
 #include <iostream>
 #include <vector>
 #include <cfloat>
@@ -14,31 +15,126 @@
 #include "../../include/Model/Point.h"
 #include "../../include/Model/Shape.h"
 
+/*! \class Triangle
+ * \brief Representation of triangle
+ *
+ * A triangle is represented by three points.
+ * This class is a template, mainly used with int, double, float or short types.
+ */
 template<class CoordinateType>
 class Triangle: public Shape<CoordinateType> {
 private :
-    Point<CoordinateType> a;
-    Point<CoordinateType> b;
-    Point<CoordinateType> c;
-    double theta;
-    Point<CoordinateType> unrotatedA;
-    Point<CoordinateType> unrotatedB;
-    Point<CoordinateType> unrotatedC;
-    sf::Color color;
+    Point<CoordinateType> a; /*!A vertex*/
+    Point<CoordinateType> b; /*!B vertex*/
+    Point<CoordinateType> c; /*!C vertex*/
+    double theta; /*!rotation angle : the triangle is rotated with this*/
+    Point<CoordinateType> unrotatedA; /*!A vertex position without rotation*/
+    Point<CoordinateType> unrotatedB; /*!B vertex position without rotation*/
+    Point<CoordinateType> unrotatedC; /*!C vertex position without rotation*/
+    sf::Color color; /*!Triangle color*/
 
 public :
+    /*!
+     * \brief Base constructor
+     * \param _a : first triangle's vertex
+     * \param _b : second triangle's vertex
+     * \param _c : third triangle's vertex
+     * \param color : triangle's color
+     *
+     * Creates a triangle from three vertices and a color
+     */
     Triangle(Point<CoordinateType> _a, Point<CoordinateType> _b, Point<CoordinateType> _c, sf::Color color);
 
+    /*!
+     * \brief Calculates barycentric coordinates of the given point.
+     * \param p : a point (in most cases, a click performed by the user)
+     * \return the barycentric coordinates of the point in the triangle
+     *
+     * A point is inside a triangle if all his coordinates are positive or negative
+     */
     std::vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType>& p) const;
+
+    /*!
+     * \brief Checks if the triangles is selected by the user
+     * \param p : a point (in most cases, a click performed by the user)
+     * \return true if the triangle is selected, returns else in the other case
+     *
+     * Returns true if the point p is inside the triangle.
+     */
     bool isClicked(const Point<CoordinateType>& p) const;
+
+    /*!
+     * \brief Gets the center of a triangle
+     * \return the center of the triangle
+     *
+     */
     Point<CoordinateType> center() const;
+
+    /*!
+     * \brief Rotates a triangle
+     * \param center : the center
+     * \param theta : the rotation (in radians)
+
+     * Rotates the triangle around around center, with theta angle.
+     */
     virtual void rotate(const Point<CoordinateType>& center, double theta);
+
+    /*
+    !!!!!!!!!!!
+    TODO
+    !!!!!!!!!!!
+    */
     virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
+
+    /*!
+     * \brief Translates a triangle
+     * \param translation : the translation performed
+     *
+     * Translates the triangle by the given translation.
+     */
     virtual void translate(const Point<CoordinateType>& translation);
+
+    /*!
+     * \brief Gets the point from a triangle
+     * \return a vector that contains the points
+     *
+     * Puts the points in a vector.
+     */
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
+
+	/*!
+     * \brief Computes the distance between a triangle and a shape
+     * \param shape : the other shape
+     * \param points : the closest points from the current triangle and the shape
+     * \return the distance between triangle and shape
+     *
+     * The distance between a triangle and a shape is the minimum distance between two vertices of shape and triangle.
+     * These points are put in points vector to perform magnetism later.
+     */
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
+
+	/*!
+     * \brief Checks if the translated triangle is inside the window
+     * \param translation : translation performed on the triangle.
+     *
+     * If the translated triangle is outside the window, the translation is modified to avoid this.
+     */
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
+
+	/*!
+     * \brief Reduces the size of current triangle
+     * \param coeff : coefficient of decrease. Higher is the coefficient, smaller is the triangle.
+     *
+     * Each vertex coordinates are divide by the coefficient to reduce the triangle's size.
+     */
 	virtual void reduceSize(int coeff);
+
+	/*!
+     * \brief Draws method
+     * \param window : SFML window where the triangle is draw
+     *
+     * Draw the triangle in the window
+     */
     void draw(sf::RenderWindow& window);
 
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {

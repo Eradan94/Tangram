@@ -85,6 +85,7 @@ public :
     /*!
      * \brief Normalizes points
      * \param points : vector of points
+     * \return : a new rotated point
      *
      */
     static void normalize(std::vector<Point<CoordinateType>> & points);
