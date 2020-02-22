@@ -11,11 +11,11 @@
 class GameBuilder {
 public:
 	GameBuilder();
-	void withShape(Shape<double> * shape);
+	void withShape(std::shared_ptr<Shape<double>> shape);
 	std::shared_ptr<Game> build(const char * filename);
 	std::shared_ptr<Game> build();
 
 private:
-	std::vector<Shape<double> *> pieces;
+	std::vector<std::shared_ptr<Shape<double>>> pieces;
 };
 

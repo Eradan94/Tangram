@@ -2,6 +2,7 @@
  * Project Tangram
  */
 
+#include <memory>
 
 #pragma once
 #include "../../include/Controller/Clickable.h"

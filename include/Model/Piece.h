@@ -21,7 +21,7 @@ public :
 	Piece(sf::Color color, std::vector<Point<CoordinateType>> points);
 	~Piece();
 
-	static Piece<CoordinateType> * createPiece(const char * filename);
+	static std::unique_ptr<Piece<CoordinateType>> createPiece(const char * filename);
     void addTriangle(Triangle<CoordinateType> t);
 
     virtual void translate(const Point<CoordinateType>& translation);
@@ -197,10 +197,9 @@ Piece<CoordinateType>::Piece(sf::Color color, vector<Point<CoordinateType>> poin
 }
 
 template<class CoordinateType>
-Piece<CoordinateType> * Piece<CoordinateType>::createPiece(const char *filename) {
-
+std::unique_ptr<Piece<CoordinateType>> Piece<CoordinateType>::createPiece(const char *filename) {
 	std::vector<Point<CoordinateType>> points = FileUtils::readFile(filename);
-	return new Piece(sf::Color(255, 255, 255), points);
+	return std::move(std::unique_ptr<Piece<CoordinateType>>(new Piece(sf::Color(255, 255, 255), points)));
 }
 
 template<class CoordinateType>
