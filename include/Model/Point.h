@@ -13,8 +13,6 @@
 
 #include "../../include/Controller/Preferences.h"
 
-#define EPSILON 4.0 // devrait etre dans preferences
-
 template<class CoordinateType>
 class Point {
 private :

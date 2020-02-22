@@ -57,9 +57,7 @@ void Button::callFct() {
 }
 
 Button::~Button() {
-	//delete rectangle;
-	//delete txt->getFont();
-	//delete txt;
+	delete txt->getFont();
 }
 
 Point<double> Button::center() {

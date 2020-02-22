@@ -179,7 +179,7 @@ void GameManager::initLoadGameButtons(int loadIndex) {
                             actionManager->setMenu(menu);
                         }
                     ));
-                    Piece<double> * goal = Piece<double>::createPiece(prefix);
+                    std::shared_ptr<Shape<double>> goal = std::shared_ptr<Shape<double>>(Piece<double>::createPiece(prefix));
                     Point<double> buttonCenter = button->center();
                     goal->reduceSize(4);
                     Point<double> pieceCenter = goal->center();

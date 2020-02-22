@@ -23,7 +23,7 @@ public :
 	void draw(sf::RenderWindow & window);
 	void select(const Point<double> & event);
 	void clear();
-	void addDecorationPiece(Piece<double>* piece);
+	void addDecorationPiece(std::shared_ptr<Shape<double>> piece);
 	friend std::ostream& operator<< (std::ostream& os, const Menu& menu) {
 	    os << "menu : " << std::endl;
 	    os << menu.buttons.size() << std::endl;
@@ -34,6 +34,6 @@ public :
     }
 private :
     std::vector<std::unique_ptr<Button>> buttons;
-    std::vector<Shape<double> *> decorationPieces;
+    std::vector<std::shared_ptr<Shape<double>>> decorationPieces;
 };
 
