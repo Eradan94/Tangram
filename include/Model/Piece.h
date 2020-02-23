@@ -68,7 +68,7 @@ public :
 
     /*!
      * \brief Rotates a piece around a point
-     * \param center : the center of the piece or another point
+     * \param center : the center of the piece
      * \param theta : angle of rotation (in radians)
      *
      * The rotation is performed on each piece's triangle.
