@@ -38,9 +38,9 @@ std::vector<Point<double>> FileUtils::readFile(const char* fileName) {
     return points;
 }
 
-void FileUtils::writeFile(std::vector<Point<double>> points, const char *filename) {
+void FileUtils::writeFile(std::vector<Point<double>> points, const char *fileName) {
 	std::string line;
-	std::ofstream level(filename);
+	std::ofstream level(fileName);
 	std::string xStr, yStr;
 	if(level) {
         for_each(points.cbegin(), points.cend(), [&level](Point<double> p) {

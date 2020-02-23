@@ -37,7 +37,7 @@ class FileUtils {
          *
          * The points are written in the specified file.
          */
-    	static void writeFile(std::vector<Point<double>> points, const char * filename);
+    	static void writeFile(std::vector<Point<double>> points, const char * fileName);
     private :
 
 };
