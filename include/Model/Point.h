@@ -30,8 +30,8 @@ private :
 public :
     /*!
      * \brief Base constructor
-     * \param x : x coordinate
-     * \param y : y coordinate
+     * \param _x : x coordinate
+     * \param _y : y coordinate
      *
      * Creates a point with x and y coordinates
      */
@@ -90,16 +90,83 @@ public :
      */
     static void normalize(std::vector<Point<CoordinateType>> & points);
 
+    /*!
+     * \brief Gets X coordinate
+     * \return the X coordinate of the point
+     *
+     */
     CoordinateType getX() const;
+
+    /*!
+     * \brief Gets Y coordinate
+     * \return the Y coordinate of the point
+     *
+     */
     CoordinateType getY() const;
 
+    /*!
+     * \brief Compares two points
+     * \param other : the other point
+     * \return true if the current point is equal to other
+     *
+     */
     bool operator== (const Point<CoordinateType>& other) const;
+
+    /*!
+     * \brief Compares two points
+     * \param other : the other point
+     * \return true if the points are different
+     *
+     */
     bool operator!= (const Point<CoordinateType>& other) const;
+
+    /*!
+     * \brief Adds the other point with the current point
+     * \param other : the other point
+     * \return a new point, result of the addition
+     *
+     */
     Point<CoordinateType> operator+ (const Point& other) const;
+
+    /*!
+     * \brief Subs the current point by the other point
+     * \param other : the other point
+     * \return a new point result of the subtraction
+     *
+     */
     Point<CoordinateType> operator- (const Point& other) const;
+
+    /*!
+     * \brief Divides the current point by a number
+     * \param val : a number
+     * \return a new point result of the division
+     *
+     */
     Point<CoordinateType> operator/ (const CoordinateType& val) const;
+
+    /*!
+     * \brief Adds the other point with the current point
+     * \param other : the other point
+     * \return the current point plus the other point
+     *
+     */
     Point<CoordinateType>& operator+= (const Point<CoordinateType>& other);
+
+    /*!
+     * \brief Compares points
+     * \param other : the other point
+     * \return true if current point is smaller than the other point
+     *
+     */
     bool operator< (const Point<CoordinateType>& other) const;
+
+    /*!
+     * \brief Prints the point in a output stream
+     * \param os : output stream
+     * \param point : the point
+     * \return the modified output stream
+     *
+     */
     friend std::ostream& operator<< (std::ostream& os, const Point<CoordinateType>& point) {
         os << "(" << point.x << ", " << point.y << ")";
         return os;

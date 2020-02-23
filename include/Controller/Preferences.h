@@ -30,28 +30,28 @@ class Preferences {
 
         /*!
         * \brief Sets the magnetism
-        * \param : the new magnetism
+        * \param magnetism : the new magnetism
         *
         */
         void setMagnetism(double magnetism);
 
         /*!
         * \brief Sets the rotation per mouse spinning
-        * \param : the new rotation angle by spinning
+        * \param rotationPerSpinning : the new rotation angle by spinning
         *
         */
         void setRotationPerSpinning(double rotationPerSpinning);
 
         /*!
         * \brief Sets the tolerance of error
-        * \param : the new tolerance
+        * \param tolerance : the new tolerance
         *
         */
         void setTolerance(double tolerance);
 
         /*!
         * \brief Sets the height of buttons
-        * \param : the new height
+        * \param buttonHeight : the new height
         *
         */
         void setGameButtonHeight(double buttonHeight);
