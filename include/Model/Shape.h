@@ -10,7 +10,7 @@
 #include "../../include/View/Drawable.h"
 #include "../../include/Model/Point.h"
 
-/*! \class Shape
+/*! \interface Shape
  * \brief Interface for shapes (triangles and pieces)
  *
  */

@@ -54,7 +54,7 @@ public :
     void draw(sf::RenderWindow& window) override;
 
     /*!
-     * \brief Check if the button is clicked bu the user
+     * \brief Check if the button is clicked by the user
      * \param p : the position of the click
      * \return true if the button is clicked, false in the other case
      *
