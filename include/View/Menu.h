@@ -5,8 +5,6 @@
  * \date 22/02/2020
  */
 
-
-
 #pragma once
 #include "../../include/View/Drawable.h"
 #include "../../include/View/Button.h"
