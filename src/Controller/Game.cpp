@@ -51,9 +51,8 @@ void Game::select(const Point<double> & event) {
 	}
 }
 
-void Game::deselect(const Point<double> & event) {
+void Game::deselect() {
 	if (selected != nullptr) {
-		//selected->centralize(event, relativePos);
 		magnetize();
 		selected = nullptr;
 	}

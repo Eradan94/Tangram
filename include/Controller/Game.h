@@ -1,7 +1,9 @@
-/**
- * Project Tangram
+/*!
+ * \file Game.h
+ * \brief Defines a representation of game
+ * \author Biguenet Denis & Gosset Severin
+ * \date 22/02/2020
  */
-
 
 #pragma once
 
@@ -16,42 +18,109 @@
 #include <cfloat>
 #include <memory>
 
+/*! \class Action
+ * \brief A game is represented by movable pieces and a shape to reproduce
+ *
+ */
 class Game {
 public :
+    /*!
+     * \brief Initialize a game from a file
+     * \param filename : the name of the file
+     * \return a pointer to the new game
+     *
+     */
 	static std::shared_ptr<Game> init(const char * filename);
 
-	static std::shared_ptr<Game> init();
-
+	/*!
+     * \brief Constructor, create a new game from a vector of pieces and a goal
+     * \param pieces : the vector of pieces, used by the user to reproduce the shape
+     * \param goal : the shape to reproduce
+     */
 	Game(std::vector<std::shared_ptr<Shape<double>>> pieces, std::unique_ptr<Piece<double>> goal);
 
+	/*!
+     * \brief Default constructor
+     *
+     */
 	Game();
 
+	/*!
+     * \brief Destructor
+     *
+     */
 	~Game();
 
+	/*!
+     * \brief Draw method
+     * \param window : window where the game is draw
+     *
+     */
 	void draw(sf::RenderWindow & window);
 
+	/*!
+     * \brief Selects a piece
+     * \param event : position of the mouse click
+     *
+     * Checks if a piece is selected by checking if the point is inside a it.
+     */
 	void select(const Point<double> & event);
 
-	void deselect(const Point<double> & event);
+	/*!
+     * \brief Deselects the selected piece
+     *
+     */
+	void deselect();
 
+	/*
+	*!!!!!!!!!!
+	* TODO
+	*!!!!!!!!!!
+	*/
 	void centralizeSelected(const sf::Event::MouseMoveEvent event);
 
+	/*!
+     * \brief Rotates the selected piece
+     * \param d : rotation angle
+     *
+     */
 	void rotateSelected(const double d);
 
+	/*
+	*!!!!!!!!!!
+	* TODO
+	*!!!!!!!!!!
+	*/
 	void save();
 
+	/*!
+     * \brief Magnetizes the selected piece when released
+     *
+     * The piece is magnetized by the closest vertex of another shape.
+     * The reach of magnetism is defined in Preferences class
+     */
 	void magnetize();
 
+	/*!
+     * \brief Checks if the goal is reproduced
+     *
+     * If the goal is reproduced by the user, a win screen appears.
+     */
 	void validateShape();
 
+	/*!
+     * \brief Gets the game state
+     * \return the game state
+     *
+     */
 	bool getGameState();
 
 private :
-	std::vector<std::shared_ptr<Shape<double>>> pieces;
-	std::shared_ptr<Shape<double>> selected;
-	std::unique_ptr<Piece<double>> goal;
-	Point<double> relativePos;
-	bool gameState;
+	std::vector<std::shared_ptr<Shape<double>>> pieces; /*!Vector of movable and clickable pieces*/
+	std::shared_ptr<Shape<double>> selected; /*!The selected piece*/
+	std::unique_ptr<Piece<double>> goal; /*!The shape to reproduce*/
+	Point<double> relativePos; /* TODO*/
+	bool gameState; /*!Game state*/
 
 	// All shapes
 	// little triangles

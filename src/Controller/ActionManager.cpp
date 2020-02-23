@@ -14,7 +14,7 @@ ActionManager::ActionManager(std::shared_ptr<Game> game, std::shared_ptr<Menu> m
 	registerEvent(sf::Event::MouseButtonReleased, [this](sf::Event event) {
 		if (event.mouseButton.button == sf::Mouse::Left) {
 			if (this -> game != nullptr){
-				this -> game -> deselect(event.mouseButton);
+				this -> game -> deselect();
 				this -> game -> validateShape();
 			}
 		}
