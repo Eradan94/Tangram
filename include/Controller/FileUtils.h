@@ -1,8 +1,8 @@
 /*!
  * \file FileUtils.h
- * \brief Utils fonctions to read and write files.
+ * \brief Utils functions to read and write files.
  * \author Biguenet Denis & Gosset Severin
- * \date 22/02/2019
+ * \date 22/02/2020
  */
 
 #pragma once

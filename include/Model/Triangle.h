@@ -2,7 +2,7 @@
  * \file Triangle.h
  * \brief Defines a representation of triangle.
  * \author Biguenet Denis & Gosset Severin
- * \date 22/02/2019
+ * \date 22/02/2020
  */
 
 #pragma once
@@ -115,22 +115,22 @@ public :
 
 	/*!
      * \brief Checks if the translated triangle is inside the window
-     * \param translation : translation performed on the triangle.
+     * \param translation : translation performed on the triangle
      *
-     * If the translated triangle is outside the window, the translation is modified to avoid this.
+     * If the translated triangle is outside the window (one vertex outside of the window), the translation is modified to avoid this.
      */
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
 
 	/*!
      * \brief Reduces the size of current triangle
-     * \param coeff : coefficient of decrease. Higher is the coefficient, smaller is the triangle.
+     * \param coeff : coefficient of decrease. Higher is the coefficient, smaller is the triangle
      *
      * Each vertex coordinates are divide by the coefficient to reduce the triangle's size.
      */
 	virtual void reduceSize(int coeff);
 
 	/*!
-     * \brief Draws method
+     * \brief Draw method
      * \param window : SFML window where the triangle is draw
      *
      * Draw the triangle in the window

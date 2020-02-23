@@ -1,7 +1,9 @@
-/**
- * Project Tangram
+/*!
+ * \file Piece.h
+ * \brief Defines a representation of piece.
+ * \author Biguenet Denis & Gosset Severin
+ * \date 22/02/2020
  */
-
 
 #pragma once
 
@@ -12,25 +14,131 @@
 #include "../../include/Model/Shape.h"
 #include "../../include/Model/Triangle.h"
 
+/*! \class Piece
+ * \brief Representation of piece
+ *
+ * A triangle is represented by a list of triangles.
+ * This class is a template, mainly used with int, double, float or short types.
+ */
 template<class CoordinateType>
 class Piece: public Shape<CoordinateType> {
 public :
+    /*!
+     * \brief default constructor
+     *
+     */
     Piece();
+
 	Piece(int size, sf::Color color, ...);
+
+    /*!
+     * \brief Create a piece from points
+     * \param points : vertices of the piece
+     *
+     */
 	Piece(int size, sf::Color color, const CoordinateType * points);
+
+	/*!
+     * \brief Create a piece from vector of points
+     * \param points : vertices of the piece
+     *
+     */
 	Piece(sf::Color color, std::vector<Point<CoordinateType>> points);
+
+	/*!
+     * \brief Create a piece from a file
+     * \param fileNam : name of the file
+     * \return a pointer to new piece
+     */
 	static std::unique_ptr<Piece<CoordinateType>> createPiece(const char * filename);
 
+	/*!
+     * \brief Adds a single triangle in the piece
+     * \param t : the triangle added into the list of triangles
+     */
     void addTriangle(Triangle<CoordinateType> t);
+
+    /*!
+     * \brief Translates a piece
+     * \param t : the performed translation
+     *
+     * The translation is performed on each piece's triangle to move the whole piece.
+     */
     virtual void translate(const Point<CoordinateType>& translation);
+
+    /*!
+     * \brief Rotates a piece around a point
+     * \param center : the center of the piece or another point
+     * \param theta : angle of rotation (in radians)
+     *
+     * The rotation is performed on each piece's triangle.
+     */
     virtual void rotate(const Point<CoordinateType>& center, double theta);
+
+    /*!
+     * \brief Gets the piece's center
+     * \return the center of the piece
+     *
+     * The center of the piece is the mean of the triangle's centers
+     */
     virtual Point<CoordinateType> center() const;
+
+    /*
+    * !!!!!!!!!!!!!!!
+    * TODO
+    * !!!!!!!!!!!!!!!
+    */
     virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
+
+    /*!
+     * \brief Check if the piece is selected by the user
+     * \param p : a point (the position of the click)
+     * \return true if the piece is selected, false in the other case
+     *
+     * Check if p is inside at least one triangle.
+     */
 	virtual bool isClicked(const Point<CoordinateType> & p) const;
+
+	/*!
+     * \brief Gets the points of the triangle
+     * \return a vector of points
+     *
+     */
 	virtual std::vector<Point<CoordinateType>> getPoints() const;
+
+	/*!
+     * \brief Computes the distance between a piece and a shape
+     * \param shape : the other shape
+     * \param points : the closest points from the current piece and the shape
+     * \return the distance between piece and shape
+     *
+     * The distance between a piece and a shape is the minimum distance between two vertices of shape and triangle.
+     * These points are put in points vector to perform magnetism later.
+     */
 	virtual double distance(Shape<CoordinateType>* shape, std::vector<Point<CoordinateType>>& points) const;
+
+	/*!
+     * \brief Checks if the translated piece is inside the window
+     * \param translation : translation performed on the triangle
+     *
+     * If the translated piece is outside the window (one vertex outside the window), the translation is modified to avoid this.
+     */
 	virtual void isInsideWindow(Point<CoordinateType>& translation) const;
+
+    /*!
+     * \brief Reduces the size of current piece
+     * \param coeff : coefficient of decrease. Higher is the coefficient, smaller is the piece
+     *
+     * Each vertex coordinates are divide by the coefficient to reduce the piece's size.
+     */
 	virtual void reduceSize(int coeff);
+
+	/*!
+     * \brief Draw method
+     * \param window : SFML window where the piece is draw
+     *
+     * Draws the piece in the window (draws each piece's triangle)
+     */
     void draw(sf::RenderWindow& window);
 
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
@@ -42,7 +150,7 @@ public :
     }
 
 private :
-    std::list<Triangle<CoordinateType>> triangles;
+    std::list<Triangle<CoordinateType>> triangles; /*!List of triangles*/
 };
 
 template<class CoordinateType>
@@ -74,6 +182,35 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, ...) {
 	}
 
 	va_end(args);
+}
+
+template<class CoordinateType>
+Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * points) {
+	for(int i = 0; i < size; i++) {
+		CoordinateType x = points[i * 6];
+		CoordinateType y = points[i * 6 + 1];
+		Point<CoordinateType> p1 = Point<CoordinateType>(x, y);
+		x = points[i * 6 + 2];
+		y = points[i * 6 + 3];
+		Point<CoordinateType> p2 = Point<CoordinateType>(x, y);
+		x = points[i * 6 + 4];
+		y = points[i * 6 + 5];
+		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
+		Triangle<CoordinateType> t(p1, p2, p3, color);
+		triangles.push_back(t);
+	}
+}
+
+template<class CoordinateType>
+Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>> points) {
+	Point<double> offsetPoint(600, 50);
+	for(int i = 0; i < (int)points.size() / 3; i++) {
+		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
+		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;
+		Point<CoordinateType> p3 = points[i * 3 + 2] + offsetPoint;
+		Triangle<CoordinateType> t(p1, p2, p3, color);
+		triangles.push_back(t);
+	}
 }
 
 /* Add a single triangle in the list
@@ -177,38 +314,9 @@ double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector
 }
 
 template<class CoordinateType>
-Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>> points) {
-	Point<double> offsetPoint(600, 50);
-	for(int i = 0; i < (int)points.size() / 3; i++) {
-		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
-		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;
-		Point<CoordinateType> p3 = points[i * 3 + 2] + offsetPoint;
-		Triangle<CoordinateType> t(p1, p2, p3, color);
-		triangles.push_back(t);
-	}
-}
-
-template<class CoordinateType>
 std::unique_ptr<Piece<CoordinateType>> Piece<CoordinateType>::createPiece(const char *filename) {
 	std::vector<Point<CoordinateType>> points = FileUtils::readFile(filename);
 	return std::move(std::unique_ptr<Piece<CoordinateType>>(new Piece(sf::Color(255, 255, 255), points)));
-}
-
-template<class CoordinateType>
-Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * points) {
-	for(int i = 0; i < size; i++) {
-		CoordinateType x = points[i * 6];
-		CoordinateType y = points[i * 6 + 1];
-		Point<CoordinateType> p1 = Point<CoordinateType>(x, y);
-		x = points[i * 6 + 2];
-		y = points[i * 6 + 3];
-		Point<CoordinateType> p2 = Point<CoordinateType>(x, y);
-		x = points[i * 6 + 4];
-		y = points[i * 6 + 5];
-		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
-		Triangle<CoordinateType> t(p1, p2, p3, color);
-		triangles.push_back(t);
-	}
 }
 
 template<class CoordinateType>
