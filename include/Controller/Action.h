@@ -14,7 +14,7 @@
 #include <functional>
 #include <string>
 
-/*! \interface Action
+/*! \class Action
  * \brief An action is represented by a lambda function, called when the action is performed
  *
  * Action is a functor.
