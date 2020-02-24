@@ -14,7 +14,7 @@
 #include <list>
 #include <memory>
 
-/*! \class Button
+/*! \class Menu
  * \brief Representation of menu
  *
  * A menu is represented by a vector of buttons and a vector of pieces (decorations)

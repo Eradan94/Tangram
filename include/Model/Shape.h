@@ -67,7 +67,7 @@ public:
 
     /*!
      * \brief Translates a shape
-     * \param t : the performed translation
+     * \param translation : the performed translation
      *
      */
 	virtual void translate(const Point<CoordinateType>& translation) = 0;
@@ -87,6 +87,11 @@ public:
      */
 	virtual void reduceSize(int coeff) = 0;
 
+	/*!
+     * \brief Rotates a shape around the center of the shape
+     * \param theta : angle of rotation (in radians)
+     *
+     */
 	void rotate(const float theta) {
 		rotate(center(), theta);
 	}

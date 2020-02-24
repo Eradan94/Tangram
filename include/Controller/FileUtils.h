@@ -14,7 +14,7 @@
 
 #include "../../include/Model/Point.h"
 
-/*! \class FilesUtils
+/*! \class FileUtils
  * \brief Utils fonctions to read and write files.
  *
  * Static class without fields

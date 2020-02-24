@@ -18,7 +18,7 @@
 #include <cfloat>
 #include <memory>
 
-/*! \class Action
+/*! \class Game
  * \brief A game is represented by movable pieces and a shape to reproduce
  *
  */

@@ -32,7 +32,9 @@ public :
 	Piece(int size, sf::Color color, ...);
 
     /*!
-     * \brief Create a piece from points
+     * \brief Create a piece from points and color
+     * \param size : number of triangle in the piece
+     * \param color : color of the piece
      * \param points : vertices of the piece
      *
      */
@@ -40,6 +42,7 @@ public :
 
 	/*!
      * \brief Create a piece from vector of points
+     * \param color : color of the piece
      * \param points : vertices of the piece
      *
      */
@@ -47,7 +50,7 @@ public :
 
 	/*!
      * \brief Create a piece from a file
-     * \param fileNam : name of the file
+     * \param filename : name of the file
      * \return a pointer to new piece
      */
 	static std::unique_ptr<Piece<CoordinateType>> createPiece(const char * filename);
@@ -60,7 +63,7 @@ public :
 
     /*!
      * \brief Translates a piece
-     * \param t : the performed translation
+     * \param translation : the performed translation
      *
      * The translation is performed on each piece's triangle to move the whole piece.
      */
@@ -141,6 +144,13 @@ public :
      */
     void draw(sf::RenderWindow& window);
 
+    /*!
+     * \brief Print function
+     * \param os : output stream
+     * \param piece : piece to print
+     *
+     * Prints the piece in the output stream os.
+     */
     friend std::ostream& operator<< (std::ostream& os, const Piece<CoordinateType>& piece) {
         os << "Piece : " << std::endl;
         for(auto& t : piece.triangles) {

@@ -29,7 +29,7 @@ public :
      * \param bottomRightX : X coordinate of bottom right point
      * \param bottomRightY : Y coordinate of bottom right point
      * \param text : string that contains the button's text
-     * \param fct : lambda function called when the button is clicked
+     * \param _fct : lambda function called when the button is clicked
      *
      */
     Button(int topLeftX, int topLeftY, int bottomRightX, int bottomRightY, std::string text, std::function<void()> _fct);

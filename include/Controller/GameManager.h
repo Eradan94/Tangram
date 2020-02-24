@@ -12,7 +12,7 @@
 
 #include <dirent.h>
 
-/*! \class Action
+/*! \class GameManager
  * \brief A gameManager is represented by a game, a menu, a window and an actionManager
  *
  * Manages the game and the interface (such as displaying or actions)

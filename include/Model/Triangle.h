@@ -137,6 +137,13 @@ public :
      */
     void draw(sf::RenderWindow& window);
 
+    /*!
+     * \brief Print function
+     * \param os : output stream
+     * \param triangle : triangle to print
+     *
+     * Prints the triangle in the output stream os.
+     */
     friend std::ostream& operator<< (std::ostream& os, const Triangle<CoordinateType>& triangle) {
         os << "Triangle : " << std::endl << "   Point A : " << triangle.a << std::endl << "   Point B : " << triangle.b << std::endl << "   Point C : " << triangle.c;
         return os;
