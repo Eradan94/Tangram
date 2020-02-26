@@ -133,8 +133,8 @@ void GameManager::initLoadGameButtons(int loadIndex) {
     const int buttonWidth = (width - 2 * xOffset - (levelByLine - 1) * interButtonGap) / levelByLine;
     const int buttonHeight = (height - 2 * yOffset - (levelByLine - 1) * interButtonGap) / levelByLine;
 
-    int i = 0; // Nombre de niveau actuel à afficher sur le menu
-    int j = 0; // nombre de niveaux parcourus (à afficher ou non)
+    int i = 0; // Nombre de niveau actuel a afficher sur le menu
+    int j = 0; // nombre de niveaux parcourus (a afficher ou non)
     DIR* dpdf = nullptr;
     struct dirent* epdf = nullptr;
     dpdf = opendir("../Tangram/levels/");

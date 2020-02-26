@@ -58,9 +58,9 @@ void Game::deselect() {
 	}
 }
 
-void Game::centralizeSelected(sf::Event::MouseMoveEvent event) {
+void Game::centralizeSelected(Point<double> point) {
 	if (selected != nullptr) {
-		selected -> centralize(event, relativePos);
+		selected -> centralize(point, relativePos);
 	}
 }
 

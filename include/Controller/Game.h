@@ -72,12 +72,12 @@ public :
      */
 	void deselect();
 
-	/*
-	*!!!!!!!!!!
-	* TODO
-	*!!!!!!!!!!
-	*/
-	void centralizeSelected(const sf::Event::MouseMoveEvent event);
+	/*!
+	 * \brief Centralise the selected piece on the given point
+	 * \param point : point on which centralize
+	 *
+	 */
+	void centralizeSelected(const Point<double> point);
 
 	/*!
      * \brief Rotates the selected piece
@@ -86,10 +86,9 @@ public :
      */
 	void rotateSelected(const double d);
 
-	/*
-	*!!!!!!!!!!
-	* TODO
-	*!!!!!!!!!!
+	/*!
+	 * \brief Saves the game under the file "levels/save.txt"
+	 *
 	*/
 	void save();
 
