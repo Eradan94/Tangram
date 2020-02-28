@@ -225,6 +225,16 @@ void GameManager::initCreateLevelButtons() {
     )));
 }
 
+Button* GameManager::initSaveLevelButton() {
+	std::unique_ptr<Button> button = std::unique_ptr<Button>(new Button(0, 100, 100, 200,
+			"File name : ", [this]{
+        }
+    ));
+    Button* b = button.get();
+	menu -> addButton(std::move(button));
+	return b;
+}
+
 void GameManager::draw() const {
     window->clear();
 	if(game != nullptr) {
@@ -243,14 +253,13 @@ void GameManager::play() {
 			window -> close();
 		Action act = actionManager -> getAction(event.type);
 		act(event);
-		if(game->getGameState()) {
-            game.reset();
-            game = std::shared_ptr<Game>(new Game());
-            actionManager->setGame(game);
-            menu->clear();
-            initWinScreenButtons();
-		}
 	}
+	if(game->getGameState()) {
+        game = std::shared_ptr<Game>(new Game());
+        actionManager->setGame(game);
+        menu->clear();
+        initWinScreenButtons();
+    }
 	draw();
 }
 

@@ -74,6 +74,8 @@ public:
      */
 	void initLoadGameButtons(int loadIndex);
 
+	Button* initSaveLevelButton();
+
 	/*!
      * \brief Initializes the wins menu buttons.
      *
