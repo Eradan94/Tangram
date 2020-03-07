@@ -205,7 +205,8 @@ void GameManager::initCreateLevelButtons() {
     const int buttonHeight = 0.1 * height;
 	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline,
 			"Save level", [this]{
-            game -> save();
+            menu->clear();
+            initSaveGameButton();
         }
     )));
     menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
@@ -225,14 +226,33 @@ void GameManager::initCreateLevelButtons() {
     )));
 }
 
-Button* GameManager::initSaveLevelButton() {
-	std::unique_ptr<Button> button = std::unique_ptr<Button>(new Button(0, 100, 100, 200,
-			"File name : ", [this]{
+void GameManager::initSaveGameButton() {
+    const int width = window->getView().getSize().x;
+    const int height = window->getView().getSize().y;
+	const int buttonOutline = 5;
+    const int buttonHeight = 0.1 * height;
+    menu -> setInputBox(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, width / 2 + buttonOutline, height - buttonOutline,
+        "Level name : ", [this]{
+
         }
-    ));
-    Button* b = button.get();
-	menu -> addButton(std::move(button));
-	return b;
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 + buttonOutline * 2, height - buttonHeight - buttonOutline, 0.75 * width + 2 * buttonOutline, height - buttonOutline,
+        "Save", [this]{
+            game -> save(menu->getInputBoxText());
+            game.reset();
+            game = std::shared_ptr<Game>(new Game());
+			actionManager->setGame(game);
+			menu->clear();
+			initMainMenuButtons();
+			actionManager->setMenu(menu);
+        }
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(0.75 * width + 2 * buttonOutline, height - buttonHeight - buttonOutline, width - buttonOutline, height - buttonOutline,
+        "Cancel", [this]{
+            menu->clear();
+            initCreateLevelButtons();
+        }
+    )));
 }
 
 void GameManager::draw() const {

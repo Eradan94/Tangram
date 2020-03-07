@@ -65,3 +65,12 @@ Point<double> Button::center() const {
     double height = bottomRight.getY() - topLeft.getY();
     return Point(topLeft.getX() + length / 2, topLeft.getY() + height / 2);
 }
+
+void Button::setText(char input) {
+    inputText+= input;
+    txt->setString(text + inputText);
+}
+
+std::string Button::getInputText() {
+    return inputText;
+}

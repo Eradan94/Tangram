@@ -91,7 +91,7 @@ public :
 	* TODO
 	*!!!!!!!!!!
 	*/
-	void save();
+	void save(std::string levelName);
 
 	/*!
      * \brief Magnetizes the selected piece when released
