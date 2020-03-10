@@ -90,7 +90,7 @@ public :
 	 * \brief Saves the game under the file "levels/save.txt"
 	 *
 	*/
-	void save();
+	void save(std::string levelName);
 
 	/*!
      * \brief Magnetizes the selected piece when released

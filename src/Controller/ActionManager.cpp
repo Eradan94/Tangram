@@ -30,6 +30,9 @@ ActionManager::ActionManager(std::shared_ptr<Game> game, std::shared_ptr<Menu> m
 			this -> game -> rotateSelected(event.mouseWheelScroll.delta * pref.getRotationPerSpinning());
 		}
 	});
+	registerEvent(sf::Event::TextEntered, [this](sf::Event event) {
+		this -> menu -> setText((char)event.text.unicode);
+	});
 }
 
 void ActionManager::registerEvent(sf::Event::EventType event, const std::function<void (sf::Event)> action) {

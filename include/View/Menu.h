@@ -41,6 +41,8 @@ public :
      */
 	void addButton(std::unique_ptr<Button> button);
 
+	void setInputBox(std::unique_ptr<Button> inputBox);
+
 	/*!
      * \brief Draw method
      * \param window : the window chre the button is draw
@@ -67,8 +69,14 @@ public :
      *
      */
 	void addDecorationPiece(std::shared_ptr<Shape<double>> piece);
+
+	void setText(char c);
+
+	std::string getInputBoxText();
+
 private :
     std::vector<std::unique_ptr<Button>> buttons; /*!Vector of buttons */
+    std::shared_ptr<Button> inputBox; /*!Input box*/
     std::vector<std::shared_ptr<Shape<double>>> decorationPieces; /*!Vector of decoration pieces */
 };
 

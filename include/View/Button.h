@@ -68,10 +68,15 @@ public :
      */
     Point<double> center() const;
 
+    void setText(char input);
+
+    std::string getInputText();
+
 private :
     Point<double> topLeft; /*!Top left point*/
     Point<double> bottomRight; /*!Right bottom point*/
     std::string text; /*!Button's text*/
+    std::string inputText;
 	std::function<void ()> fct; /*!Lambda function called when the button is clicked*/
 	std::unique_ptr<sf::RectangleShape> rectangle; /*!SFML rectangle to draw the button*/
 	std::unique_ptr<sf::Text> txt; /*!SFML text to draw the button's content*/

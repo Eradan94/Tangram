@@ -48,7 +48,7 @@ void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
-    const int buttonCount = 4;
+    const int buttonCount = 3;
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     Preferences& pref = Preferences::getInstance();
@@ -60,11 +60,7 @@ void GameManager::initMainGameButtons() {
 			actionManager->setMenu(menu);
         }
     )));
-	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
-			"Hint", []{
-        }
-    )));
-    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
+    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             game.reset();
             game = std::shared_ptr<Game>(new Game());
@@ -74,7 +70,7 @@ void GameManager::initMainGameButtons() {
 			actionManager->setMenu(menu);
         }
     )));
-	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             window->close();
         }
@@ -205,7 +201,8 @@ void GameManager::initCreateLevelButtons() {
     const int buttonHeight = 0.1 * height;
 	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, buttonOutline + buttonWidth, height - buttonOutline,
 			"Save level", [this]{
-            game -> save();
+            menu->clear();
+            initSaveGameButton();
         }
     )));
     menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
@@ -221,6 +218,35 @@ void GameManager::initCreateLevelButtons() {
 	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             window->close();
+        }
+    )));
+}
+
+void GameManager::initSaveGameButton() {
+    const int width = window->getView().getSize().x;
+    const int height = window->getView().getSize().y;
+	const int buttonOutline = 5;
+    const int buttonHeight = 0.1 * height;
+    menu -> setInputBox(std::unique_ptr<Button>(new Button(buttonOutline, height - buttonHeight - buttonOutline, width / 2 + buttonOutline, height - buttonOutline,
+        "Level name : ", [this]{
+
+        }
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(width / 2 + buttonOutline * 2, height - buttonHeight - buttonOutline, 0.75 * width + 2 * buttonOutline, height - buttonOutline,
+        "Save", [this]{
+            game -> save(menu->getInputBoxText());
+            game.reset();
+            game = std::shared_ptr<Game>(new Game());
+			actionManager->setGame(game);
+			menu->clear();
+			initMainMenuButtons();
+			actionManager->setMenu(menu);
+        }
+    )));
+    menu -> addButton(std::unique_ptr<Button>(new Button(0.75 * width + 2 * buttonOutline, height - buttonHeight - buttonOutline, width - buttonOutline, height - buttonOutline,
+        "Cancel", [this]{
+            menu->clear();
+            initCreateLevelButtons();
         }
     )));
 }
@@ -243,14 +269,13 @@ void GameManager::play() {
 			window -> close();
 		Action act = actionManager -> getAction(event.type);
 		act(event);
-		if(game->getGameState()) {
-            game.reset();
-            game = std::shared_ptr<Game>(new Game());
-            actionManager->setGame(game);
-            menu->clear();
-            initWinScreenButtons();
-		}
 	}
+	if(game->getGameState()) {
+        game = std::shared_ptr<Game>(new Game());
+        actionManager->setGame(game);
+        menu->clear();
+        initWinScreenButtons();
+    }
 	draw();
 }
 

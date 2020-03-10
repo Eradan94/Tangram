@@ -9,26 +9,20 @@
  * FileUtils implementation
  */
 
- /* Charge un niveau selon le nom du fichier specifie
- * fileName : nom du niveau a charger
- * renvoie un vecteur de points qui correspond a la figure a reproduire
- */
 std::vector<Point<double>> FileUtils::readFile(const char* fileName) {
-    std::vector<Point<double>> points; // Liste des points de la forme � reproduire
-    std::string line; // contient la derni�re ligne lue
-    std::ifstream level(fileName); // ouvre le fichier en lecture
-    std::string xStr, yStr; // contiennent les coordonn�es du points
-    double x, y; // contiennent les coordonn�es du points sous forme de nombres
-    int sep; // indice de la s�paration entre les coordonn�es x et y (un espace)
+    std::vector<Point<double>> points;
+    std::string line;
+    std::ifstream level(fileName);
+    std::string xStr, yStr;
+    double x, y;
+    int sep;
     if(level) {
-        while(getline(level, line)) { // On lit une ligne du fichier
-            sep = line.find(' '); // On cherche le premier espace pour s�parer la coordonn�e x et y
+        while(getline(level, line)) {
+            sep = line.find(' ');
             xStr = line.substr(0, sep);
             yStr = line.substr(sep, line.size());
-            // On utilise stoi pour passer de string vers int
             x = std::stoi(xStr);
             y = std::stoi(yStr);
-            // On ajoute le point dans le vecteur
             points.push_back(Point(x, y));
         }
     }
@@ -38,7 +32,7 @@ std::vector<Point<double>> FileUtils::readFile(const char* fileName) {
     return points;
 }
 
-void FileUtils::writeFile(std::vector<Point<double>> points, const char *fileName) {
+void FileUtils::writeFile(std::vector<Point<double>> points, std::string fileName) {
 	std::string line;
 	std::ofstream level(fileName);
 	std::string xStr, yStr;

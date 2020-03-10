@@ -22,7 +22,7 @@
  * This class is a template, mainly used with int, double, float or short types.
  */
 template<class CoordinateType>
-class Point {
+class Point final {
 private :
 	CoordinateType x; /*!X coordinate*/
     CoordinateType y; /*!Y coordinate*/
