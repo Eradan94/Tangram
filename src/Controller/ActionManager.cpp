@@ -26,8 +26,8 @@ ActionManager::ActionManager(std::shared_ptr<Game> game, std::shared_ptr<Menu> m
 	});
 	registerEvent(sf::Event::MouseWheelScrolled, [this](sf::Event event) {
 		if (this -> game != nullptr) {
-            Preferences& pref = Preferences::getInstance();
-			this -> game -> rotateSelected(event.mouseWheelScroll.delta * pref.getRotationPerSpinning());
+            Preferences * pref = Preferences::getInstance();
+			this -> game -> rotateSelected(event.mouseWheelScroll.delta * pref -> getRotationPerSpinning());
 		}
 	});
 	registerEvent(sf::Event::TextEntered, [this](sf::Event event) {

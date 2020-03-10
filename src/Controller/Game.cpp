@@ -90,7 +90,7 @@ void Game::magnetize() {
     std::vector<Point<double>> points(2);
     std::vector<Point<double>> minPoints(2);
     Point<double> translation;
-    Preferences& pref = Preferences::getInstance();
+    Preferences * pref = Preferences::getInstance();
     // Get the shortest distance between two points from each shape
     for(auto& piece : pieces) {
         if(piece != selected) {
@@ -109,7 +109,7 @@ void Game::magnetize() {
             minPoints = points;
         }
     }
-    if(minDist < pref.getMagnetism()) { // if the distance is greater than the threshold, the piece is not magnetized
+    if(minDist < pref -> getMagnetism()) { // if the distance is greater than the threshold, the piece is not magnetized
         translation = minPoints[1] - minPoints[0];
         selected->translate(translation);
     }

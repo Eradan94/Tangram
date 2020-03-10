@@ -196,8 +196,8 @@ bool Point<CoordinateType>::operator==(const Point<CoordinateType>& other) const
 
 template<>
 inline bool Point<double>::operator==(const Point<double>& other) const {
-    Preferences& pref = Preferences::getInstance();
-    return this->distance(other) <= pref.getTolerance();
+    Preferences * pref = Preferences::getInstance();
+    return this->distance(other) <= pref -> getTolerance();
 }
 
 template<class CoordinateType>
@@ -285,8 +285,8 @@ double Point<CoordinateType>::distance(const Point& otherPoint) const {
 template<class CoordinateType>
 void Point<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
     Point p = *this + translation;
-    Preferences& pref = Preferences::getInstance();
-    if(p.y < 0 || p.y > (sf::VideoMode::getDesktopMode().height - pref.getGameButtonHeight())) {
+    Preferences * pref = Preferences::getInstance();
+    if(p.y < 0 || p.y > (sf::VideoMode::getDesktopMode().height - pref -> getGameButtonHeight())) {
         translation.y = 0;
     }
     if(p.x < 0 || p.x > sf::VideoMode::getDesktopMode().width) {

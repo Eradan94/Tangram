@@ -23,8 +23,10 @@ class Preferences {
         * \brief Gets the instance
         * \return the instance
         */
-        static Preferences& getInstance(){
-            static Preferences instance;
+        static Preferences * getInstance(){
+        	if (instance == nullptr) {
+        		instance = new Preferences();
+        	}
             return instance;
         }
 
@@ -80,7 +82,7 @@ class Preferences {
         */
         double getGameButtonHeight();
     private :
-        static Preferences& instance; /*!Instance*/
+        inline static Preferences * instance = nullptr; /*!Instance*/
         std::map<std::string, double> options; /*!map to associate a string to a preference*/
 
         /*!
