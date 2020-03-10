@@ -48,7 +48,7 @@ void GameManager::initMainGameButtons() {
     //Here, initialize the main game buttons
     const int width = window->getView().getSize().x;
     const int height = window->getView().getSize().y;
-    const int buttonCount = 4;
+    const int buttonCount = 3;
 	const int buttonOutline = 5;
     const int buttonWidth = (width - 2 * buttonOutline) / buttonCount;
     Preferences& pref = Preferences::getInstance();
@@ -60,11 +60,7 @@ void GameManager::initMainGameButtons() {
 			actionManager->setMenu(menu);
         }
     )));
-	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
-			"Hint", []{
-        }
-    )));
-    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
+    menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 1 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 2 * buttonWidth, height - buttonOutline,
 			"Menu", [this]{
             game.reset();
             game = std::shared_ptr<Game>(new Game());
@@ -74,7 +70,7 @@ void GameManager::initMainGameButtons() {
 			actionManager->setMenu(menu);
         }
     )));
-	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 3 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 4 * buttonWidth, height - buttonOutline,
+	menu -> addButton(std::unique_ptr<Button>(new Button(buttonOutline + 2 * buttonWidth, height - buttonHeight - buttonOutline, buttonOutline + 3 * buttonWidth, height - buttonOutline,
 			"Quit", [this]{
             window->close();
         }
