@@ -57,7 +57,7 @@ public :
      * \brief Adds a single triangle in the piece
      * \param t : the triangle added into the list of triangles
      */
-    void addTriangle(Triangle<CoordinateType> t);
+    void addTriangle(const Triangle<CoordinateType> * t);
 
     /*!
      * \brief Translates a piece
@@ -158,7 +158,7 @@ public :
     }
 
 private :
-    std::list<Triangle<CoordinateType>> triangles; /*!List of triangles*/
+    std::list<Shape<CoordinateType> *> triangles; /*!List of triangles*/
 };
 
 template<class CoordinateType>
@@ -182,7 +182,7 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * p
 		x = points[i * 6 + 4];
 		y = points[i * 6 + 5];
 		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
-		Triangle<CoordinateType> t(p1, p2, p3, color);
+		Triangle<CoordinateType> * t = new Triangle<CoordinateType>(p1, p2, p3, color);
 		triangles.push_back(t);
 	}
 }
@@ -194,7 +194,7 @@ Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>>
 		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
 		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;
 		Point<CoordinateType> p3 = points[i * 3 + 2] + offsetPoint;
-		Triangle<CoordinateType> t(p1, p2, p3, color);
+		Triangle<CoordinateType>  * t = new Triangle<CoordinateType>(p1, p2, p3, color);
 		triangles.push_back(t);
 	}
 }
@@ -202,7 +202,7 @@ Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>>
 /* Add a single triangle in the list
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::addTriangle(const Triangle<CoordinateType> t) {
+void Piece<CoordinateType>::addTriangle(const Triangle<CoordinateType> * t) {
     triangles.push_back(t);
 }
 
@@ -212,7 +212,7 @@ template<class CoordinateType>
 Point<CoordinateType> Piece<CoordinateType>::center() const {
     Point<CoordinateType> center;
     for(auto& t : triangles) {
-        center += t.center();
+        center += t -> center();
     }
     return center / triangles.size();
 }
@@ -223,7 +223,7 @@ template<class CoordinateType>
 void Piece<CoordinateType>::rotate(const Point<CoordinateType>& center, double theta) {
     //Point<CoordinateType> c = center();
     for(auto& t : triangles) {
-        t.rotate(center, theta);
+        t -> rotate(center, theta);
     }
 }
 
@@ -242,7 +242,7 @@ void Piece<CoordinateType>::centralize(const Point<CoordinateType>& clickPos, co
 template<class CoordinateType>
 void Piece<CoordinateType>::translate(const Point<CoordinateType>& translation) {
     for(auto& t : triangles) {
-        t.translate(translation);
+        t -> translate(translation);
     }
 }
 
@@ -251,7 +251,7 @@ void Piece<CoordinateType>::translate(const Point<CoordinateType>& translation) 
 template<class CoordinateType>
 void Piece<CoordinateType>::draw(sf::RenderWindow& window) {
     for(auto& t : triangles) {
-        t.draw(window);
+        t -> draw(window);
     }
 }
 
@@ -261,7 +261,7 @@ template<class CoordinateType>
 bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
     // Verify for each triangle if the point is inside it
 	for(auto& t : triangles) {
-		if(t.isClicked(p)) {
+		if(t -> isClicked(p)) {
 			return true;
 		}
 	}
@@ -271,8 +271,8 @@ bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
 template<class CoordinateType>
 std::vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
 	std::vector<Point<CoordinateType>> points;
-	for_each(triangles.cbegin(), triangles.cend(), [&points](Triangle<CoordinateType> t){
-		std::vector<Point<CoordinateType>> trianglePoints = t.getPoints();
+	for_each(triangles.cbegin(), triangles.cend(), [&points](Shape<CoordinateType> * t){
+		std::vector<Point<CoordinateType>> trianglePoints = t -> getPoints();
 		points.insert(points.cend(), trianglePoints.cbegin(), trianglePoints.cend());
 	});
 
@@ -289,7 +289,7 @@ double Piece<CoordinateType>::distance(Shape<CoordinateType>* shape, std::vector
     double minDist = DBL_MAX;
     double dist;
     for(auto& triangle : this->triangles) {
-        dist = triangle.distance(shape, points);
+        dist = triangle -> distance(shape, points);
         if(dist < minDist) {
             minDist = dist;
             minPoints = points;
@@ -308,13 +308,13 @@ std::unique_ptr<Piece<CoordinateType>> Piece<CoordinateType>::createPiece(const 
 template<class CoordinateType>
 void Piece<CoordinateType>::isInsideWindow(Point<CoordinateType>& translation) const {
     for(auto& triangle : this->triangles) {
-        triangle.isInsideWindow(translation);
+        triangle -> isInsideWindow(translation);
     }
 }
 
 template<class CoordinateType>
 void Piece<CoordinateType>::reduceSize(int coeff) {
     for(auto& triangle : this->triangles) {
-        triangle.reduceSize(coeff);
+        triangle -> reduceSize(coeff);
     }
 }
