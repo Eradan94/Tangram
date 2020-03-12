@@ -53,12 +53,6 @@ public :
      */
 	static std::unique_ptr<Piece<CoordinateType>> createPiece(const char * filename);
 
-	/*!
-     * \brief Adds a single triangle in the piece
-     * \param t : the triangle added into the list of triangles
-     */
-    void addTriangle(const Triangle<CoordinateType> * t);
-
     /*!
      * \brief Translates a piece
      * \param translation : the performed translation
@@ -159,7 +153,7 @@ public :
     }
 
 private :
-    std::list<Shape<CoordinateType> *> triangles; /*!List of triangles*/
+    std::list<std::shared_ptr<Shape<CoordinateType>>> triangles; /*!List of triangles*/
 };
 
 template<class CoordinateType>
@@ -183,8 +177,7 @@ Piece<CoordinateType>::Piece(int size, sf::Color color, const CoordinateType * p
 		x = points[i * 6 + 4];
 		y = points[i * 6 + 5];
 		Point<CoordinateType> p3 = Point<CoordinateType>(x, y);
-		Triangle<CoordinateType> * t = new Triangle<CoordinateType>(p1, p2, p3, color);
-		triangles.push_back(t);
+		triangles.push_back(std::shared_ptr<Shape<CoordinateType>>(new Triangle<CoordinateType>(p1, p2, p3, color)));
 	}
 }
 
@@ -195,16 +188,8 @@ Piece<CoordinateType>::Piece(sf::Color color, std::vector<Point<CoordinateType>>
 		Point<CoordinateType> p1 = points[i * 3 ] + offsetPoint;
 		Point<CoordinateType> p2 = points[i * 3 + 1] + offsetPoint;
 		Point<CoordinateType> p3 = points[i * 3 + 2] + offsetPoint;
-		Triangle<CoordinateType>  * t = new Triangle<CoordinateType>(p1, p2, p3, color);
-		triangles.push_back(t);
+		triangles.push_back(std::shared_ptr<Shape<CoordinateType>>(new Triangle<CoordinateType>(p1, p2, p3, color)));
 	}
-}
-
-/* Add a single triangle in the list
-*/
-template<class CoordinateType>
-void Piece<CoordinateType>::addTriangle(const Triangle<CoordinateType> * t) {
-    triangles.push_back(t);
 }
 
 /* calculate the piece's center
@@ -272,7 +257,7 @@ bool Piece<CoordinateType>::isClicked(const Point<CoordinateType> &p) const{
 template<class CoordinateType>
 std::vector<Point<CoordinateType>> Piece<CoordinateType>::getPoints() const {
 	std::vector<Point<CoordinateType>> points;
-	for_each(triangles.cbegin(), triangles.cend(), [&points](Shape<CoordinateType> * t){
+	for_each(triangles.cbegin(), triangles.cend(), [&points](std::shared_ptr<Shape<CoordinateType>> t){
 		std::vector<Point<CoordinateType>> trianglePoints = t -> getPoints();
 		points.insert(points.cend(), trianglePoints.cbegin(), trianglePoints.cend());
 	});
