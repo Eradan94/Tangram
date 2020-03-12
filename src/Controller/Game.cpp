@@ -60,7 +60,7 @@ void Game::deselect() {
 
 void Game::centralizeSelected(Point<double> point) {
 	if (selected != nullptr) {
-		selected -> centralize(point, relativePos);
+		selected->centralizeRelative(point, relativePos);
 	}
 }
 

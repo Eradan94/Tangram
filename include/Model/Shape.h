@@ -24,12 +24,13 @@ public:
      */
 	virtual Point<CoordinateType> center() const = 0;
 
-	/*
-	* !!!!!!!!!!!!
-	* TODO
-	* !!!!!!!!!!!!
-	*/
-	virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) = 0;
+	/*!
+	 * \brief Centralize the shape, relatively to the given position.
+	 * This makes the shape follow mouse position while keeping the relative position to the initial click
+	 * \param clickPos the click position to follow
+	 * \param relativePos the relative position of the initial click
+	 */
+	virtual void centralizeRelative(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) = 0;
 
     /*!
      * \brief Rotates a shape around a point

@@ -84,12 +84,13 @@ public :
      */
     virtual Point<CoordinateType> center() const;
 
-    /*
-    * !!!!!!!!!!!!!!!
-    * TODO
-    * !!!!!!!!!!!!!!!
-    */
-    virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
+	/*!
+	 * \brief Centralize the piece, relatively to the given position.
+	 * This makes the piece follow mouse position while keeping the relative position to the initial click
+	 * \param clickPos the click position to follow
+	 * \param relativePos the relative position of the initial click
+	 */
+    virtual void centralizeRelative(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
 
     /*!
      * \brief Check if the piece is selected by the user
@@ -230,7 +231,7 @@ void Piece<CoordinateType>::rotate(const Point<CoordinateType>& center, double t
 /* Centralize the piece on the mouse cursor
 */
 template<class CoordinateType>
-void Piece<CoordinateType>::centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
+void Piece<CoordinateType>::centralizeRelative(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
     Point<CoordinateType> point = center() - relativePos;
     Point<CoordinateType> translation = clickPos - point;
     isInsideWindow(translation);

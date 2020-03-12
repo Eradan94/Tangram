@@ -79,12 +79,13 @@ public :
      */
     virtual void rotate(const Point<CoordinateType>& center, double theta);
 
-    /*
-    !!!!!!!!!!!
-    TODO
-    !!!!!!!!!!!
-    */
-    virtual void centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
+	/*!
+	 * \brief Centralize the triangle, relatively to the given position.
+	 * This makes the triangle follow mouse position while keeping the relative position to the initial click
+	 * \param clickPos the click position to follow
+	 * \param relativePos the relative position of the initial click
+	 */
+	virtual void centralizeRelative(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos);
 
     /*!
      * \brief Translates a triangle
@@ -202,7 +203,7 @@ void Triangle<CoordinateType>::rotate(const Point<CoordinateType>& center, doubl
 /* Centralize the triangle around the click position
 */
 template<class CoordinateType>
-void Triangle<CoordinateType>::centralize(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
+void Triangle<CoordinateType>::centralizeRelative(const Point<CoordinateType>& clickPos, const Point<CoordinateType>& relativePos) {
 	Point<CoordinateType> point = center() - relativePos;
 	Point<CoordinateType> translation = clickPos - point;
     translate(translation);

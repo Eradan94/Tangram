@@ -68,15 +68,23 @@ public :
      */
     Point<double> center() const;
 
+    /*!
+     * \brief Adds character to the input text of the button
+     * \param input the character to add
+     */
     void setText(char input);
 
+    /*!
+     * \brief Returns the input text of the button
+     * \return the input text
+     */
     std::string getInputText();
 
 private :
     Point<double> topLeft; /*!Top left point*/
     Point<double> bottomRight; /*!Right bottom point*/
     std::string text; /*!Button's text*/
-    std::string inputText;
+    std::string inputText; /*!Button's input text, i.e. given by user in a textbox*/
 	std::function<void ()> fct; /*!Lambda function called when the button is clicked*/
 	std::unique_ptr<sf::RectangleShape> rectangle; /*!SFML rectangle to draw the button*/
 	std::unique_ptr<sf::Text> txt; /*!SFML text to draw the button's content*/

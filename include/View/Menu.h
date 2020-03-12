@@ -41,6 +41,10 @@ public :
      */
 	void addButton(std::unique_ptr<Button> button);
 
+	/*!
+	 * \brief Sets an input button for the menu
+	 * \param inputBox the button to sets as input
+	 */
 	void setInputBox(std::unique_ptr<Button> inputBox);
 
 	/*!
@@ -70,8 +74,16 @@ public :
      */
 	void addDecorationPiece(std::shared_ptr<Shape<double>> piece);
 
+	/*!
+	 * \brief Adds a character to the input button of the menu, if it exists
+	 * \param c the character to add
+	 */
 	void setText(char c);
 
+	/*!
+	 * \brief Returns the input text of the input button
+	 * \return the input text
+	 */
 	std::string getInputBoxText();
 
 private :

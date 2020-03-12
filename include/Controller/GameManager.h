@@ -74,6 +74,9 @@ public:
      */
 	void initLoadGameButtons(int loadIndex);
 
+	/*!
+	 * \brief Initialize the save game menu buttons
+	 */
 	void initSaveGameButton();
 
 	/*!
