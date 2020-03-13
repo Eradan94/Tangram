@@ -2,42 +2,160 @@
 Class Main
 
 Package Controller {
-	Class Game	
-	Class Action
-	Class FileUtils
-	Interface Clickable
+    Interface Clickable<CoordinateType> {
+        isClicked(const Point<CoordinateType> &) : bool
+    }
+    Class Action {
+        Action()
+        operator()(sf::Event) : void
+    }
+    Class ActionManager {
+        ActionManager(std::shared_ptr<Game>, std::shared_ptr<Menu>)
+        setGame(std::shared_ptr<Game>) : void
+        setMenu(std::shared_ptr<Menu>) : void
+        registerEvent(sf::Event::EventType, const std::function<void (sf::Event)>) : void
+        getAction(sf::Event::EventType) : Action &
+    }
+    Class FileUtils{
+        static readFile(const char *) : std::vector<Point<double>>
+    	static writeFile(std::vector<Point<double>>, std::string) : void
+    }
+    Class Game{
+	    Game(std::vector<std::shared_ptr<Shape<double>>>, std::unique_ptr<Piece<double>>)
+	    Game()
+        static init(const char *) : std::shared_ptr<Game>
+    	draw(sf::RenderWindow &) : void
+    	select(const Point<double> &) : void
+    	deselect() : void
+    	centralizeSelected(const Point<double>) : void
+    	rotateSelected(const double) : void
+    	save(std::string) : void
+    	magnetize() : void
+    	validateShape() : void
+    	getGameState() : bool
+    }
+    Class GameBuilder {
+        GameBuilder()
+    	withShape(std::shared_ptr<Shape<double>>) : void
+    	build(const char *) : std::shared_ptr<Game>
+    }
+    Class GameManager {
+       GameManager() : 
+        draw() const : void
+        play() : void
+        isRunning() : bool
+        initMainGameButtons() : void
+        initMainMenuButtons() : void
+        initCreateLevelButtons() : void
+        initLoadGameButtons(int) : void
+        initSaveGameButton() : void
+        initWinScreenButtons() : void
+    }
+    Class Preferences {
+        static getInstance() : Preferences *
+        setMagnetism(double) : void
+        setRotationPerSpinning(double) : void
+        setTolerance(double tolerance) : void
+        setGameButtonHeight(double) : void
+        getMagnetism() : double
+        getRotationPerSpinning() : double
+        getTolerance() : double
+        getGameButtonHeight() : double
+    }
 }
 
 Package Model {
-	Class Point<CoordinateType>
-	Class Triangle
-	Class Piece
-	Interface Shape
+    Interface Shape<CoordinateType> {
+        center() : Point<CoordinateType>
+        centralizeRelative(const Point<CoordinateType> &, const Point<CoordinateType> &) : void
+        rotate(const Point<CoordinateType> &, double) : void
+        isClicked(const Point<CoordinateType> &) : bool
+        getPoints() : std::vector<Point<CoordinateType>>
+        distance(Shape<CoordinateType> *, std::vector<Point<double>> &) : double
+        translate(const Point<CoordinateType> &) : void
+        isInsideWindow(Point<CoordinateType> &) : void
+        reduceSize(int) : void
+        rotate(const float) : void
+    }
+    Class Piece<CoordinateType> {
+	    Piece(int, sf::Color, const CoordinateType *)
+	    Piece(sf::Color, std::vector<Point<CoordinateType>>)
+	    static createPiece(const char *) : std::unique_ptr<Piece<CoordinateType>>
+	}
+    Class Point<CoordinateType> {
+        Point(CoordinateType, CoordinateType)
+        Point(sf::Event::MouseButtonEvent)
+        Point(sf::Event::MouseMoveEvent)
+        getX() : CoordinateType
+        getY() : CoordinateType
+        operator==(const Point<CoordinateType> &) : bool
+        operator!=(const Point<CoordinateType> &) : bool
+        operator+(const Point &) : Point<CoordinateType>
+        operator-(const Point &) : Point<CoordinateType>
+        operator/(const CoordinateType &) : Point<CoordinateType>
+        operator+=(const Point<CoordinateType> &) : Point<CoordinateType>&
+        operator<(const Point<CoordinateType> &) : bool
+    }
+    Class Triangle<CoordinateType> {
+        Triangle(Point<CoordinateType>, Point<CoordinateType>, Point<CoordinateType>, sf::Color)
+        std::vector<CoordinateType> calculateBarycentricCoordinates(const Point<CoordinateType> &) const;
+    }
 }
 
 Package View {
-	Interface Drawable
-	Class Menu
-	Class Button
+    Interface Drawable {
+        draw(sf::RenderWindow &) : void
+    }
+    Class Button {
+        Button(int, int, int, int, std::string, std::function<void()>)
+        void callFct();
+        Point<double> center() const;
+        void setText(char input);
+        std::string getInputText();
+    }
+    Class Menu {
+        Menu()
+        static std::shared_ptr<Menu> init();
+        void addButton(std::unique_ptr<Button> button);
+        void setInputBox(std::unique_ptr<Button> inputBox);
+        void select(const Point<double> &);
+        void clear();
+        void addDecorationPiece(std::shared_ptr<Shape<double>>);
+        void setText(char);
+        std::string getInputBoxText();
+    }
 }
 
-FileUtils <-- Action
-Action <-- Game
-Action <- Shape
-Action <- Button
-Game <-- Main
-Game -> Menu
-Game -* "0..*" Shape
-Game .|> Drawable
-Shape <|. Piece
+Main *-- GameManager
+Game --> GameManager
+Clickable <|.. Button
+Clickable <|.. Shape
+ActionManager *-- "0..*" Action
+ActionManager o-- Game
+ActionManager o-- Menu
+ActionManager --> Preferences
+Game --* "0..*" Shape
+Game --* Piece
+Game --> GameBuilder
+Game --> Point
+Game --> Preferences
+GameBuilder o-- Game
+GameManager *-- Game
+GameManager *-- Menu
+GameManager *-- ActionManager
+GameManager --> Preferences
+Shape <|.. Piece
+Shape <|.. Point
 Shape <|.. Triangle
-Shape ..|> Drawable
-Shape ..|> Clickable
-Triangle o- "3" Point
-Piece o-- "0..*" Triangle
-Menu o-- "0..*" Button
-Menu .|> Drawable
-Button .|> Drawable
-Point --> Menu
-Clickable <|. Button
+Shape --> Point
+Piece --* "0..*" Triangle
+Piece --> Point
+Point --> Preferences
+Triangle *-- "3" Point
+Drawable <|.. Button
+Drawable <|.. Menu
+Drawable <|.. Shape
+Button --> Point
+Menu *-- "0..*" Button
+Menu *-- "0..*" Shape
 @enduml
