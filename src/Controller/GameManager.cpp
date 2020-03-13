@@ -1,13 +1,9 @@
 #include <cstring>
 #include "../../include/Controller/GameManager.h"
 
-GameManager::~GameManager() {
-	delete window;
-	delete actionManager;
-}
-
-GameManager::GameManager() : menu(Menu::init()), game(std::shared_ptr<Game> (new Game())), actionManager(new ActionManager(game, menu)),
-							 window(new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram")){
+GameManager::GameManager() : menu(Menu::init()), game(std::shared_ptr<Game> (new Game())), actionManager(
+		std::unique_ptr<ActionManager> (new ActionManager(game, menu))),
+		window(std::unique_ptr<sf::RenderWindow> (new sf::RenderWindow(sf::VideoMode::getDesktopMode(), "Tangram"))){
 }
 
 void GameManager::initMainMenuButtons() {

@@ -118,7 +118,7 @@ private :
 	std::vector<std::shared_ptr<Shape<double>>> pieces; /*!Vector of movable and clickable pieces*/
 	std::shared_ptr<Shape<double>> selected; /*!The selected piece*/
 	std::unique_ptr<Piece<double>> goal; /*!The shape to reproduce*/
-	Point<double> relativePos; /* TODO*/
+	Point<double> relativePos; /*!Relative position of the click to the selected piece*/
 	bool gameState; /*!Game state*/
 
 	// All shapes

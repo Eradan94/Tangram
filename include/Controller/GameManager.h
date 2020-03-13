@@ -26,12 +26,6 @@ public:
 	GameManager();
 
 	/*!
-     * \brief Destructor
-     *
-     */
-	~GameManager();
-
-	/*!
      * \brief Draw method
      *
      */
@@ -88,6 +82,6 @@ public:
 private:
     std::shared_ptr<Menu> menu; /*!The current menu, an interface with elements to draw, such as buttons*/
 	std::shared_ptr<Game> game; /*!The current game, composed of movable shapes */
-	ActionManager * actionManager; /*!Action manager to manage actions performed by the user*/
-	sf::RenderWindow * window; /*!Window where the elements are draw*/
+	std::unique_ptr<ActionManager> actionManager; /*!Action manager to manage actions performed by the user*/
+	std::unique_ptr<sf::RenderWindow> window; /*!Window where the elements are draw*/
 };
